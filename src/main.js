@@ -14,7 +14,6 @@ import { initImpact, initFactory } from './js/impact.js';
 import { initIslands } from './js/islands.js';
 import { initBrandWorld } from './js/brand-world.js';
 import { initMascot } from './js/mascot.js';
-import { initTimeline } from './js/timeline.js';
 import { initWhy, initContact, initFooter } from './js/contact.js';
 
 /** Build every scene. Runs once the hero frames are ready. */
@@ -34,7 +33,6 @@ function buildScenes() {
   initFactory();
   initIslands();
   initBrandWorld();
-  initTimeline();
   initWhy();
   initContact();
   initFooter();

@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Nokma · MeghFarm — Rooted in Meghalaya, Crafted for the World</title>
-<meta name="description" content="Nokma by MeghFarm — handcrafted ice creams, fruit drinks, packaged water, banana chips and spice powders from the hills of Meghalaya. A farmer-led co-operative in West Garo Hills." />
+<meta name="description" content="Explore Nokma ice creams, fruit drinks, packaged water, banana chips, spice powders and processed foods, made in Meghalaya by MeghFarm." />
 <meta name="theme-color" content="#0E3B24" />
 <link rel="icon" href="./favicon.png" type="image/png" />
 <link rel="apple-touch-icon" href="./favicon.png" />
@@ -20,8 +20,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
 
 <link rel="preload" as="image" href="./frames/desktop/f001.webp" />
-  <script type="module" crossorigin src="./assets/index-CWWZyQFo.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Bx4oC7qN.css">
+  <script type="module" crossorigin src="./assets/index-PctwXeRk.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-snyM6g0h.css">
 </head>
 
 <body class="is-loading">
@@ -30,7 +30,7 @@
 <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading Nokma">
   <div class="loader__inner">
     <div class="loader__scoop" aria-hidden="true">
-      <svg viewBox="0 0 120 150" class="scoop-svg">
+      <svg viewBox="0 0 140 170" class="scoop-svg">
         <defs>
           <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#FFF8E6" /><stop offset="100%" stop-color="#F0DFB4" />
@@ -39,16 +39,37 @@
             <stop offset="0%" stop-color="#E8621B" /><stop offset="100%" stop-color="#B8460D" />
           </linearGradient>
         </defs>
-        <g class="scoop-ball">
-          <circle cx="60" cy="52" r="30" fill="url(#cream)" />
-          <circle cx="50" cy="44" r="7" fill="#fff" opacity=".55" />
+        <ellipse class="scoop-shadow" cx="70" cy="158" rx="35" ry="6" fill="#051D11" opacity=".32" />
+        <g class="scoop-cup">
+          <path d="M31 88 h78 l-10 57 a8 8 0 0 1 -8 7 h-42 a8 8 0 0 1 -8 -7 z" fill="url(#cup)" />
+          <ellipse cx="70" cy="89" rx="39" ry="8" fill="#F57B32" />
+          <path d="M45 100 l6 38" stroke="#FFB17A" stroke-width="5" stroke-linecap="round" opacity=".42" />
+          <text class="scoop-cup-mark" x="70" y="132" fill="#FFF8E6" text-anchor="middle">N</text>
         </g>
-        <path class="scoop-cup" d="M28 74 h64 l-9 62 a6 6 0 0 1 -6 5 h-34 a6 6 0 0 1 -6 -5 z" fill="url(#cup)" />
-        <path class="scoop-drip" d="M60 78 v0" stroke="#FFF8E6" stroke-width="7" stroke-linecap="round" />
+        <g class="scoop-splash" fill="none" stroke="#FFF8E6" stroke-width="5" stroke-linecap="round">
+          <path d="M37 91 C24 87 21 77 16 72" />
+          <path d="M103 91 C116 87 119 77 124 72" />
+          <path d="M44 86 C34 78 36 69 32 62" />
+          <path d="M96 86 C106 78 104 69 108 62" />
+        </g>
+        <g class="scoop-ball">
+          <circle cx="70" cy="58" r="35" fill="url(#cream)" />
+          <path d="M45 60 C54 48 63 69 73 54 S93 48 98 62" fill="none" stroke="#DFC996" stroke-width="3" stroke-linecap="round" opacity=".6" />
+          <path d="M51 73 C60 65 67 80 79 68 S94 65 96 74" fill="none" stroke="#DFC996" stroke-width="2.5" stroke-linecap="round" opacity=".52" />
+          <circle cx="58" cy="45" r="8" fill="#fff" opacity=".55" />
+          <g class="scoop-sprinkles" stroke-linecap="round" stroke-width="3">
+            <path d="M55 34 l5 3" stroke="#E8621B" />
+            <path d="M77 31 l-1 6" stroke="#2E7D4F" />
+            <path d="M88 44 l5 -2" stroke="#E8621B" />
+            <path d="M47 51 l-5 -1" stroke="#2E7D4F" />
+            <path d="M70 49 l5 2" stroke="#E8621B" />
+          </g>
+          <path class="scoop-drip" d="M91 75 v0" stroke="#F0DFB4" stroke-width="7" stroke-linecap="round" />
+        </g>
       </svg>
     </div>
     <img class="loader__logo" src="./img/logo-nokma.webp" alt="Nokma" width="220" height="68" />
-    <p class="loader__tag">Rooted in Meghalaya</p>
+    <p class="loader__tag">Scooping up Meghalaya</p>
     <div class="loader__bar"><span class="loader__fill" id="loaderFill"></span></div>
     <p class="loader__pct"><span id="loaderPct">0</span>%</p>
   </div>
@@ -56,7 +77,7 @@
 
 <!-- ══════════════════ SCROLL COMPANION ══════════════════ -->
 <div class="mascot" id="mascot" aria-hidden="true">
-  <img id="mascotImage" src="./products/mascot.webp" alt="" width="700" height="900" />
+  <img class="mascot__pose" id="mascotImage" src="./products/mascot/pose-04.png" alt="" width="672" height="900" decoding="async" />
 </div>
 
 <!-- ══════════════════ NAV ══════════════════ -->
@@ -94,7 +115,6 @@
     <a href="#brand-world">Brand World</a>
     <a href="#impact">Impact</a>
     <a href="#factory">The Hub</a>
-    <a href="#timeline">Journey</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="menu__foot">
@@ -142,9 +162,9 @@
         <p class="eyebrow" data-reveal>Our Story</p>
         <h2 class="h2" data-reveal-words>A journey from the hills<br />to your hands</h2>
         <p class="lede" data-reveal>
-          MeghFarm is a pioneering agro-processing initiative under Muktidata Multipurpose
-          Co-operative Society Ltd. — created to empower local communities through value
-          addition, market access and sustainable enterprise.
+          Nokma is the product brand of MeghFarm, bringing ice creams, drinks, snacks and
+          naturally processed foods from Meghalaya to everyday tables. Every product begins
+          with local ingredients, careful processing and a commitment to dependable quality.
         </p>
         <div class="story__route" data-reveal aria-label="Seven stages from the hills to your hands">
           <span>The Hills</span><i aria-hidden="true"></i><span>Local Harvest</span><i aria-hidden="true"></i><span>MeghFarm</span><i aria-hidden="true"></i><span>Your Hands</span>
@@ -186,7 +206,7 @@
     <div class="universe__head">
       <p class="eyebrow" data-reveal>The Collection</p>
       <h2 class="h2" data-reveal-words>A complete range,<br />made in Meghalaya</h2>
-      <p class="lede" data-reveal>Twenty-five products across ice cream, drinks, snacks, spices and farm produce. Select any product to view its details.</p>
+      <p class="lede" data-reveal>Twenty-three products across ice cream, drinks, snacks, spices and processed produce. Select any product to view its details.</p>
     </div>
 
     <div class="universe__filters" id="uniFilters" role="tablist" aria-label="Product categories"></div>
@@ -354,32 +374,20 @@
     <img class="range__leaf range__leaf--two" src="./products/leaf-2.webp" alt="" aria-hidden="true" loading="lazy" />
     <div class="range__head">
       <p class="eyebrow" data-reveal>Beyond the Pack</p>
-      <h2 class="h2" data-reveal-words>The people, produce<br />and range behind Nokma</h2>
+      <h2 class="h2" data-reveal-words>The products, produce<br />and places behind Nokma</h2>
       <p class="lede" data-reveal>
-        A visual record of the flavours, local harvests and Garo identity that shape every
-        product made at MeghFarm.
+        A closer look at the flavours, local ingredients and finished products made by
+        MeghFarm under the Nokma name.
       </p>
     </div>
     <div class="range__grid" id="rangeGrid"><!-- brand assets injected --></div>
-  </section>
-
-  <!-- ══════════════════ 10 · TIMELINE ══════════════════ -->
-  <section class="tl" id="timeline">
-    <div class="tl__sticky">
-      <div class="tl__head">
-        <p class="eyebrow">The Journey</p>
-        <h2 class="h2">From a co-operative<br />to a brand</h2>
-      </div>
-      <div class="tl__track" id="tlTrack"><!-- timeline cards injected --></div>
-      <div class="tl__progress"><span id="tlBar"></span></div>
-    </div>
   </section>
 
   <!-- ══════════════════ 10 · WHY ══════════════════ -->
   <section class="why" id="why">
     <div class="why__head">
       <p class="eyebrow" data-reveal>Quality You Can Trust</p>
-      <h2 class="h2" data-reveal-words>Why MeghFarm</h2>
+      <h2 class="h2" data-reveal-words>Why Nokma</h2>
     </div>
     <div class="why__grid" id="whyGrid"></div>
   </section>
@@ -461,7 +469,8 @@
   <footer class="foot">
     <div class="foot__top">
       <div class="foot__brand">
-        <img src="./img/logo-meghfarm-full.webp" alt="MeghFarm — Fresh From Meghalaya" width="120" height="126" />
+        <img src="./img/logo-nokma.webp" alt="Nokma" width="132" height="41" />
+        <p class="foot__company">A product brand by MeghFarm</p>
         <p class="foot__promise">Rooted in Meghalaya<br />Crafted for the World</p>
       </div>
       <div class="foot__cols">
@@ -479,7 +488,6 @@
           <a href="#story">Our Story</a>
           <a href="#impact">Our Impact</a>
           <a href="#factory">Processing Hub</a>
-          <a href="#timeline">Our Journey</a>
           <a href="#why">Quality</a>
         </div>
         <div>

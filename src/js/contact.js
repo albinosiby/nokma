@@ -2,7 +2,7 @@ import { gsap, reduced } from './core.js';
 import { WHY, OPPORTUNITIES, BRAND } from './data.js';
 import { initTilt } from './micro.js';
 
-/** "Why MeghFarm" cards with 3D hover. */
+/** "Why Nokma" product-quality cards with 3D hover. */
 export function initWhy() {
   const grid = document.getElementById('whyGrid');
   if (!grid) return;

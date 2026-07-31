@@ -105,7 +105,6 @@ export function initUniverse() {
       card.setAttribute('aria-pressed', String(active));
     });
 
-    window.dispatchEvent(new CustomEvent('nokma:product-category', { detail: { category: product.cat } }));
     syncDockVisibility();
   }
 

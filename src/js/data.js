@@ -350,26 +350,6 @@ export const UNIVERSE = [
     cat: 'spices',
   },
   {
-    id: 'raw-pineapple',
-    img: 'raw-pineapple',
-    name: 'Raw Pineapples',
-    kicker: 'Bulk Supply',
-    sizes: 'Wholesale volumes',
-    blurb: 'Farm-fresh quality, wholesale reliability — direct from farming communities.',
-    flavours: 'Bulk & institutional',
-    cat: 'bulk',
-  },
-  {
-    id: 'raw-ginger',
-    img: 'raw-ginger',
-    name: 'Raw Ginger',
-    kicker: 'Bulk Supply',
-    sizes: 'Wholesale volumes',
-    blurb: 'Sourced directly from Meghalaya’s farmers, graded and dispatched.',
-    flavours: 'Bulk & institutional',
-    cat: 'bulk',
-  },
-  {
     id: 'raw-turmeric',
     img: 'raw-turmeric',
     name: 'Raw Turmeric',
@@ -409,7 +389,7 @@ export const ISLANDS = [
   { id: 'drinks', label: 'Drinks', icon: '🥤', img: 'drink-passion', count: '3 fruit drinks · 1 water', line: 'Freshness in Every Sip' },
   { id: 'chips', label: 'Banana Chips', icon: '🍌', img: 'chips-crispy', count: '2 variants · 4 pack sizes', line: 'Crunch with Authentic Flavour' },
   { id: 'spices', label: 'Spices', icon: '🌿', img: 'spice-turmeric', count: '2 powders · 2 pack sizes', line: 'Pure Flavour, Traditional Strength' },
-  { id: 'bulk', label: 'Bulk & Dehydrated', icon: '🌾', img: 'raw-turmeric', count: '5 lines · wholesale', line: 'Farm-Fresh Quality, Wholesale Reliability' },
+  { id: 'bulk', label: 'Bulk & Dehydrated', icon: '🌾', img: 'raw-turmeric', count: '3 lines · wholesale', line: 'Farm-Fresh Quality, Wholesale Reliability' },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -419,16 +399,9 @@ export const BRAND_WORLD = [
   {
     id: 'complete-range',
     title: 'The Nokma Range',
-    note: 'Ice creams, fruit drinks, water, chips, spices and farm produce.',
+    note: 'Ice creams, fruit drinks, water, chips, spices and processed ingredients.',
     src: './products/lineup.webp',
     className: 'range__item--wide',
-  },
-  {
-    id: 'garo-dancer',
-    title: 'Garo Spirit',
-    note: 'A brand language rooted in the culture of the hills.',
-    src: './products/garo-dancer.webp',
-    className: 'range__item--portrait range__item--orange',
   },
   {
     id: 'water-range',
@@ -450,20 +423,6 @@ export const BRAND_WORLD = [
     note: 'The starting point for TE·RIK banana chips.',
     src: './products/bananas-green.webp',
     className: 'range__item--green',
-  },
-  {
-    id: 'garo-basket',
-    title: 'Collected Locally',
-    note: 'Farm produce gathered close to the processing hub.',
-    src: './products/garo-basket.webp',
-    className: 'range__item--portrait',
-  },
-  {
-    id: 'garo-ginger',
-    title: 'Meghalaya Ginger',
-    note: 'Fresh roots become powders, flakes and flavour.',
-    src: './products/garo-ginger.webp',
-    className: 'range__item--portrait range__item--warm',
   },
   {
     id: 'delivery',
@@ -493,12 +452,12 @@ export const BRAND_WORLD = [
  * ------------------------------------------------------------------ */
 export const STORY = [
   { id: 'mountain', title: 'The Hills', img: 'hills', kind: 'photo', text: 'Nestled in the pristine hills of Meghalaya, in the West Garo Hills, everything we make begins with where we are.' },
-  { id: 'farmer', title: 'The Farmer', img: 'story-farmer', kind: 'art', text: 'Fair-trade partnerships with tribal farmers — sourcing direct, and cutting the middlemen out of the chain.' },
-  { id: 'fruit', title: 'Fresh Produce', img: 'raw-pineapple', kind: 'art', text: 'Pineapple, jackfruit, ginger, turmeric, banana — collected at peak and moved fast.' },
-  { id: 'processing', title: 'Processing', img: 'story-processing', kind: 'art', text: 'A modern processing hub adds value where it is grown, instead of shipping raw produce away.' },
-  { id: 'quality', title: 'Quality Control', img: 'story-qc', kind: 'art', text: 'Every batch is checked for taste, nutrition, hygiene, freshness and safe packaging standards.' },
-  { id: 'packaging', title: 'Packaging', img: 'story-packaging', kind: 'art', text: 'Hygienically packed and cold-chain ready — 6 months frozen, 12 months ambient.' },
-  { id: 'consumer', title: 'To You', img: 'story-consumer', kind: 'art', text: 'Meghalaya’s authentic flavours, brought to homes across India under the name Nokma.' },
+  { id: 'farmer', title: 'Local Sourcing', img: 'farmer-harvest', kind: 'photo', text: 'Meghalaya-grown ingredients are sourced close to the communities and landscapes where they begin.' },
+  { id: 'fruit', title: 'Fresh Ingredients', img: 'bananas-green', kind: 'art', text: 'Fruit, spices and farm produce are selected for flavour, freshness and suitability for each Nokma product.' },
+  { id: 'processing', title: 'Processing', img: 'factory-front', kind: 'photo', text: 'MeghFarm processes the ingredients close to source, with dedicated lines for the Nokma range.' },
+  { id: 'quality', title: 'Quality Control', img: 'lineup', kind: 'art', text: 'Every batch is checked for taste, nutrition, hygiene, freshness and safe packaging standards.' },
+  { id: 'packaging', title: 'Packed for Freshness', img: 'family-tub', kind: 'art', text: 'Each format is hygienically packed and prepared for reliable frozen or ambient storage.' },
+  { id: 'consumer', title: 'Nokma to You', img: 'mascot', kind: 'art', text: 'Meghalaya’s flavours reach homes and retailers through the Nokma product range.' },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -532,48 +491,7 @@ export const IMPACT_PILLARS = [
 ];
 
 /* ------------------------------------------------------------------ *
- *  Timeline
- * ------------------------------------------------------------------ */
-export const TIMELINE = [
-  {
-    year: '2017',
-    title: 'Foundation',
-    text: 'Muktidata Multipurpose Co-operative Society Ltd. is registered on 30th June 2017 under the Meghalaya Co-operative Societies Act, 1971 — with a vision of sustainable livelihoods and farmer participation.',
-    img: 'logo-muktidata',
-    kind: 'art',
-  },
-  {
-    year: 'The Hub',
-    title: 'Processing Unit',
-    text: 'The MeghFarm Processing Hub is built at Khamari, West Garo Hills — bringing modern agro-processing to where the produce is actually grown.',
-    img: 'factory-front',
-    kind: 'photo',
-  },
-  {
-    year: 'Nokma',
-    title: 'The Brand Launches',
-    text: 'A Nokma is the respected custodian of ancestral land in the Garo Hills. The name was chosen to honour that heritage — pride, authenticity, belonging.',
-    img: 'lineup',
-    kind: 'art',
-  },
-  {
-    year: 'Today',
-    title: 'Six Product Lines',
-    text: 'Ice creams, fruit drinks, packaged water, banana chips, spice powders and bulk dehydrated products — all sourced from Meghalaya’s farming communities.',
-    img: 'factory-aerial',
-    kind: 'photo',
-  },
-  {
-    year: 'Next',
-    title: 'The Road Ahead',
-    text: 'To become Northeast India’s most trusted agro-food brand — global recognition for Meghalaya-grown products, and a self-reliant farming economy behind them.',
-    img: 'hills-2',
-    kind: 'photo',
-  },
-];
-
-/* ------------------------------------------------------------------ *
- *  Why MeghFarm
+ *  Why Nokma
  * ------------------------------------------------------------------ */
 export const WHY = [
   { t: '100% Locally Sourced', d: 'Every ingredient traced back to Meghalaya’s farming communities.' },

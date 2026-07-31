@@ -1,23 +1,24 @@
 import { gsap, ScrollTrigger, reduced, onResize } from './core.js';
 
 const SCENES = [
-  { id: 'story', side: 'left', lift: 0, asset: 'story-farmer', variant: 'compact' },
-  { id: 'universe', side: 'right', lift: 92, asset: 'mascot', variant: 'compact' },
-  { id: 'flavours', side: 'left', lift: 4, asset: 'garo-dancer', variant: 'wide' },
-  { id: 'ingredients', side: 'right', lift: 8, asset: 'garo-ginger', variant: 'wide' },
-  { id: 'impact', side: 'right', lift: 170, asset: 'garo-basket', variant: 'wide' },
-  { id: 'factory', side: 'right', lift: 12, asset: 'story-processing', variant: 'compact' },
-  { id: 'islands', side: 'left', lift: 4, asset: 'mascot', variant: 'mascot' },
-  { id: 'timeline', side: 'left', lift: 6, asset: 'story-delivery', variant: 'vehicle' },
-  { id: 'why', side: 'right', lift: 4, asset: 'story-qc', variant: 'compact' },
+  { id: 'story', side: 'left', lift: 0, pose: 'pose-04' },
+  { id: 'universe', side: 'right', lift: 92, pose: 'pose-05' },
+  { id: 'flavours', side: 'left', lift: 4, pose: 'pose-03' },
+  { id: 'ingredients', side: 'right', lift: 8, pose: 'pose-06' },
+  { id: 'impact', side: 'right', lift: 0, pose: 'pose-01' },
+  { id: 'factory', side: 'right', lift: 12, pose: 'pose-04' },
+  { id: 'islands', side: 'left', lift: 4, pose: 'pose-02' },
+  { id: 'why', side: 'right', lift: 4, pose: 'pose-06' },
 ];
 
-const PRODUCT_CHARACTERS = {
-  'ice-cream': { asset: 'mascot', variant: 'compact' },
-  drinks: { asset: 'story-consumer', variant: 'compact' },
-  chips: { asset: 'garo-basket', variant: 'wide' },
-  spices: { asset: 'garo-ginger', variant: 'wide' },
-  bulk: { asset: 'story-farmer', variant: 'compact' },
+// The source PNGs share a canvas size but have different transparent margins.
+const POSE_SCALE = {
+  'pose-01': 1,
+  'pose-02': 1.1,
+  'pose-03': 0.91,
+  'pose-04': 0.85,
+  'pose-05': 1.01,
+  'pose-06': 1.03,
 };
 
 /** Keep the Nokma character with the visitor and reposition it between sections. */
@@ -27,6 +28,42 @@ export function initMascot() {
   if (!mascot || !image) return;
 
   let currentScene = null;
+  let currentPose = image.getAttribute('src')?.match(/pose-\d+/)?.[0];
+
+  SCENES.forEach(({ pose }) => {
+    const preload = new Image();
+    preload.src = `./products/mascot/${pose}.png`;
+  });
+
+  const swapPose = (pose, side) => {
+    const src = `./products/mascot/${pose}.png`;
+    const scale = POSE_SCALE[pose] ?? 1;
+
+    if (currentPose === pose) {
+      gsap.to(image, {
+        scale,
+        rotation: 0,
+        opacity: 1,
+        duration: reduced ? 0 : 0.2,
+        overwrite: true,
+      });
+      return;
+    }
+    currentPose = pose;
+    image.setAttribute('src', src);
+
+    if (reduced) {
+      gsap.set(image, { scale, rotation: 0, opacity: 1 });
+      return;
+    }
+
+    gsap.killTweensOf(image);
+    gsap.fromTo(
+      image,
+      { opacity: 0, scale: scale * 0.9, rotation: side === 'right' ? -3 : 3 },
+      { opacity: 1, scale, rotation: 0, duration: 0.34, ease: 'back.out(1.7)', overwrite: true }
+    );
+  };
 
   const positionFor = (scene) => {
     const edge = window.innerWidth <= 760 ? 8 : 18;
@@ -37,9 +74,7 @@ export function initMascot() {
 
   const showScene = (scene) => {
     currentScene = scene;
-    const src = `./products/${scene.asset}.webp`;
-    if (image.getAttribute('src') !== src) image.setAttribute('src', src);
-    mascot.dataset.variant = scene.variant;
+    swapPose(scene.pose, scene.side);
     mascot.dataset.scene = scene.id;
     const position = positionFor(scene);
 
@@ -133,15 +168,6 @@ export function initMascot() {
   const pdp = document.getElementById('pdp');
   if (pdp) observer.observe(pdp, { attributes: true, attributeFilter: ['class'] });
   syncInteractiveState();
-
-  window.addEventListener('nokma:product-category', (event) => {
-    const next = PRODUCT_CHARACTERS[event.detail?.category];
-    const universe = SCENES.find((scene) => scene.id === 'universe');
-    if (!next || !universe) return;
-    universe.asset = next.asset;
-    universe.variant = next.variant;
-    if (currentScene?.id === 'universe') showScene(universe);
-  });
 
   onResize(() => {
     if (currentScene) gsap.set(mascot, positionFor(currentScene));

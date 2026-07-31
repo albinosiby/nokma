@@ -213,9 +213,13 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
   color: var(--cream);
 }
 .loader__inner { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: 2rem; }
-.loader__scoop { width: 96px; height: 120px; }
+.loader__scoop { width: 128px; height: 156px; }
 .scoop-svg { width: 100%; height: 100%; overflow: visible; }
-.scoop-ball { transform-origin: 60px 52px; }
+.scoop-ball { transform-origin: 70px 58px; }
+.scoop-cup { transform-origin: 70px 152px; }
+.scoop-cup-mark { font-family: var(--f-display); font-size: 30px; font-weight: 900; }
+.scoop-splash { transform-origin: 70px 88px; }
+.scoop-sprinkles { transform-origin: 70px 52px; }
 .loader__logo { width: 200px; margin-top: 1.6rem; filter: drop-shadow(0 8px 26px rgba(0,0,0,0.35)); }
 .loader__tag {
   font-family: var(--f-script);
@@ -238,28 +242,31 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
   left: 18px;
   bottom: 0;
   z-index: 120;
-  width: clamp(112px, 11vw, 176px);
+  width: clamp(138px, 14vw, 220px);
+  aspect-ratio: 1;
   pointer-events: none;
   visibility: hidden;
   will-change: transform, opacity;
   filter: drop-shadow(0 14px 18px rgba(8, 37, 21, 0.22));
 }
-.mascot img { width: 100%; height: auto; }
+.mascot__pose {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center bottom;
+  transform-origin: 50% 100%;
+  will-change: opacity, transform;
+}
 .mascot.is-blocked { opacity: 0 !important; visibility: hidden !important; }
-.mascot[data-variant='compact'] { width: clamp(96px, 9vw, 142px); }
-.mascot[data-variant='wide'] { width: clamp(132px, 14vw, 210px); }
-.mascot[data-variant='vehicle'] { width: clamp(170px, 18vw, 270px); }
 
 @media (max-width: 760px) {
   .mascot {
     left: 8px;
     bottom: 0;
-    width: clamp(72px, 19vw, 94px);
+    width: clamp(84px, 25vw, 112px);
     filter: drop-shadow(0 8px 12px rgba(8, 37, 21, 0.2));
   }
-  .mascot[data-variant='compact'] { width: clamp(64px, 17vw, 84px); }
-  .mascot[data-variant='wide'] { width: clamp(86px, 24vw, 112px); }
-  .mascot[data-variant='vehicle'] { width: clamp(116px, 34vw, 156px); }
 }
 
 /* ═══════════════ NAV ═══════════════ */

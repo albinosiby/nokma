@@ -32,7 +32,6 @@ export function initNav() {
     ['#brand-world', '#universe'],
     ['#impact', '#impact'],
     ['#factory', '#impact'],
-    ['#timeline', '#impact'],
     ['#contact', '#contact'],
   ];
 
@@ -86,7 +85,7 @@ export function initNav() {
     e.preventDefault();
 
     // pinned sections must land at their very top; everything else clears the nav
-    const pinned = ['hero', 'story', 'factory', 'timeline'].includes(target.id);
+    const pinned = ['hero', 'story', 'factory'].includes(target.id);
     const opts = { offset: pinned ? 0 : -72 };
 
     if (menu.classList.contains('is-open')) {
