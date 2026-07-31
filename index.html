@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Nokma · MeghFarm — Rooted in Meghalaya, Crafted for the World</title>
+<meta name="description" content="Nokma by MeghFarm — handcrafted ice creams, fruit drinks, packaged water, banana chips and spice powders from the hills of Meghalaya. A farmer-led co-operative in West Garo Hills." />
+<meta name="theme-color" content="#0E3B24" />
+<link rel="icon" href="./favicon.png" type="image/png" />
+<link rel="apple-touch-icon" href="./favicon.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Nokma · MeghFarm — Rooted in Meghalaya, Crafted for the World" />
+<meta property="og:description" content="Handcrafted ice creams, fruit drinks and naturally processed produce from the hills of Meghalaya." />
+<meta property="og:image" content="./img/hills.webp" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+
+<link rel="preload" as="image" href="./frames/desktop/f001.webp" />
+</head>
+
+<body class="is-loading">
+
+<!-- ══════════════════ LOADING SCREEN ══════════════════ -->
+<div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading Nokma">
+  <div class="loader__inner">
+    <div class="loader__scoop" aria-hidden="true">
+      <svg viewBox="0 0 120 150" class="scoop-svg">
+        <defs>
+          <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFF8E6" /><stop offset="100%" stop-color="#F0DFB4" />
+          </linearGradient>
+          <linearGradient id="cup" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E8621B" /><stop offset="100%" stop-color="#B8460D" />
+          </linearGradient>
+        </defs>
+        <g class="scoop-ball">
+          <circle cx="60" cy="52" r="30" fill="url(#cream)" />
+          <circle cx="50" cy="44" r="7" fill="#fff" opacity=".55" />
+        </g>
+        <path class="scoop-cup" d="M28 74 h64 l-9 62 a6 6 0 0 1 -6 5 h-34 a6 6 0 0 1 -6 -5 z" fill="url(#cup)" />
+        <path class="scoop-drip" d="M60 78 v0" stroke="#FFF8E6" stroke-width="7" stroke-linecap="round" />
+      </svg>
+    </div>
+    <img class="loader__logo" src="./img/logo-nokma.webp" alt="Nokma" width="220" height="68" />
+    <p class="loader__tag">Rooted in Meghalaya</p>
+    <div class="loader__bar"><span class="loader__fill" id="loaderFill"></span></div>
+    <p class="loader__pct"><span id="loaderPct">0</span>%</p>
+  </div>
+</div>
+
+<!-- ══════════════════ SCROLL COMPANION ══════════════════ -->
+<div class="mascot" id="mascot" aria-hidden="true">
+  <img id="mascotImage" src="./products/mascot.webp" alt="" width="700" height="900" />
+</div>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#hero" data-cursor="link" aria-label="Nokma by MeghFarm — home">
+    <img src="./img/logo-meghfarm.webp" alt="" class="nav__badge" width="52" height="52" />
+    <img src="./img/logo-nokma.webp" alt="Nokma" class="nav__word" width="132" height="41" />
+  </a>
+
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#hero" data-cursor="link" class="is-active">Home</a>
+    <a href="#universe" data-cursor="link">Products</a>
+    <a href="#story" data-cursor="link">Our Story</a>
+    <a href="#impact" data-cursor="link">Impact</a>
+    <a href="#contact" data-cursor="link">Contact</a>
+  </nav>
+
+  <div class="nav__tools">
+    <button class="icon-btn nav__burger" id="burger" data-cursor="link" aria-label="Open menu" aria-expanded="false">
+      <span class="nav__burger-lines" aria-hidden="true">
+      <span></span><span></span><span></span>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- mobile menu -->
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="menu__list" aria-label="Mobile">
+    <a href="#hero">Home</a>
+    <a href="#story">Our Story</a>
+    <a href="#universe">Products</a>
+    <a href="#flavours">Flavours</a>
+    <a href="#islands">Categories</a>
+    <a href="#brand-world">Brand World</a>
+    <a href="#impact">Impact</a>
+    <a href="#factory">The Hub</a>
+    <a href="#timeline">Journey</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="menu__foot">
+    <p>MeghFarm Processing Hub · West Garo Hills</p>
+    <p>sales@themeghfarm.com</p>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ══════════════════ 1 · HERO ══════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__sticky">
+      <div class="hero__stage" id="heroStage">
+        <canvas class="hero__canvas" id="heroCanvas" aria-label="Nokma ice cream floating over the hills of Meghalaya"></canvas>
+        <div class="hero__vig" aria-hidden="true"></div>
+        <div class="hero__grain" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero__copy" id="heroCopy">
+        <h1 class="hero__title">
+          <span class="line"><span class="w">Rooted</span> <span class="w">in</span></span>
+          <span class="line"><span class="w">Meghalaya</span></span>
+        </h1>
+        <p class="hero__script">Crafted for the World</p>
+        <p class="hero__sub">From the hills we call home,<br />to the hearts around the world.</p>
+        <a class="btn btn--primary" href="#universe" data-cursor="link" data-ripple>
+          <span>Explore Our Products</span>
+          <svg viewBox="0 0 24 24" class="btn__arrow"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="hero__cue" id="heroCue" aria-hidden="true">
+        <span class="mouse"><span class="wheel"></span></span>
+        <span class="cue-label">Scroll Down</span>
+        <svg viewBox="0 0 24 24" class="chev"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 2 · BRAND STORY ══════════════════ -->
+  <section class="story" id="story">
+    <div class="story__intro">
+      <div class="story__copy">
+        <p class="eyebrow" data-reveal>Our Story</p>
+        <h2 class="h2" data-reveal-words>A journey from the hills<br />to your hands</h2>
+        <p class="lede" data-reveal>
+          MeghFarm is a pioneering agro-processing initiative under Muktidata Multipurpose
+          Co-operative Society Ltd. — created to empower local communities through value
+          addition, market access and sustainable enterprise.
+        </p>
+        <div class="story__route" data-reveal aria-label="Seven stages from the hills to your hands">
+          <span>The Hills</span><i aria-hidden="true"></i><span>Local Harvest</span><i aria-hidden="true"></i><span>MeghFarm</span><i aria-hidden="true"></i><span>Your Hands</span>
+        </div>
+      </div>
+
+      <figure class="story__preview" data-reveal>
+        <img src="./img/hills.webp" alt="The green hills of Meghalaya" loading="lazy" decoding="async" />
+        <figcaption>
+          <span>Journey begins · 01</span>
+          <strong>The Hills</strong>
+          <p>West Garo Hills, Meghalaya</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="story__track" id="storyTrack">
+      <div class="story__hud" aria-hidden="true">
+        <div class="story__hud-step"><span id="storyCurrent">01</span><small>/ 07</small></div>
+        <strong id="storyCurrentName">The Hills</strong>
+        <div class="story__progress"><span id="storyProgress"></span></div>
+      </div>
+      <div class="story__rail" id="storyRail">
+        <svg class="story__line" id="storyLine" aria-hidden="true" preserveAspectRatio="none">
+          <path id="storyPath" fill="none" stroke="url(#storyGrad)" stroke-width="2.5" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="storyGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#E8621B" /><stop offset="100%" stop-color="#2E7D4F" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <!-- story nodes injected -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 3 · PRODUCT UNIVERSE ══════════════════ -->
+  <section class="universe" id="universe">
+    <div class="universe__head">
+      <p class="eyebrow" data-reveal>The Collection</p>
+      <h2 class="h2" data-reveal-words>A complete range,<br />made in Meghalaya</h2>
+      <p class="lede" data-reveal>Twenty-five products across ice cream, drinks, snacks, spices and farm produce. Select any product to view its details.</p>
+    </div>
+
+    <div class="universe__filters" id="uniFilters" role="tablist" aria-label="Product categories"></div>
+
+    <div class="universe__spotlight" id="uniSpotlight" aria-live="polite">
+      <div class="spotlight__media">
+        <span class="spotlight__badge">Featured product</span>
+        <img id="spotlightImg" alt="" />
+      </div>
+      <div class="spotlight__body">
+        <p class="spotlight__kicker" id="spotlightKicker"></p>
+        <h3 class="spotlight__name" id="spotlightName"></h3>
+        <p class="spotlight__sizes" id="spotlightSizes"></p>
+        <p class="spotlight__blurb" id="spotlightBlurb"></p>
+        <button class="spotlight__button" id="spotlightButton" type="button" data-cursor="product" data-cursor-label="Open">
+          <span>View product details</span><span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="universe__space" id="uniSpace">
+      <div class="universe__list-head">
+        <h3>Browse the range</h3>
+        <span id="uniCount"></span>
+      </div>
+      <div class="universe__field" id="uniField"><!-- product cards injected --></div>
+    </div>
+
+    <aside class="selection-dock" id="selectionDock" aria-hidden="true" aria-live="polite">
+      <img id="selectionDockImg" src="" alt="" />
+      <div class="selection-dock__copy">
+        <span>Selected product</span>
+        <strong id="selectionDockName"></strong>
+        <small id="selectionDockSizes"></small>
+      </div>
+      <button class="selection-dock__button" id="selectionDockButton" type="button" data-cursor="product" data-cursor-label="Open">
+        <span>View details</span><span aria-hidden="true">→</span>
+      </button>
+    </aside>
+  </section>
+
+  <!-- product detail modal -->
+  <div class="pdp" id="pdp" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="pdpName">
+    <div class="pdp__scrim" data-pdp-close></div>
+    <div class="pdp__card" id="pdpCard">
+      <button class="pdp__x" data-pdp-close aria-label="Close" data-cursor="link">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="pdp__media"><img id="pdpImg" src="" alt="" /></div>
+      <div class="pdp__body">
+        <p class="pdp__kicker" id="pdpKicker"></p>
+        <h3 class="pdp__name" id="pdpName"></h3>
+        <p class="pdp__sizes" id="pdpSizes"></p>
+        <p class="pdp__blurb" id="pdpBlurb"></p>
+        <div class="pdp__row"><span>Flavours</span><p id="pdpFlavours"></p></div>
+        <div class="pdp__row" id="pdpStorageRow"><span>Storage</span><p id="pdpStorage"></p></div>
+        <a class="btn btn--ghost" href="#contact" data-pdp-close data-ripple data-cursor="link"><span>Enquire about this product</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ 4 · FLAVOUR SHOWCASE ══════════════════ -->
+  <section class="flav" id="flavours">
+    <div class="flav__bg" id="flavBg" aria-hidden="true"></div>
+    <div class="flav__glow" id="flavGlow" aria-hidden="true"></div>
+
+    <div class="flav__head">
+      <p class="eyebrow">Twelve Flavours</p>
+      <h2 class="h2" id="flavHeading">A scoop of<br />Meghalaya’s finest</h2>
+    </div>
+
+    <div class="flav__stage">
+      <button class="flav__nav flav__nav--prev" id="flavPrev" aria-label="Previous flavour" data-cursor="link">
+        <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+
+      <div class="flav__ring" id="flavRing"><!-- flavour slides injected --></div>
+
+      <button class="flav__nav flav__nav--next" id="flavNext" aria-label="Next flavour" data-cursor="link">
+        <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+
+      <svg class="flav__melt" id="flavMelt" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
+        <path id="meltPath" d="" />
+      </svg>
+    </div>
+
+    <div class="flav__meta">
+      <h3 class="flav__name" id="flavName">Vanilla</h3>
+      <p class="flav__sub" id="flavSub"></p>
+      <p class="flav__note" id="flavNote"></p>
+      <ul class="flav__formats" id="flavFormats"></ul>
+      <p class="flav__cold">Store frozen at −18&nbsp;°C or below · Best within 6 months of manufacture</p>
+    </div>
+
+    <div class="flav__dots" id="flavDots" role="tablist" aria-label="Flavours"></div>
+  </section>
+
+  <!-- ══════════════════ 5 · INGREDIENTS ══════════════════ -->
+  <section class="ingr" id="ingredients">
+    <div class="ingr__head">
+      <p class="eyebrow" data-reveal>How It’s Made</p>
+      <h2 class="h2" data-reveal-words>Real fruit pulp.<br />Rich butter. Slow churn.</h2>
+    </div>
+    <div class="ingr__pipe" id="ingrPipe"><!-- steps injected --></div>
+  </section>
+
+  <!-- ══════════════════ 6 · IMPACT ══════════════════ -->
+  <section class="impact" id="impact">
+    <div class="impact__head">
+      <p class="eyebrow" data-reveal>Our Impact</p>
+      <h2 class="h2" data-reveal-words>Transforming agriculture<br />through value addition</h2>
+    </div>
+
+    <svg class="impact__web" id="impactWeb" aria-hidden="true"><g id="impactLines"></g></svg>
+    <div class="impact__grid" id="impactGrid"><!-- counters injected --></div>
+
+    <div class="impact__pillars">
+      <p class="impact__pillars-t" data-reveal>Impact pillars</p>
+      <ul id="pillarList"></ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 7 · FACTORY PARALLAX ══════════════════ -->
+  <section class="factory" id="factory">
+    <div class="factory__sticky">
+      <div class="factory__layer factory__layer--sky" data-depth="0.06"></div>
+      <div class="factory__layer factory__layer--far" data-depth="0.18"></div>
+      <div class="factory__layer factory__layer--mid" data-depth="0.4"></div>
+      <div class="factory__layer factory__layer--near" data-depth="0.75"></div>
+      <div class="factory__mist" aria-hidden="true"></div>
+
+      <div class="factory__copy">
+        <p class="eyebrow">The Processing Hub</p>
+        <h2 class="h2">Khamari,<br />West Garo Hills</h2>
+        <p class="lede">
+          A modern agro-processing facility built where the produce is grown — so the value
+          stays in the region instead of leaving it. Cold-chain capable, quality-controlled,
+          and supported through the enabling ecosystem created by the Government of Meghalaya
+          with the Meghalaya Basin Management Agency.
+        </p>
+        <ul class="factory__facts">
+          <li><b>−18 °C</b><span>Cold chain storage</span></li>
+          <li><b>6</b><span>Product lines processed</span></li>
+          <li><b>794109</b><span>Khamari, P.O. Hollaidanga</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 8 · CATEGORY ISLANDS ══════════════════ -->
+  <section class="isl" id="islands">
+    <div class="isl__head">
+      <p class="eyebrow" data-reveal>Six Lines, One Origin</p>
+      <h2 class="h2" data-reveal-words>Choose an island</h2>
+      <p class="lede" data-reveal>Explore each product category. Select one to see what is inside.</p>
+    </div>
+    <div class="isl__world" id="islWorld"><!-- islands injected --></div>
+    <div class="isl__panel" id="islPanel" aria-live="polite"></div>
+  </section>
+
+  <!-- ══════════════════ 9 · BRAND WORLD ══════════════════ -->
+  <section class="range" id="brand-world">
+    <img class="range__leaf range__leaf--one" src="./products/leaf-1.webp" alt="" aria-hidden="true" loading="lazy" />
+    <img class="range__leaf range__leaf--two" src="./products/leaf-2.webp" alt="" aria-hidden="true" loading="lazy" />
+    <div class="range__head">
+      <p class="eyebrow" data-reveal>Beyond the Pack</p>
+      <h2 class="h2" data-reveal-words>The people, produce<br />and range behind Nokma</h2>
+      <p class="lede" data-reveal>
+        A visual record of the flavours, local harvests and Garo identity that shape every
+        product made at MeghFarm.
+      </p>
+    </div>
+    <div class="range__grid" id="rangeGrid"><!-- brand assets injected --></div>
+  </section>
+
+  <!-- ══════════════════ 10 · TIMELINE ══════════════════ -->
+  <section class="tl" id="timeline">
+    <div class="tl__sticky">
+      <div class="tl__head">
+        <p class="eyebrow">The Journey</p>
+        <h2 class="h2">From a co-operative<br />to a brand</h2>
+      </div>
+      <div class="tl__track" id="tlTrack"><!-- timeline cards injected --></div>
+      <div class="tl__progress"><span id="tlBar"></span></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 10 · WHY ══════════════════ -->
+  <section class="why" id="why">
+    <div class="why__head">
+      <p class="eyebrow" data-reveal>Quality You Can Trust</p>
+      <h2 class="h2" data-reveal-words>Why MeghFarm</h2>
+    </div>
+    <div class="why__grid" id="whyGrid"></div>
+  </section>
+
+  <!-- ══════════════════ 11 · CONTACT ══════════════════ -->
+  <section class="contact" id="contact">
+    <div class="contact__sun" aria-hidden="true"></div>
+    <div class="contact__ridge contact__ridge--far" aria-hidden="true"></div>
+    <div class="contact__ridge contact__ridge--mid" aria-hidden="true"></div>
+    <div class="contact__ridge contact__ridge--near" aria-hidden="true"></div>
+
+    <div class="contact__inner">
+      <div class="contact__card" id="contactCard">
+        <p class="eyebrow">Contact Us</p>
+        <h2 class="h2">Contact <br />MeghFarm</h2>
+
+        <div class="contact__cols">
+          <div class="contact__col">
+            <h4>MeghFarm Processing Hub</h4>
+            <p class="muted">(A Unit of Muktidata Multipurpose Co-Operative Society Ltd.)</p>
+            <address>
+              Khamari, P.O. Hollaidanga<br />
+              Dist — West Garo Hills<br />
+              Meghalaya — 794109
+            </address>
+            <p class="contact__lines">
+              <a href="tel:+919366323755" data-cursor="link">+91 93663 23755</a>
+              <a href="mailto:sales@themeghfarm.com" data-cursor="link">sales@themeghfarm.com</a>
+              <a href="https://www.themeghfarm.com" target="_blank" rel="noopener" data-cursor="link">www.themeghfarm.com</a>
+            </p>
+          </div>
+
+          <div class="contact__col">
+            <h4>Business Opportunities</h4>
+            <ul class="contact__ops" id="opsList"></ul>
+            <h4 class="mt">Why Partner With Us</h4>
+            <p class="muted small">
+              Direct sourcing network · Modern processing infrastructure · Quality assurance ·
+              Cold chain capability · Distributor support · Flexible order volumes
+            </p>
+          </div>
+        </div>
+
+        <form class="contact__form" id="contactForm" novalidate>
+          <div class="field">
+            <input type="text" id="cfName" name="name" required autocomplete="name" placeholder=" " />
+            <label for="cfName">Your name</label>
+          </div>
+          <div class="field">
+            <input type="email" id="cfEmail" name="email" required autocomplete="email" placeholder=" " />
+            <label for="cfEmail">Email address</label>
+          </div>
+          <div class="field field--full">
+            <select id="cfTopic" name="topic">
+              <option>Distributor Enquiries</option>
+              <option>Retail Partnerships</option>
+              <option>Institutional Supply</option>
+              <option>Bulk Orders</option>
+              <option>Private Label</option>
+              <option>Something else</option>
+            </select>
+            <label for="cfTopic" class="label--static">I’m interested in</label>
+          </div>
+          <div class="field field--full">
+            <textarea id="cfMsg" name="message" rows="3" placeholder=" "></textarea>
+            <label for="cfMsg">Tell us a little more</label>
+          </div>
+          <button class="btn btn--primary" type="submit" data-ripple data-cursor="link">
+            <span>Send enquiry</span>
+            <svg viewBox="0 0 24 24" class="btn__arrow"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="contact__hint" id="cfHint" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="foot">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <img src="./img/logo-meghfarm-full.webp" alt="MeghFarm — Fresh From Meghalaya" width="120" height="126" />
+        <p class="foot__promise">Rooted in Meghalaya<br />Crafted for the World</p>
+      </div>
+      <div class="foot__cols">
+        <div>
+          <h5>Products</h5>
+          <a href="#flavours">Nokma Ice Creams</a>
+          <a href="#universe">Fruit Drinks</a>
+          <a href="#universe">Packaged Water</a>
+          <a href="#universe">Banana Chips</a>
+          <a href="#universe">Spice Powders</a>
+          <a href="#universe">Bulk &amp; Dehydrated</a>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <a href="#story">Our Story</a>
+          <a href="#impact">Our Impact</a>
+          <a href="#factory">Processing Hub</a>
+          <a href="#timeline">Our Journey</a>
+          <a href="#why">Quality</a>
+        </div>
+        <div>
+          <h5>Connect</h5>
+          <a href="mailto:sales@themeghfarm.com">sales@themeghfarm.com</a>
+          <a href="mailto:customercare@themeghfarm.com">customercare@themeghfarm.com</a>
+          <a href="tel:+919366323755">+91 93663 23755</a>
+          <div class="foot__socials" aria-label="Social media">
+            <a href="https://instagram.com/nokma_meghfarm" target="_blank" rel="noopener noreferrer" aria-label="Nokma MeghFarm on Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle class="is-filled" cx="17.4" cy="6.7" r="1" />
+              </svg>
+            </a>
+            <a href="https://facebook.com/meghfarm" target="_blank" rel="noopener noreferrer" aria-label="MeghFarm on Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="is-filled" d="M13.7 22v-8.7h2.9l.5-3.4h-3.4V7.7c0-1 .3-1.7 1.7-1.7h1.9V3a25 25 0 0 0-2.7-.2c-2.7 0-4.6 1.7-4.6 4.7v2.4H7v3.4h3V22h3.7Z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot__support">
+      <img src="./products/logo-muktidata.webp" alt="Muktidata Multipurpose Co-operative Society Ltd." height="64" />
+      <img src="./products/logo-govt.webp" alt="Government of Meghalaya" height="64" />
+      <img src="./img/logo-collectives.webp" alt="The Collectives" height="64" />
+      <p>
+        MeghFarm’s growth journey is supported through the enabling ecosystem created by the
+        Government of Meghalaya, with support and collaboration through the Meghalaya Basin
+        Management Agency (MBMA).
+      </p>
+    </div>
+
+    <div class="foot__bar">
+      <p>© <span id="yr"></span> Muktidata Multipurpose Co-operative Society Ltd. · Reg. NO. T-3 OF 2017-18</p>
+      <p>FSSAI Lic. No. 11725006000073</p>
+      <p class="foot__promise-sm">Empowering Farmers · Creating Value · Delivering Quality</p>
+    </div>
+  </footer>
+
+</main>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

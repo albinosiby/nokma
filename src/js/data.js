@@ -1,0 +1,593 @@
+/**
+ * Nokma / MeghFarm product catalogue.
+ * Every figure, size and flavour here is taken from the company brochure
+ * and the product pamphlet — nothing is invented.
+ */
+
+export const BRAND = {
+  name: 'MeghFarm',
+  flagship: 'Nokma',
+  tagline: 'Fresh From Meghalaya',
+  promise: ['Rooted in Meghalaya', 'Crafted for the World'],
+  parent: 'Muktidata Multipurpose Co-operative Society Ltd.',
+  established: 2017,
+  registration: 'NO. T-3 OF 2017-18',
+  registeredOn: '30th June 2017',
+  registeredUnder:
+    'The Meghalaya Co-operative Societies Act, 1971 (vide adoption of Laws Order NO. I of 1971)',
+  address: {
+    unit: 'MeghFarm Processing Hub',
+    sub: '(A Unit of Muktidata Multipurpose Co-Operative Society Ltd.)',
+    lines: ['Khamari, P.O. Hollaidanga', 'Dist — West Garo Hills', 'Meghalaya — 794109'],
+  },
+  phone: '+91 93663 23755',
+  email: 'sales@themeghfarm.com',
+  care: 'customercare@themeghfarm.com',
+  website: 'www.themeghfarm.com',
+  social: {
+    instagram: '@nokma_meghfarm',
+    facebook: '@meghfarm',
+  },
+  fssai: '11725006000073',
+};
+
+/* ------------------------------------------------------------------ *
+ *  Ice cream flavours — the showcase carousel
+ * ------------------------------------------------------------------ */
+export const FLAVOURS = [
+  {
+    id: 'vanilla',
+    name: 'Vanilla',
+    sub: 'Tantalise White Temptation',
+    img: 'flavour-vanilla',
+    note: 'Snow-soft, slow-churned, the quiet classic every scoop is measured against.',
+    formats: ['IML Container 100 / 125 ML', 'Round & Oval Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'Mono Carton 750 / 1000 ML'],
+    theme: { bg: '#F6EEDC', deep: '#5A4526', ink: '#3A2C15', accent: '#C89A4A', glow: '#FFF3D6' },
+  },
+  {
+    id: 'chocolate',
+    name: 'Chocolate',
+    sub: 'Deep Cocoa Indulgence',
+    img: 'flavour-chocolate',
+    note: 'Dark, rounded cocoa folded through rich Meghalaya cream.',
+    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    theme: { bg: '#EADCCF', deep: '#4A2C1B', ink: '#33200F', accent: '#8A5230', glow: '#F6E3D2' },
+  },
+  {
+    id: 'strawberry',
+    name: 'Strawberry',
+    sub: 'Blush of the Hills',
+    img: 'flavour-strawberry',
+    note: 'Bright berry brought forward with real fruit pulp, never essence alone.',
+    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    theme: { bg: '#F7DDE6', deep: '#7A2745', ink: '#511628', accent: '#D4436F', glow: '#FFE7EF' },
+  },
+  {
+    id: 'orange',
+    name: 'Orange',
+    sub: 'Sunrise Citrus',
+    img: 'flavour-orange',
+    note: 'A clean citrus lift — the first light over the Garo Hills, in a scoop.',
+    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    theme: { bg: '#FCE3CC', deep: '#8A3D0E', ink: '#5E2708', accent: '#E2731C', glow: '#FFEBD6' },
+  },
+  {
+    id: 'jackfruit',
+    name: 'Jackfruit',
+    sub: 'Jack-A-licious',
+    img: 'flavour-jackfruit',
+    note: 'Meghalaya’s own jackfruit — honeyed, tropical, unmistakably regional.',
+    formats: ['IML Container 100 / 125 ML', 'Round & Oval Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'Cone 45 / 80 / 110 ML'],
+    theme: { bg: '#F8EBBE', deep: '#6E5410', ink: '#4A3806', accent: '#C9A21B', glow: '#FFF6D0' },
+  },
+  {
+    id: 'butterscotch',
+    name: 'Butterscotch',
+    sub: 'Golden Crunch',
+    img: 'flavour-butterscotch',
+    note: 'Burnt-sugar warmth with a crunch that keeps finding you.',
+    formats: ['IML Container 100 / 125 ML', 'Round & Oval Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'Cone 45 / 80 / 110 ML'],
+    theme: { bg: '#F7E4C3', deep: '#6B4412', ink: '#472C06', accent: '#C4832A', glow: '#FFEFD5' },
+  },
+  {
+    id: 'pistachio',
+    name: 'Pistachio',
+    sub: 'Tantalise Green Crush',
+    img: 'flavour-pistachio',
+    note: 'Nut-forward and gently savoury — the grown-up scoop of the range.',
+    formats: ['IML Container 100 / 125 ML', 'Round & Oval Tub 750 / 1000 ML', 'Cup 55 / 70 ML'],
+    theme: { bg: '#E7EDCE', deep: '#3F4F1C', ink: '#2A360F', accent: '#7B9435', glow: '#F3F8DC' },
+  },
+  {
+    id: 'pineapple',
+    name: 'Pineapple',
+    sub: 'Field-Grown Sweetness',
+    img: 'flavour-pineapple',
+    note: 'From the same raw pineapples we supply in bulk — straight into cream.',
+    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    theme: { bg: '#E3EEDF', deep: '#1F4A32', ink: '#12301F', accent: '#3E8055', glow: '#EFF8EC' },
+  },
+  {
+    id: 'lychee',
+    name: 'Lychee',
+    sub: 'Orchard Blush',
+    img: 'flavour-lychee',
+    note: 'Delicate, floral, faintly rose — the most fragile flavour we make.',
+    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    theme: { bg: '#FADCE3', deep: '#7B2438', ink: '#54141F', accent: '#CF4560', glow: '#FFE9EE' },
+  },
+  {
+    id: 'ginger',
+    name: 'Ginger',
+    sub: 'Hill Spice',
+    img: 'flavour-ginger',
+    note: 'Made with our own dehydrated ginger — warm, clean, quietly bold.',
+    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    theme: { bg: '#F6E2CE', deep: '#7A3E14', ink: '#52270A', accent: '#C1701E', glow: '#FFEDDA' },
+  },
+  {
+    id: 'lemon',
+    name: 'Lemon',
+    sub: 'Sharp & Clear',
+    img: 'flavour-lemon',
+    note: 'A cold, clean finish — the palate-cleanser of the collection.',
+    formats: ['Cup 55 / 70 ML'],
+    theme: { bg: '#EEF2D8', deep: '#4B5518', ink: '#333C0B', accent: '#8A9A2C', glow: '#F7FAE6' },
+  },
+  {
+    id: 'banana',
+    name: 'Banana',
+    sub: 'Local Harvest',
+    img: 'flavour-banana',
+    note: 'The same local bananas that become our chips — churned soft and sweet.',
+    formats: ['Cup 55 / 70 ML'],
+    theme: { bg: '#F7EFC8', deep: '#655412', ink: '#443806', accent: '#B79C1E', glow: '#FFFAD8' },
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ *  Product universe — every format, floating in 3D
+ * ------------------------------------------------------------------ */
+export const UNIVERSE = [
+  {
+    id: 'family-tub',
+    img: 'family-tub',
+    name: 'Family Tub',
+    kicker: 'IML Round Tub',
+    sizes: '750 ML · 1000 ML',
+    blurb: 'Generous servings of happiness, made for parties, celebrations and joyful moments.',
+    flavours: 'Vanilla · Butterscotch · Jackfruit · Pistachio · Chocolate · Strawberry · Pineapple · Lychee · Orange · Ginger',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'iml-round',
+    img: 'iml-round',
+    name: 'IML Container',
+    kicker: 'Round',
+    sizes: '100 ML · 125 ML',
+    blurb: 'Small in size, rich in creamy satisfaction — crafted for everyday delight.',
+    flavours: 'Vanilla · Pistachio · Butterscotch · Jackfruit',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'iml-oval',
+    img: 'iml-oval',
+    name: 'IML Container',
+    kicker: 'Oval',
+    sizes: '100 ML · 125 ML',
+    blurb: 'The same everyday scoop in an oval format built for the freezer door.',
+    flavours: 'Vanilla · Jackfruit · Butterscotch · Pistachio',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'cup-vanilla',
+    img: 'cup-vanilla',
+    name: 'Cup Ice Cream',
+    kicker: 'Single Serve',
+    sizes: '55 ML · 70 ML',
+    blurb: 'Individual portions packed with rich flavour — twelve flavours, one hand.',
+    flavours: 'All 12 flavours',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'cone-vanilla-wink',
+    img: 'cone-vanilla-wink',
+    name: 'Vanilla Wink',
+    kicker: 'Cone',
+    sizes: '45 · 80 · 110 ML',
+    blurb: 'Crunchy cones filled with smooth, creamy delight.',
+    flavours: 'Vanilla',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'cone-choco-thunder',
+    img: 'cone-choco-thunder',
+    name: 'Choco Thunder',
+    kicker: 'Cone',
+    sizes: '45 · 80 · 110 ML',
+    blurb: 'Deep cocoa through a wafer cone that keeps its snap.',
+    flavours: 'Chocolate',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'cone-jack-royale',
+    img: 'cone-jack-royale',
+    name: 'Jack Royale',
+    kicker: 'Cone',
+    sizes: '45 · 80 · 110 ML',
+    blurb: 'Our jackfruit, given the cone it deserves.',
+    flavours: 'Jackfruit',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'cone-scotch',
+    img: 'cone-scotch',
+    name: 'Scotch Cone',
+    kicker: 'Cone',
+    sizes: '45 · 80 · 110 ML',
+    blurb: 'Butterscotch and crunch, all the way to the tip.',
+    flavours: 'Butterscotch',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'cone-berry-giggles',
+    img: 'cone-berry-giggles',
+    name: 'Berry Giggles',
+    kicker: 'Cone',
+    sizes: '45 · 80 · 110 ML',
+    blurb: 'Bright strawberry in the range’s most cheerful wrapper.',
+    flavours: 'Strawberry',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'carton-vanilla',
+    img: 'carton-vanilla',
+    name: 'Snow Drift Vanilla',
+    kicker: 'Mono Carton',
+    sizes: '750 ML · 1000 ML',
+    blurb: 'Premium presentation paired with irresistible taste.',
+    flavours: 'Vanilla',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'carton-butterscotch',
+    img: 'carton-butterscotch',
+    name: 'Golden Crunch',
+    kicker: 'Mono Carton',
+    sizes: '750 ML · 1000 ML',
+    blurb: 'Butterscotch, boxed for the table rather than the freezer aisle.',
+    flavours: 'Butterscotch',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'carton-jackfruit',
+    img: 'carton-jackfruit',
+    name: 'Jack-A-licious',
+    kicker: 'Mono Carton',
+    sizes: '750 ML · 1000 ML',
+    blurb: 'Made with our own farm-fresh jackfruit.',
+    flavours: 'Jackfruit',
+    cat: 'ice-cream',
+  },
+  {
+    id: 'drink-passion',
+    img: 'drink-passion',
+    name: 'Passion Fruit Drink',
+    kicker: 'Nokma Beverages',
+    sizes: '125 · 250 · 500 ML',
+    blurb: 'Made from real fruit extracts, naturally refreshing.',
+    flavours: 'Passion Fruit',
+    cat: 'drinks',
+  },
+  {
+    id: 'drink-pineapple',
+    img: 'drink-pineapple',
+    name: 'Pineapple Drink',
+    kicker: 'Nokma Beverages',
+    sizes: '125 · 320 · 500 ML',
+    blurb: 'Meghalaya-grown pineapple, pressed and bottled.',
+    flavours: 'Pineapple',
+    cat: 'drinks',
+  },
+  {
+    id: 'drink-lychee',
+    img: 'drink-lychee',
+    name: 'Lychee Drink',
+    kicker: 'Nokma Beverages',
+    sizes: '125 · 250 · 500 ML',
+    blurb: 'Floral, light and cold — freshness in every sip.',
+    flavours: 'Lychee',
+    cat: 'drinks',
+  },
+  {
+    id: 'water-bottle',
+    img: 'water-bottle',
+    name: 'Packaged Drinking Water',
+    kicker: 'Blink · Shots · Squad',
+    sizes: '250 ML · 500 ML · 1 L',
+    blurb: 'Clean, refreshing water for every lifestyle — no compromise on purity.',
+    flavours: 'Nokma BLINK 250 ML · SHOTS 500 ML · SQUAD 1 L',
+    cat: 'drinks',
+  },
+  {
+    id: 'chips-crispy',
+    img: 'chips-crispy',
+    name: 'Crispy Banana Chips',
+    kicker: 'TE·RIK',
+    sizes: '30 · 60 · 85 · 105 G',
+    blurb: 'Crispy chips prepared from carefully selected local bananas.',
+    flavours: 'Crispy',
+    cat: 'chips',
+  },
+  {
+    id: 'chips-plain',
+    img: 'chips-plain',
+    name: 'Plain Banana Chips',
+    kicker: 'TE·RIK',
+    sizes: '30 · 60 · 85 · 105 G',
+    blurb: 'Light, crunchy and naturally delicious — hygienically packed for freshness.',
+    flavours: 'Plain',
+    cat: 'chips',
+  },
+  {
+    id: 'spice-turmeric',
+    img: 'spice-turmeric',
+    name: 'Turmeric Powder',
+    kicker: 'Dehydrated',
+    sizes: '100 G · 500 G',
+    blurb: 'Carefully processed to preserve aroma, colour and nutrition.',
+    flavours: 'Chemical-free processing',
+    cat: 'spices',
+  },
+  {
+    id: 'spice-ginger',
+    img: 'spice-ginger',
+    name: 'Ginger Powder',
+    kicker: 'Dehydrated',
+    sizes: '100 G · 500 G',
+    blurb: 'Pure flavour, traditional strength — naturally sourced.',
+    flavours: 'Chemical-free processing',
+    cat: 'spices',
+  },
+  {
+    id: 'raw-pineapple',
+    img: 'raw-pineapple',
+    name: 'Raw Pineapples',
+    kicker: 'Bulk Supply',
+    sizes: 'Wholesale volumes',
+    blurb: 'Farm-fresh quality, wholesale reliability — direct from farming communities.',
+    flavours: 'Bulk & institutional',
+    cat: 'bulk',
+  },
+  {
+    id: 'raw-ginger',
+    img: 'raw-ginger',
+    name: 'Raw Ginger',
+    kicker: 'Bulk Supply',
+    sizes: 'Wholesale volumes',
+    blurb: 'Sourced directly from Meghalaya’s farmers, graded and dispatched.',
+    flavours: 'Bulk & institutional',
+    cat: 'bulk',
+  },
+  {
+    id: 'raw-turmeric',
+    img: 'raw-turmeric',
+    name: 'Raw Turmeric',
+    kicker: 'Bulk Supply',
+    sizes: 'Wholesale volumes',
+    blurb: 'Deep-pigment turmeric root for processors and institutional buyers.',
+    flavours: 'Bulk & institutional',
+    cat: 'bulk',
+  },
+  {
+    id: 'flakes-ginger',
+    img: 'flakes-ginger',
+    name: 'Dehydrated Ginger Flakes',
+    kicker: 'Bulk Supply',
+    sizes: 'Wholesale volumes',
+    blurb: 'Dried at controlled temperature to hold aroma through the supply chain.',
+    flavours: 'Bulk & institutional',
+    cat: 'bulk',
+  },
+  {
+    id: 'flakes-turmeric',
+    img: 'flakes-turmeric',
+    name: 'Dehydrated Turmeric Flakes',
+    kicker: 'Bulk Supply',
+    sizes: 'Wholesale volumes',
+    blurb: 'Consistent quality, reliable sourcing, scalable supply.',
+    flavours: 'Bulk & institutional',
+    cat: 'bulk',
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ *  Category islands
+ * ------------------------------------------------------------------ */
+export const ISLANDS = [
+  { id: 'ice-cream', label: 'Ice Cream', icon: '🍦', img: 'family-tub', count: '12 flavours · 6 formats', line: 'A Scoop of Meghalaya’s Finest' },
+  { id: 'drinks', label: 'Drinks', icon: '🥤', img: 'drink-passion', count: '3 fruit drinks · 1 water', line: 'Freshness in Every Sip' },
+  { id: 'chips', label: 'Banana Chips', icon: '🍌', img: 'chips-crispy', count: '2 variants · 4 pack sizes', line: 'Crunch with Authentic Flavour' },
+  { id: 'spices', label: 'Spices', icon: '🌿', img: 'spice-turmeric', count: '2 powders · 2 pack sizes', line: 'Pure Flavour, Traditional Strength' },
+  { id: 'bulk', label: 'Bulk & Dehydrated', icon: '🌾', img: 'raw-turmeric', count: '5 lines · wholesale', line: 'Farm-Fresh Quality, Wholesale Reliability' },
+];
+
+/* ------------------------------------------------------------------ *
+ *  Brand world — supporting artwork and range photography
+ * ------------------------------------------------------------------ */
+export const BRAND_WORLD = [
+  {
+    id: 'complete-range',
+    title: 'The Nokma Range',
+    note: 'Ice creams, fruit drinks, water, chips, spices and farm produce.',
+    src: './products/lineup.webp',
+    className: 'range__item--wide',
+  },
+  {
+    id: 'garo-dancer',
+    title: 'Garo Spirit',
+    note: 'A brand language rooted in the culture of the hills.',
+    src: './products/garo-dancer.webp',
+    className: 'range__item--portrait range__item--orange',
+  },
+  {
+    id: 'water-range',
+    title: 'Water for Every Day',
+    note: 'Blink, Shots and Squad in three practical sizes.',
+    src: './products/water-trio.webp',
+    className: 'range__item--cool',
+  },
+  {
+    id: 'oval-tub',
+    title: 'Butterscotch Oval Tub',
+    note: 'A family format made for sharing.',
+    src: './products/oval-butterscotch.webp',
+    className: 'range__item--gold',
+  },
+  {
+    id: 'local-bananas',
+    title: 'Local Banana Harvest',
+    note: 'The starting point for TE·RIK banana chips.',
+    src: './products/bananas-green.webp',
+    className: 'range__item--green',
+  },
+  {
+    id: 'garo-basket',
+    title: 'Collected Locally',
+    note: 'Farm produce gathered close to the processing hub.',
+    src: './products/garo-basket.webp',
+    className: 'range__item--portrait',
+  },
+  {
+    id: 'garo-ginger',
+    title: 'Meghalaya Ginger',
+    note: 'Fresh roots become powders, flakes and flavour.',
+    src: './products/garo-ginger.webp',
+    className: 'range__item--portrait range__item--warm',
+  },
+  {
+    id: 'delivery',
+    title: 'Ready for the Road',
+    note: 'Packed carefully and moved through a dependable cold chain.',
+    src: './products/story-delivery.webp',
+    className: 'range__item--wide range__item--mist',
+  },
+  {
+    id: 'farm-field',
+    title: 'Where It Begins',
+    note: 'The Meghalaya landscape behind the ingredients and the enterprise.',
+    src: './img/farm-field.webp',
+    className: 'range__item--photo',
+  },
+  {
+    id: 'farmer-harvest',
+    title: 'Harvested by Hand',
+    note: 'Local growers remain at the centre of MeghFarm\'s value chain.',
+    src: './img/farmer-harvest.webp',
+    className: 'range__item--photo',
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ *  Brand story chain
+ * ------------------------------------------------------------------ */
+export const STORY = [
+  { id: 'mountain', title: 'The Hills', img: 'hills', kind: 'photo', text: 'Nestled in the pristine hills of Meghalaya, in the West Garo Hills, everything we make begins with where we are.' },
+  { id: 'farmer', title: 'The Farmer', img: 'story-farmer', kind: 'art', text: 'Fair-trade partnerships with tribal farmers — sourcing direct, and cutting the middlemen out of the chain.' },
+  { id: 'fruit', title: 'Fresh Produce', img: 'raw-pineapple', kind: 'art', text: 'Pineapple, jackfruit, ginger, turmeric, banana — collected at peak and moved fast.' },
+  { id: 'processing', title: 'Processing', img: 'story-processing', kind: 'art', text: 'A modern processing hub adds value where it is grown, instead of shipping raw produce away.' },
+  { id: 'quality', title: 'Quality Control', img: 'story-qc', kind: 'art', text: 'Every batch is checked for taste, nutrition, hygiene, freshness and safe packaging standards.' },
+  { id: 'packaging', title: 'Packaging', img: 'story-packaging', kind: 'art', text: 'Hygienically packed and cold-chain ready — 6 months frozen, 12 months ambient.' },
+  { id: 'consumer', title: 'To You', img: 'story-consumer', kind: 'art', text: 'Meghalaya’s authentic flavours, brought to homes across India under the name Nokma.' },
+];
+
+/* ------------------------------------------------------------------ *
+ *  Ingredient pipeline
+ * ------------------------------------------------------------------ */
+export const INGREDIENTS = [
+  { id: 'fruit', label: 'Real Fruit Pulp', img: 'raw-pineapple', note: 'Jackfruit, pineapple, lychee, orange, banana — pulped, never powdered.' },
+  { id: 'milk', label: 'Fresh Milk', img: null, note: 'The base of every scoop, brought in and standardised on site.', glyph: 'milk' },
+  { id: 'butter', label: 'Rich Butter', img: null, note: 'Butter-fat is what carries flavour — ours is not thinned out.', glyph: 'butter' },
+  { id: 'spice', label: 'Dehydrated Herbs', img: 'flakes-ginger', note: 'Our own ginger and turmeric, dried to hold aroma.' },
+  { id: 'mix', label: 'Slow Churn', img: null, note: 'Blended, aged and churned until the texture holds a clean edge.', glyph: 'churn' },
+  { id: 'done', label: 'Nokma Ice Cream', img: 'family-tub', note: 'Frozen at −18 °C and sealed. Indulgence inspired by nature.' },
+];
+
+/* ------------------------------------------------------------------ *
+ *  Impact counters
+ * ------------------------------------------------------------------ */
+export const IMPACT = [
+  { id: 'flavours', value: 12, suffix: '', label: 'Ice Cream Flavours', note: 'From Vanilla to Jackfruit' },
+  { id: 'lines', value: 6, suffix: '', label: 'Product Categories', note: 'Ice cream, drinks, water, chips, spices, bulk' },
+  { id: 'formats', value: 30, suffix: '+', label: 'Pack Formats & Sizes', note: 'Cups, cones, tubs, cartons, bottles, pouches' },
+  { id: 'since', value: 2017, suffix: '', label: 'Building Since', label2: 'Registered 30 June 2017', note: 'Muktidata Multipurpose Co-operative Society Ltd.', raw: true },
+];
+
+export const IMPACT_PILLARS = [
+  'Local sourcing',
+  'Employment generation',
+  'Women participation',
+  'Sustainable livelihoods',
+  'Regional brand development',
+];
+
+/* ------------------------------------------------------------------ *
+ *  Timeline
+ * ------------------------------------------------------------------ */
+export const TIMELINE = [
+  {
+    year: '2017',
+    title: 'Foundation',
+    text: 'Muktidata Multipurpose Co-operative Society Ltd. is registered on 30th June 2017 under the Meghalaya Co-operative Societies Act, 1971 — with a vision of sustainable livelihoods and farmer participation.',
+    img: 'logo-muktidata',
+    kind: 'art',
+  },
+  {
+    year: 'The Hub',
+    title: 'Processing Unit',
+    text: 'The MeghFarm Processing Hub is built at Khamari, West Garo Hills — bringing modern agro-processing to where the produce is actually grown.',
+    img: 'factory-front',
+    kind: 'photo',
+  },
+  {
+    year: 'Nokma',
+    title: 'The Brand Launches',
+    text: 'A Nokma is the respected custodian of ancestral land in the Garo Hills. The name was chosen to honour that heritage — pride, authenticity, belonging.',
+    img: 'lineup',
+    kind: 'art',
+  },
+  {
+    year: 'Today',
+    title: 'Six Product Lines',
+    text: 'Ice creams, fruit drinks, packaged water, banana chips, spice powders and bulk dehydrated products — all sourced from Meghalaya’s farming communities.',
+    img: 'factory-aerial',
+    kind: 'photo',
+  },
+  {
+    year: 'Next',
+    title: 'The Road Ahead',
+    text: 'To become Northeast India’s most trusted agro-food brand — global recognition for Meghalaya-grown products, and a self-reliant farming economy behind them.',
+    img: 'hills-2',
+    kind: 'photo',
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ *  Why MeghFarm
+ * ------------------------------------------------------------------ */
+export const WHY = [
+  { t: '100% Locally Sourced', d: 'Every ingredient traced back to Meghalaya’s farming communities.' },
+  { t: 'Farmer-Led Cooperative', d: 'Owned and steered through a registered co-operative society.' },
+  { t: 'Women Empowerment Focused', d: 'Women and youth participation built into how the enterprise runs.' },
+  { t: 'Ethical & Sustainable', d: 'Value added at source, so the margin stays in the region.' },
+  { t: 'Modern Processing Facility', d: 'A purpose-built hub in West Garo Hills with cold-chain capability.' },
+  { t: 'Premium Quality Assurance', d: 'Strict control over taste, nutrition, hygiene, freshness and packaging.' },
+];
+
+export const OPPORTUNITIES = [
+  'Distributor Enquiries',
+  'Retail Partnerships',
+  'Institutional Supply',
+  'Bulk Orders',
+  'Private Label',
+];
