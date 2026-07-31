@@ -3,7 +3,7 @@ import './styles/sections.css';
 
 import { ScrollTrigger, initSmoothScroll } from './js/core.js';
 import { runLoader } from './js/loader.js';
-import { preloadHero, initHero, sequence } from './js/hero.js';
+import { preloadHero, initHero } from './js/hero.js';
 import { initNav } from './js/nav.js';
 import { initRipples, initMagnetic, initReveals } from './js/micro.js';
 import { initStory } from './js/story.js';
@@ -52,7 +52,7 @@ async function boot() {
   // Fonts first: SplitText must measure final glyphs, not fallbacks.
   const fonts = document.fonts?.ready ?? Promise.resolve();
 
-  // Priority frame pass drives the progress bar (85% of it); fonts take the rest.
+  // The prepared scroll sequence drives 85% of progress; font readiness takes the rest.
   await Promise.all([
     preloadHero((p) => loader.setProgress(p * 0.85)),
     fonts.then(() => loader.setProgress(0.88)),
@@ -62,9 +62,6 @@ async function boot() {
   loader.setProgress(0.97);
 
   await loader.finish();
-
-  // Fill in the remaining frames quietly, then settle the layout once more.
-  sequence.loadRest().then(() => ScrollTrigger.refresh());
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
 }

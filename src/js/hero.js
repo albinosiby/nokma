@@ -7,10 +7,9 @@ const src = (i) => `./frames/${DIR}/f${String(i + 1).padStart(3, '0')}.webp`;
 /**
  * Streams the hero frame sequence.
  *
- * Pass 1 loads every 4th frame so the scrub has full-range coverage almost
- * immediately (that pass drives the loading bar); pass 2 fills in the gaps in
- * the background. Any frame that has not arrived yet falls back to the nearest
- * one that has, so scrubbing never stalls or flickers.
+ * Load every other source frame before the loader exits. This keeps the
+ * sequence smooth while avoiding hundreds of background decodes competing
+ * with scroll rendering after the page becomes interactive.
  */
 class FrameSequence {
   constructor() {
@@ -24,7 +23,8 @@ class FrameSequence {
       if (this.ready[index]) return resolve();
       const img = new Image();
       img.decoding = 'async';
-      img.onload = () => {
+      img.onload = async () => {
+        try { await img.decode(); } catch { /* onload still provides a drawable image */ }
         this.images[index] = img;
         if (!this.ready[index]) { this.ready[index] = 1; this.readyCount++; }
         resolve();
@@ -47,9 +47,9 @@ class FrameSequence {
     await Promise.all(Array.from({ length: concurrency }, worker));
   }
 
-  /** Priority pass — coarse coverage across the whole timeline. */
+  /** Prepare a dense, evenly distributed sequence before interaction. */
   async loadPriority(onProgress) {
-    const step = 4;
+    const step = 2;
     const list = [];
     for (let i = 0; i < FRAME_COUNT; i += step) list.push(i);
     if (list[list.length - 1] !== FRAME_COUNT - 1) list.push(FRAME_COUNT - 1);
@@ -57,13 +57,6 @@ class FrameSequence {
     let done = 0;
     await this.pump(list, 8, () => onProgress?.(++done / list.length));
     return list.length;
-  }
-
-  /** Background pass — everything else, at low pressure. */
-  loadRest() {
-    const list = [];
-    for (let i = 0; i < FRAME_COUNT; i++) if (!this.ready[i]) list.push(i);
-    return this.pump(list, 5);
   }
 
   /** Closest already-decoded frame to `i`. */
@@ -95,7 +88,9 @@ export function initHero() {
   let cw = 0, ch = 0;
 
   function size() {
-    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 2 : 2.25);
+    // Source frames are 1280×720 (desktop) and 720×405 (mobile). A high-DPR
+    // backing store adds draw cost without revealing additional source detail.
+    const dpr = 1;
     const r = stage.getBoundingClientRect();
     cw = Math.round(r.width);
     ch = Math.round(r.height);
@@ -125,10 +120,6 @@ export function initHero() {
   size();
   onResize(size);
 
-  // keep painting while background frames stream in
-  const settle = setInterval(draw, 220);
-  setTimeout(() => clearInterval(settle), 45000);
-
   if (reduced) {
     state.frame = FRAME_COUNT - 1;
     draw();
@@ -145,7 +136,7 @@ export function initHero() {
       trigger: hero,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 0.55,
+      scrub: true,
     },
     onUpdate: draw,
   });
@@ -160,7 +151,7 @@ export function initHero() {
       scale: 1.0,
       rotate: -0.4,
       ease: 'none',
-      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom bottom', scrub: 1 },
+      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom bottom', scrub: true },
     }
   );
 
@@ -180,14 +171,14 @@ export function initHero() {
     opacity: 0,
     filter: 'blur(9px)',
     ease: 'power1.in',
-    scrollTrigger: { trigger: hero, start: 'top top', end: '38% top', scrub: 0.7 },
+    scrollTrigger: { trigger: hero, start: 'top top', end: '38% top', scrub: true },
   });
 
   gsap.to(cue, {
     opacity: 0,
     y: 26,
     ease: 'none',
-    scrollTrigger: { trigger: hero, start: 'top top', end: '14% top', scrub: 0.6 },
+    scrollTrigger: { trigger: hero, start: 'top top', end: '14% top', scrub: true },
   });
 
   /* ── mouse changes the scene perspective ──────────────── */
