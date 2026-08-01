@@ -448,19 +448,6 @@ export const BRAND_WORLD = [
 ];
 
 /* ------------------------------------------------------------------ *
- *  Brand story chain
- * ------------------------------------------------------------------ */
-export const STORY = [
-  { id: 'mountain', title: 'The Hills', img: 'hills', kind: 'photo', text: 'Nestled in the pristine hills of Meghalaya, in the West Garo Hills, everything we make begins with where we are.' },
-  { id: 'farmer', title: 'Local Sourcing', img: 'farmer-harvest', kind: 'photo', text: 'Meghalaya-grown ingredients are sourced close to the communities and landscapes where they begin.' },
-  { id: 'fruit', title: 'Fresh Ingredients', img: 'bananas-green', kind: 'art', text: 'Fruit, spices and farm produce are selected for flavour, freshness and suitability for each Nokma product.' },
-  { id: 'processing', title: 'Processing', img: 'factory-front', kind: 'photo', text: 'MeghFarm processes the ingredients close to source, with dedicated lines for the Nokma range.' },
-  { id: 'quality', title: 'Quality Control', img: 'lineup', kind: 'art', text: 'Every batch is checked for taste, nutrition, hygiene, freshness and safe packaging standards.' },
-  { id: 'packaging', title: 'Packed for Freshness', img: 'family-tub', kind: 'art', text: 'Each format is hygienically packed and prepared for reliable frozen or ambient storage.' },
-  { id: 'consumer', title: 'Nokma to You', img: 'mascot', kind: 'art', text: 'Meghalaya’s flavours reach homes and retailers through the Nokma product range.' },
-];
-
-/* ------------------------------------------------------------------ *
  *  Ingredient pipeline
  * ------------------------------------------------------------------ */
 export const INGREDIENTS = [

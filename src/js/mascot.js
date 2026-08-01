@@ -1,7 +1,6 @@
 import { gsap, ScrollTrigger, reduced, onResize } from './core.js';
 
 const SCENES = [
-  { id: 'story', side: 'left', lift: 0, pose: 'pose-04' },
   { id: 'universe', side: 'right', lift: 92, pose: 'pose-05' },
   { id: 'flavours', side: 'left', lift: 4, pose: 'pose-03' },
   { id: 'ingredients', side: 'right', lift: 8, pose: 'pose-06' },

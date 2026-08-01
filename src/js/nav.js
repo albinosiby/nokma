@@ -25,7 +25,6 @@ export function initNav() {
   /* ── active section highlighting ──────────────────────── */
   const map = [
     ['#hero', '#hero'],
-    ['#story', '#story'],
     ['#universe', '#universe'],
     ['#flavours', '#universe'],
     ['#islands', '#universe'],
@@ -85,7 +84,7 @@ export function initNav() {
     e.preventDefault();
 
     // pinned sections must land at their very top; everything else clears the nav
-    const pinned = ['hero', 'story', 'factory'].includes(target.id);
+    const pinned = ['hero', 'factory'].includes(target.id);
     const opts = { offset: pinned ? 0 : -72 };
 
     if (menu.classList.contains('is-open')) {

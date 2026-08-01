@@ -6,7 +6,6 @@ import { runLoader } from './js/loader.js';
 import { preloadHero, initHero } from './js/hero.js';
 import { initNav } from './js/nav.js';
 import { initRipples, initMagnetic, initReveals } from './js/micro.js';
-import { initStory } from './js/story.js';
 import { initUniverse } from './js/universe.js';
 import { initFlavours } from './js/flavours.js';
 import { initIngredients } from './js/ingredients.js';
@@ -25,7 +24,6 @@ function buildScenes() {
   initMagnetic('.icon-btn, .flav__nav', 0.3);
 
   initHero();
-  initStory();
   initUniverse();
   initFlavours();
   initIngredients();
