@@ -312,6 +312,12 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
 }
 .nav__links a:hover::after, .nav__links a.is-active::after { transform: scaleX(1); transform-origin: left; }
 .nav__links a.is-active { color: var(--orange); }
+.nav:not(.is-stuck) .nav__links a {
+  color: var(--cream);
+  text-shadow: 0 2px 16px rgba(3, 18, 10, 0.68);
+}
+.nav:not(.is-stuck) .nav__links a::after { background: var(--orange-200); }
+.nav:not(.is-stuck) .nav__links a.is-active { color: var(--orange-200); }
 
 .nav__tools { display: flex; align-items: center; gap: 0.6rem; }
 .nav__burger { display: none; }
