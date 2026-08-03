@@ -2,12 +2,11 @@ import { gsap, ScrollTrigger, reduced, lenis } from './core.js';
 import { UNIVERSE } from './data.js';
 
 const FILTERS = [
-  { id: 'all', label: 'Everything' },
+  { id: 'all', label: 'All' },
   { id: 'ice-cream', label: 'Ice Cream' },
-  { id: 'drinks', label: 'Drinks & Water' },
+  { id: 'drinks', label: 'Beverages' },
   { id: 'chips', label: 'Banana Chips' },
   { id: 'spices', label: 'Spices' },
-  { id: 'bulk', label: 'Bulk & Dehydrated' },
 ];
 
 const FROZEN = 'Store frozen at −18 °C or below · Shelf life 6 months from manufacture';

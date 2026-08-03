@@ -115,7 +115,7 @@ export function initMascot() {
     });
   });
 
-  const hiddenSections = ['hero', 'brand-world', 'contact'];
+  const hiddenSections = ['hero', 'contact'];
 
   hiddenSections.forEach((id) => {
     const section = document.getElementById(id);

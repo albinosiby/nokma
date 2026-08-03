@@ -151,9 +151,9 @@ export const FLAVOURS = [
 export const UNIVERSE = [
   {
     id: 'family-tub',
-    img: 'family-tub',
+    img: 'family-tub-jackfruit',
     name: 'Family Tub',
-    kicker: 'IML Round Tub',
+    kicker: 'IML Round Tub · Jackfruit',
     sizes: '750 ML · 1000 ML',
     blurb: 'Generous servings of happiness, made for parties, celebrations and joyful moments.',
     flavours: 'Vanilla · Butterscotch · Jackfruit · Pistachio · Chocolate · Strawberry · Pineapple · Lychee · Orange · Ginger',
@@ -161,9 +161,9 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-round',
-    img: 'iml-round',
+    img: 'iml-round-butterscotch',
     name: 'IML Container',
-    kicker: 'Round',
+    kicker: 'Round · Butterscotch',
     sizes: '100 ML · 125 ML',
     blurb: 'Small in size, rich in creamy satisfaction — crafted for everyday delight.',
     flavours: 'Vanilla · Pistachio · Butterscotch · Jackfruit',
@@ -171,9 +171,9 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-oval',
-    img: 'iml-oval',
+    img: 'iml-oval-pistachio',
     name: 'IML Container',
-    kicker: 'Oval',
+    kicker: 'Oval · Pistachio',
     sizes: '100 ML · 125 ML',
     blurb: 'The same everyday scoop in an oval format built for the freezer door.',
     flavours: 'Vanilla · Jackfruit · Butterscotch · Pistachio',
@@ -181,9 +181,9 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-vanilla',
-    img: 'cup-vanilla',
+    img: 'cup-strawberry',
     name: 'Cup Ice Cream',
-    kicker: 'Single Serve',
+    kicker: 'Single Serve · Strawberry',
     sizes: '55 ML · 70 ML',
     blurb: 'Individual portions packed with rich flavour — twelve flavours, one hand.',
     flavours: 'All 12 flavours',
@@ -349,36 +349,6 @@ export const UNIVERSE = [
     flavours: 'Chemical-free processing',
     cat: 'spices',
   },
-  {
-    id: 'raw-turmeric',
-    img: 'raw-turmeric',
-    name: 'Raw Turmeric',
-    kicker: 'Bulk Supply',
-    sizes: 'Wholesale volumes',
-    blurb: 'Deep-pigment turmeric root for processors and institutional buyers.',
-    flavours: 'Bulk & institutional',
-    cat: 'bulk',
-  },
-  {
-    id: 'flakes-ginger',
-    img: 'flakes-ginger',
-    name: 'Dehydrated Ginger Flakes',
-    kicker: 'Bulk Supply',
-    sizes: 'Wholesale volumes',
-    blurb: 'Dried at controlled temperature to hold aroma through the supply chain.',
-    flavours: 'Bulk & institutional',
-    cat: 'bulk',
-  },
-  {
-    id: 'flakes-turmeric',
-    img: 'flakes-turmeric',
-    name: 'Dehydrated Turmeric Flakes',
-    kicker: 'Bulk Supply',
-    sizes: 'Wholesale volumes',
-    blurb: 'Consistent quality, reliable sourcing, scalable supply.',
-    flavours: 'Bulk & institutional',
-    cat: 'bulk',
-  },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -389,62 +359,6 @@ export const ISLANDS = [
   { id: 'drinks', label: 'Drinks', icon: '🥤', img: 'drink-passion', count: '3 fruit drinks · 1 water', line: 'Freshness in Every Sip' },
   { id: 'chips', label: 'Banana Chips', icon: '🍌', img: 'chips-crispy', count: '2 variants · 4 pack sizes', line: 'Crunch with Authentic Flavour' },
   { id: 'spices', label: 'Spices', icon: '🌿', img: 'spice-turmeric', count: '2 powders · 2 pack sizes', line: 'Pure Flavour, Traditional Strength' },
-  { id: 'bulk', label: 'Bulk & Dehydrated', icon: '🌾', img: 'raw-turmeric', count: '3 lines · wholesale', line: 'Farm-Fresh Quality, Wholesale Reliability' },
-];
-
-/* ------------------------------------------------------------------ *
- *  Brand world — supporting artwork and range photography
- * ------------------------------------------------------------------ */
-export const BRAND_WORLD = [
-  {
-    id: 'complete-range',
-    title: 'The Nokma Range',
-    note: 'Ice creams, fruit drinks, water, chips, spices and processed ingredients.',
-    src: './products/lineup.webp',
-    className: 'range__item--wide',
-  },
-  {
-    id: 'water-range',
-    title: 'Water for Every Day',
-    note: 'Blink, Shots and Squad in three practical sizes.',
-    src: './products/water-trio.webp',
-    className: 'range__item--cool',
-  },
-  {
-    id: 'oval-tub',
-    title: 'Butterscotch Oval Tub',
-    note: 'A family format made for sharing.',
-    src: './products/oval-butterscotch.webp',
-    className: 'range__item--gold',
-  },
-  {
-    id: 'local-bananas',
-    title: 'Local Banana Harvest',
-    note: 'The starting point for TE·RIK banana chips.',
-    src: './products/bananas-green.webp',
-    className: 'range__item--green',
-  },
-  {
-    id: 'delivery',
-    title: 'Ready for the Road',
-    note: 'Packed carefully and moved through a dependable cold chain.',
-    src: './products/story-delivery.webp',
-    className: 'range__item--wide range__item--mist',
-  },
-  {
-    id: 'farm-field',
-    title: 'Where It Begins',
-    note: 'The Meghalaya landscape behind the ingredients and the enterprise.',
-    src: './img/farm-field.webp',
-    className: 'range__item--photo',
-  },
-  {
-    id: 'farmer-harvest',
-    title: 'Harvested by Hand',
-    note: 'Local growers remain at the centre of MeghFarm\'s value chain.',
-    src: './img/farmer-harvest.webp',
-    className: 'range__item--photo',
-  },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -464,9 +378,9 @@ export const INGREDIENTS = [
  * ------------------------------------------------------------------ */
 export const IMPACT = [
   { id: 'flavours', value: 12, suffix: '', label: 'Ice Cream Flavours', note: 'From Vanilla to Jackfruit' },
-  { id: 'lines', value: 6, suffix: '', label: 'Product Categories', note: 'Ice cream, drinks, water, chips, spices, bulk' },
+  { id: 'lines', value: 5, suffix: '', label: 'Product Categories', note: 'Ice cream, drinks, water, chips and spices' },
   { id: 'formats', value: 30, suffix: '+', label: 'Pack Formats & Sizes', note: 'Cups, cones, tubs, cartons, bottles, pouches' },
-  { id: 'since', value: 2017, suffix: '', label: 'Building Since', label2: 'Registered 30 June 2017', note: 'Muktidata Multipurpose Co-operative Society Ltd.', raw: true },
+  { id: 'since', value: 2024, suffix: '', label: 'Building Since', label2: 'Nokma production began in 2024', note: 'MeghFarm Processing Hub', raw: true },
 ];
 
 export const IMPACT_PILLARS = [

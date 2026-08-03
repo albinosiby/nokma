@@ -29,7 +29,6 @@ export function initNav() {
     ['#universe', '#universe'],
     ['#flavours', '#universe'],
     ['#islands', '#universe'],
-    ['#brand-world', '#universe'],
     ['#impact', '#impact'],
     ['#factory', '#impact'],
     ['#contact', '#contact'],

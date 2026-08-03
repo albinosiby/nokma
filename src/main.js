@@ -11,7 +11,6 @@ import { initFlavours } from './js/flavours.js';
 import { initIngredients } from './js/ingredients.js';
 import { initImpact, initFactory } from './js/impact.js';
 import { initIslands } from './js/islands.js';
-import { initBrandWorld } from './js/brand-world.js';
 import { initMascot } from './js/mascot.js';
 import { initWhy, initContact, initFooter } from './js/contact.js';
 
@@ -30,7 +29,6 @@ function buildScenes() {
   initImpact();
   initFactory();
   initIslands();
-  initBrandWorld();
   initWhy();
   initContact();
   initFooter();
