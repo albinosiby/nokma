@@ -347,8 +347,10 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
   position: fixed; inset: 0; z-index: 190;
   background: linear-gradient(160deg, var(--green-800), var(--green-900));
   color: var(--cream);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 6rem var(--pad-x) 3rem;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  padding: clamp(5.75rem, 14vh, 7.5rem) var(--pad-x) max(1.5rem, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
@@ -359,15 +361,36 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
   visibility: visible;
   pointer-events: auto;
 }
-.menu__list { display: flex; flex-direction: column; gap: 0.35rem; }
+.menu__list { display: flex; flex-direction: column; gap: clamp(0.35rem, 1.4vh, 0.75rem); }
 .menu__list a {
+  position: relative;
+  width: fit-content;
   font-family: var(--f-display);
-  font-size: clamp(1.9rem, 8vw, 2.9rem);
+  font-size: clamp(1.75rem, min(8vw, 5.4vh), 2.9rem);
   font-weight: 600;
-  transition: color 0.3s;
+  line-height: 1.08;
+  transition: color 0.3s, transform 0.3s var(--ease-out);
 }
-.menu__list a:hover { color: var(--orange-200); }
-.menu__foot { margin-top: 3rem; font-size: 0.85rem; color: rgba(251,246,236,0.5); }
+.menu__list a:hover,
+.menu__list a.is-active { color: var(--orange-200); transform: translateX(0.45rem); }
+.menu__list a.is-active::before {
+  content: '';
+  position: absolute;
+  left: -0.75rem;
+  top: 50%;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 50%;
+  background: var(--orange-200);
+  transform: translateY(-50%);
+}
+.menu__foot {
+  margin-top: auto;
+  padding-top: clamp(1.75rem, 5vh, 3rem);
+  font-size: clamp(0.72rem, 2.5vw, 0.85rem);
+  line-height: 1.55;
+  color: rgba(251,246,236,0.5);
+}
 
 /* ─── reveal primitives ─────────────────────────────────── */
 [data-reveal] { opacity: 0; transform: translateY(28px); }

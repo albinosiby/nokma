@@ -5,6 +5,7 @@ export function initNav() {
   const burger = document.getElementById('burger');
   const menu = document.getElementById('menu');
   const links = [...document.querySelectorAll('.nav__links a')];
+  const menuLinks = [...document.querySelectorAll('.menu__list a')];
 
   /* ── sticky styling + hide on scroll-down ─────────────── */
   let last = 0;
@@ -34,8 +35,9 @@ export function initNav() {
     ['#contact', '#contact'],
   ];
 
-  const setActive = (href) => {
+  const setActive = (href, sectionHref = href) => {
     links.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === href));
+    menuLinks.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === sectionHref));
   };
 
   map.forEach(([sectionSel, linkHref]) => {
@@ -45,7 +47,7 @@ export function initNav() {
       trigger: sec,
       start: 'top 45%',
       end: 'bottom 45%',
-      onToggle: (self) => self.isActive && setActive(linkHref),
+      onToggle: (self) => self.isActive && setActive(linkHref, sectionSel),
     });
   });
 

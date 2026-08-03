@@ -15,7 +15,7 @@ import { initBrandWorld } from './js/brand-world.js';
 import { initMascot } from './js/mascot.js';
 import { initWhy, initContact, initFooter } from './js/contact.js';
 
-/** Build every scene. Runs once the hero frames are ready. */
+/** Build every scene once the hero video is ready. */
 function buildScenes() {
   initSmoothScroll();
 
@@ -48,7 +48,7 @@ async function boot() {
   // Fonts first: SplitText must measure final glyphs, not fallbacks.
   const fonts = document.fonts?.ready ?? Promise.resolve();
 
-  // The prepared scroll sequence drives 85% of progress; font readiness takes the rest.
+  // The hero video drives 85% of progress; font readiness takes the rest.
   await Promise.all([
     preloadHero((p) => loader.setProgress(p * 0.85)),
     fonts.then(() => loader.setProgress(0.88)),
