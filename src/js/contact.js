@@ -10,14 +10,13 @@ export function initContact() {
     } else {
       gsap.fromTo(
         card,
-        { opacity: 0, y: 60, filter: 'blur(14px)' },
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
-          filter: 'blur(0px)',
-          duration: 1.4,
+          duration: 0.8,
           ease: 'power3.out',
-          scrollTrigger: { trigger: card, start: 'top 82%', once: true },
+          scrollTrigger: { trigger: card, start: 'top 88%', once: true },
         }
       );
     }
@@ -33,7 +32,6 @@ export function initContact() {
 
     const name = form.name.value.trim();
     const email = form.email.value.trim();
-    const topic = form.topic.value;
     const msg = form.message.value.trim();
 
     const fail = (text, field) => {
@@ -53,13 +51,12 @@ export function initContact() {
     const body = [
       `Name: ${name}`,
       `Email: ${email}`,
-      `Interested in: ${topic}`,
       '',
       msg || '(no message)',
     ].join('\n');
 
     const href = `mailto:${BRAND.email}?subject=${encodeURIComponent(
-      `Website enquiry — ${topic}`
+      'Website enquiry'
     )}&body=${encodeURIComponent(body)}`;
 
     hint.textContent = 'Opening your mail app with the enquiry ready to send…';

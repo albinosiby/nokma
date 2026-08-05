@@ -55,19 +55,17 @@ export function initUniverse() {
   const variantBar = document.getElementById('uniVariants');
   const groupTitle = document.getElementById('uniGroupTitle');
   const count = document.getElementById('uniCount');
+  const panel = document.getElementById('uniPanel');
+  const panelClose = document.getElementById('uniClose');
   if (!field) return;
 
   /* ── cards ────────────────────────────────────────────── */
-  UNIVERSE.forEach((p) => {
-    const c = document.createElement('article');
-    c.className = 'ucard';
-    c.dataset.id = p.id;
-    c.dataset.cat = p.cat;
-    c.tabIndex = 0;
-    c.setAttribute('role', 'button');
-    c.setAttribute('aria-pressed', 'false');
-    c.setAttribute('aria-label', `View details for ${p.name} — ${p.sizes}`);
-    c.innerHTML = `
+  let cards = [];
+
+  function renderCards(products) {
+    field.innerHTML = products.map((p) => `
+      <article class="ucard" data-id="${p.id}" data-cat="${p.cat}" tabindex="0"
+        role="button" aria-pressed="false" aria-label="View details for ${p.name} — ${p.sizes}">
       <div class="ucard__media">
         <img src="${productImage(p.img)}" alt="${p.name}" loading="lazy" decoding="async" />
       </div>
@@ -76,11 +74,11 @@ export function initUniverse() {
         <h3 class="ucard__name">${p.name}</h3>
         <p class="ucard__sizes">${p.sizes}</p>
         <span class="ucard__action" aria-hidden="true">View details <span>→</span></span>
-      </div>`;
-    field.appendChild(c);
-  });
+      </div>
+      </article>`).join('');
 
-  const cards = [...field.querySelectorAll('.ucard')];
+    cards = [...field.querySelectorAll('.ucard')];
+  }
 
   const spotlight = {
     root: document.getElementById('uniSpotlight'),
@@ -120,23 +118,26 @@ export function initUniverse() {
 
   }
 
-  let activeFamily = FAMILIES[0];
-  let activeVariant = activeFamily.variants[0];
+  // No category is selected at first — visitors see only the category cards.
+  let activeFamily = null;
+  let activeVariant = null;
 
   function renderFamilies() {
     familyBar.innerHTML = FAMILIES.map((family) => `
-      <button class="ufamily${family.id === activeFamily.id ? ' is-on' : ''}" type="button" role="tab"
-        aria-selected="${family.id === activeFamily.id}" data-family="${family.id}" data-cursor="link">
+      <button class="ufamily${activeFamily && family.id === activeFamily.id ? ' is-on' : ''}" type="button" role="tab"
+        aria-selected="${Boolean(activeFamily && family.id === activeFamily.id)}" data-family="${family.id}" data-cursor="link">
+        <span class="ufamily__media"><img src="${productImage(family.img)}" alt="" loading="lazy" decoding="async" /></span>
         <span class="ufamily__copy">
           <span class="ufamily__label">${family.label}</span>
           <small>${family.note}</small>
         </span>
-        <span class="ufamily__media"><img src="${productImage(family.img)}" alt="" loading="lazy" decoding="async" /></span>
+        <span class="ufamily__cta" aria-hidden="true">View products <span>→</span></span>
       </button>`).join('');
   }
 
   function renderVariants() {
-    variantBar.hidden = activeFamily.variants.length === 0;
+    variantBar.hidden = !activeFamily || activeFamily.variants.length === 0;
+    if (!activeFamily) { variantBar.innerHTML = ''; return; }
     variantBar.innerHTML = activeFamily.variants.map((variant) => `
       <button class="uvariant${variant.id === activeVariant.id ? ' is-on' : ''}" type="button" role="tab"
         aria-selected="${variant.id === activeVariant.id}" data-variant="${variant.id}" data-cursor="link">
@@ -145,20 +146,19 @@ export function initUniverse() {
   }
 
   function showVariant() {
-    const visible = cards.filter((card) => {
-      const product = UNIVERSE.find((item) => item.id === card.dataset.id);
-      const show = product?.cat === activeFamily.id && (!activeVariant || activeVariant.match(product));
-      card.hidden = !show;
-      return show;
-    });
+    if (!activeFamily) return;
+    const visible = UNIVERSE.filter((product) => (
+      product.cat === activeFamily.id && (!activeVariant || activeVariant.match(product))
+    ));
+    renderCards(visible);
 
     groupTitle.textContent = activeFamily.label;
     count.textContent = activeVariant
       ? `${visible.length} variant${visible.length === 1 ? '' : 's'}`
       : `${visible.length} product${visible.length === 1 ? '' : 's'}`;
 
-    if (!visible.some((card) => card.dataset.id === activeId) && visible[0]) {
-      highlight(visible[0].dataset.id);
+    if (!visible.some((product) => product.id === activeId) && visible[0]) {
+      highlight(visible[0].id);
     } else {
       highlight(activeId);
     }
@@ -166,16 +166,45 @@ export function initUniverse() {
     ScrollTrigger.refresh();
   }
 
+  function openPanel() {
+    panel.hidden = false;
+    if (!reduced) {
+      gsap.fromTo(panel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' });
+    }
+  }
+
+  function closePanel() {
+    activeFamily = null;
+    activeVariant = null;
+    panel.hidden = true;
+    renderFamilies();
+    ScrollTrigger.refresh();
+  }
+
   familyBar.addEventListener('click', (e) => {
     const button = e.target.closest('.ufamily');
     if (!button) return;
 
-    activeFamily = FAMILIES.find((family) => family.id === button.dataset.family) || activeFamily;
+    const picked = FAMILIES.find((family) => family.id === button.dataset.family);
+    if (!picked) return;
+
+    // tapping the open category again collapses the list
+    if (activeFamily && picked.id === activeFamily.id) { closePanel(); return; }
+
+    const wasClosed = panel.hidden;
+    activeFamily = picked;
     activeVariant = activeFamily.variants[0] ?? null;
     renderFamilies();
     renderVariants();
     showVariant();
+    if (wasClosed) openPanel();
+
+    // bring the product list into view (Lenis owns scrolling when active)
+    if (lenis) lenis.scrollTo(panel, { offset: -90, duration: 1 });
+    else panel.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   });
+
+  panelClose.addEventListener('click', closePanel);
 
   variantBar.addEventListener('click', (e) => {
     const button = e.target.closest('.uvariant');
@@ -187,9 +216,7 @@ export function initUniverse() {
   });
 
   renderFamilies();
-  renderVariants();
   renderSpotlight();
-  showVariant();
 
   /* ── detail modal ─────────────────────────────────────── */
   const pdp = document.getElementById('pdp');
@@ -251,19 +278,26 @@ export function initUniverse() {
 
   spotlight.button.addEventListener('click', () => open(featuredId));
 
-  cards.forEach((c) => {
-    c.addEventListener('click', () => {
-      highlight(c.dataset.id);
-      open(c.dataset.id);
-    });
-    c.addEventListener('focus', () => highlight(c.dataset.id));
-    c.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        highlight(c.dataset.id);
-        open(c.dataset.id);
-      }
-    });
+  field.addEventListener('click', (e) => {
+    const productCard = e.target.closest('.ucard');
+    if (!productCard) return;
+
+    highlight(productCard.dataset.id);
+    open(productCard.dataset.id);
+  });
+
+  field.addEventListener('focusin', (e) => {
+    const productCard = e.target.closest('.ucard');
+    if (productCard) highlight(productCard.dataset.id);
+  });
+
+  field.addEventListener('keydown', (e) => {
+    const productCard = e.target.closest('.ucard');
+    if (!productCard || (e.key !== 'Enter' && e.key !== ' ')) return;
+
+    e.preventDefault();
+    highlight(productCard.dataset.id);
+    open(productCard.dataset.id);
   });
 
   pdp.addEventListener('click', (e) => { if (e.target.closest('[data-pdp-close]')) close(); });

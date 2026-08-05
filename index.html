@@ -158,15 +158,21 @@
     <div class="universe__space" id="uniSpace">
       <div class="universe__browse-head">
         <p>Browse by category</p>
-        <span>Select a category, then choose a product format.</span>
+        <span>Tap a category to view its products.</span>
       </div>
       <div class="universe__families" id="uniFamilies" role="tablist" aria-label="Nokma product families"></div>
-      <div class="universe__list-head">
-        <h3 id="uniGroupTitle">Nokma Ice Cream</h3>
-        <span id="uniCount"></span>
+
+      <div class="universe__panel" id="uniPanel" hidden>
+        <div class="universe__list-head">
+          <h3 id="uniGroupTitle">Nokma Ice Cream</h3>
+          <span id="uniCount"></span>
+          <button class="universe__close" id="uniClose" type="button" aria-label="Close product list" data-cursor="link">
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+        <div class="universe__variants" id="uniVariants" role="tablist" aria-label="Product variants"></div>
+        <div class="universe__field" id="uniField"><!-- product cards injected --></div>
       </div>
-      <div class="universe__variants" id="uniVariants" role="tablist" aria-label="Product variants"></div>
-      <div class="universe__field" id="uniField"><!-- product cards injected --></div>
     </div>
 
   </section>
@@ -255,32 +261,19 @@
 
   <!-- ══════════════════ 7 · CONTACT ══════════════════ -->
   <section class="contact" id="contact">
-    <div class="contact__sun" aria-hidden="true"></div>
-    <div class="contact__ridge contact__ridge--far" aria-hidden="true"></div>
-    <div class="contact__ridge contact__ridge--mid" aria-hidden="true"></div>
-    <div class="contact__ridge contact__ridge--near" aria-hidden="true"></div>
-
     <div class="contact__inner">
       <div class="contact__card" id="contactCard">
-        <p class="eyebrow">Contact Us</p>
-        <h2 class="h2">Contact MeghFarm</h2>
-
-        <div class="contact__cols">
-          <div class="contact__col">
-            <h4>MeghFarm Processing Hub</h4>
-            <p class="muted">(A Unit of Muktidata Multipurpose Co-Operative Society Ltd.)</p>
-            <address>
-              Khamari, P.O. Hollaidanga<br />
-              Dist — West Garo Hills<br />
-              Meghalaya — 794109
-            </address>
-            <p class="contact__lines">
-              <a href="tel:+919366323755" data-cursor="link">+91 93663 23755</a>
-              <a href="mailto:sales@themeghfarm.com" data-cursor="link">sales@themeghfarm.com</a>
-              <a href="https://www.themeghfarm.com" target="_blank" rel="noopener" data-cursor="link">www.themeghfarm.com</a>
-            </p>
-          </div>
-
+        <div class="contact__intro">
+          <h2 class="h2">Contact Us</h2>
+          <p class="contact__lede">Reach MeghFarm for orders, partnerships and enquiries.</p>
+          <address>
+            MeghFarm Processing Hub<br />
+            Khamari, West Garo Hills, Meghalaya — 794109
+          </address>
+          <p class="contact__lines">
+            <a href="tel:+919366323755" data-cursor="link">+91 93663 23755</a>
+            <a href="mailto:sales@themeghfarm.com" data-cursor="link">sales@themeghfarm.com</a>
+          </p>
         </div>
 
         <form class="contact__form" id="contactForm" novalidate>
@@ -293,19 +286,8 @@
             <label for="cfEmail">Email address</label>
           </div>
           <div class="field field--full">
-            <select id="cfTopic" name="topic">
-              <option>Distributor Enquiries</option>
-              <option>Retail Partnerships</option>
-              <option>Institutional Supply</option>
-              <option>Bulk Orders</option>
-              <option>Private Label</option>
-              <option>Something else</option>
-            </select>
-            <label for="cfTopic" class="label--static">I’m interested in</label>
-          </div>
-          <div class="field field--full">
-            <textarea id="cfMsg" name="message" rows="3" placeholder=" "></textarea>
-            <label for="cfMsg">Tell us a little more</label>
+            <textarea id="cfMsg" name="message" rows="2" placeholder=" "></textarea>
+            <label for="cfMsg">Message</label>
           </div>
           <button class="btn btn--primary" type="submit" data-ripple data-cursor="link">
             <span>Send enquiry</span>
