@@ -28,9 +28,7 @@ export function initNav() {
     ['#hero', '#hero'],
     ['#universe', '#universe'],
     ['#flavours', '#universe'],
-    ['#islands', '#universe'],
     ['#impact', '#impact'],
-    ['#factory', '#impact'],
     ['#contact', '#contact'],
   ];
 

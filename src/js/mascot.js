@@ -1,13 +1,11 @@
 import { gsap, ScrollTrigger, reduced, onResize } from './core.js';
 
 const SCENES = [
-  { id: 'universe', side: 'right', lift: 92, pose: 'pose-05' },
-  { id: 'flavours', side: 'left', lift: 4, pose: 'pose-03' },
-  { id: 'ingredients', side: 'right', lift: 8, pose: 'pose-06' },
-  { id: 'impact', side: 'right', lift: 0, pose: 'pose-01' },
-  { id: 'factory', side: 'right', lift: 12, pose: 'pose-04' },
-  { id: 'islands', side: 'left', lift: 4, pose: 'pose-02' },
-  { id: 'why', side: 'right', lift: 4, pose: 'pose-06' },
+  { id: 'universe', lift: 92, pose: 'pose-05' },
+  { id: 'flavours', lift: 4, pose: 'pose-03' },
+  { id: 'ingredients', lift: 8, pose: 'pose-06' },
+  { id: 'impact', lift: 0, pose: 'pose-01' },
+  { id: 'factory', lift: 12, pose: 'pose-04' },
 ];
 
 // The source PNGs share a canvas size but have different transparent margins.
@@ -34,7 +32,7 @@ export function initMascot() {
     preload.src = `./products/mascot/${pose}.png`;
   });
 
-  const swapPose = (pose, side) => {
+  const swapPose = (pose) => {
     const src = `./products/mascot/${pose}.png`;
     const scale = POSE_SCALE[pose] ?? 1;
 
@@ -59,21 +57,18 @@ export function initMascot() {
     gsap.killTweensOf(image);
     gsap.fromTo(
       image,
-      { opacity: 0, scale: scale * 0.9, rotation: side === 'right' ? -3 : 3 },
+      { opacity: 0, scale: scale * 0.9, rotation: -3 },
       { opacity: 1, scale, rotation: 0, duration: 0.34, ease: 'back.out(1.7)', overwrite: true }
     );
   };
 
   const positionFor = (scene) => {
-    const edge = window.innerWidth <= 760 ? 8 : 18;
-    const width = mascot.getBoundingClientRect().width;
-    const x = scene.side === 'right' ? Math.max(0, window.innerWidth - width - edge * 2) : 0;
-    return { x, y: -scene.lift };
+    return { x: 0, y: -scene.lift };
   };
 
   const showScene = (scene) => {
     currentScene = scene;
-    swapPose(scene.pose, scene.side);
+    swapPose(scene.pose);
     mascot.dataset.scene = scene.id;
     const position = positionFor(scene);
 

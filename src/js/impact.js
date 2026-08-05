@@ -133,38 +133,3 @@ export function initImpact() {
     scrollTrigger: { trigger: pillars, start: 'top 88%', once: true },
   });
 }
-
-/** Layered parallax over the processing hub photography. */
-export function initFactory() {
-  const section = document.getElementById('factory');
-  if (!section || reduced) return;
-
-  section.querySelectorAll('.factory__layer').forEach((layer) => {
-    const depth = parseFloat(layer.dataset.depth) || 0.2;
-    gsap.fromTo(
-      layer,
-      { yPercent: -depth * 26, scale: 1 + depth * 0.1 },
-      {
-        yPercent: depth * 26,
-        scale: 1,
-        ease: 'none',
-        scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 1.1 },
-      }
-    );
-  });
-
-  gsap.from('.factory__copy > *', {
-    y: 44,
-    opacity: 0,
-    duration: 1.05,
-    stagger: 0.1,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: section, start: 'top 45%', once: true },
-  });
-
-  gsap.to('.factory__mist', {
-    opacity: 0.45,
-    ease: 'none',
-    scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 1.4 },
-  });
-}

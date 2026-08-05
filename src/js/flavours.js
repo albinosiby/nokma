@@ -1,8 +1,23 @@
 import { gsap, reduced, isTouch } from './core.js';
 import { FLAVOURS } from './data.js';
 
+const IML_FORMAT = 'IML Container 100 / 125 ML';
+const ICE_CREAM_MOCKUPS = {
+  vanilla: 'Ice Cream_Vanilla.png',
+  chocolate: 'Ice Cream_Chocolate.png',
+  strawberry: 'strawberry png.png',
+  orange: 'Ice Cream_Orange.png',
+  jackfruit: 'Ice Cream_Jackfruit.png',
+  butterscotch: 'Ice Cream_ButterScotch.png',
+  pistachio: 'Ice Cream_Pista.png',
+  pineapple: 'Ice Cream_Pineapple.png',
+  lychee: 'Ice Cream_Lychee.png',
+  ginger: 'Ice Cream_Ginger.png',
+};
+const SHOWCASE_FLAVOURS = FLAVOURS.filter((flavour) => ICE_CREAM_MOCKUPS[flavour.id]);
+
 /**
- * Flavour showcase: a 3D carousel of full-size tubs. The selected flavour
+ * Flavour showcase: a 3D carousel of IML containers. The selected flavour
  * rotates slowly, drips, and repaints the whole section in its own colour.
  */
 export function initFlavours() {
@@ -20,11 +35,11 @@ export function initFlavours() {
   };
 
   /* ── build slides + dots ──────────────────────────────── */
-  FLAVOURS.forEach((f, i) => {
+  SHOWCASE_FLAVOURS.forEach((f, i) => {
     const s = document.createElement('div');
     s.className = 'fslide';
     s.dataset.i = i;
-    s.innerHTML = `<img src="./products/${f.img}.webp" alt="Nokma ${f.name} ice cream" loading="${i < 3 ? 'eager' : 'lazy'}" decoding="async" />`;
+    s.innerHTML = `<img src="./products/${ICE_CREAM_MOCKUPS[f.id]}" alt="Nokma ${f.name} ice cream" loading="${i < 3 ? 'eager' : 'lazy'}" decoding="async" />`;
     ring.appendChild(s);
 
     const d = document.createElement('button');
@@ -39,7 +54,7 @@ export function initFlavours() {
 
   const slides = [...ring.querySelectorAll('.fslide')];
   const dotEls = [...dots.querySelectorAll('.fdot')];
-  const N = FLAVOURS.length;
+  const N = SHOWCASE_FLAVOURS.length;
 
   let active = 0;
   let spin = null;
@@ -116,7 +131,7 @@ export function initFlavours() {
   /* ── swap the flavour ─────────────────────────────────── */
   function select(i, instant = false) {
     active = ((i % N) + N) % N;
-    const f = FLAVOURS[active];
+    const f = SHOWCASE_FLAVOURS[active];
 
     place(instant);
 
@@ -138,7 +153,7 @@ export function initFlavours() {
       els.name.textContent = f.name;
       els.sub.textContent = f.sub;
       els.note.textContent = f.note;
-      els.formats.innerHTML = f.formats.map((x) => `<li>${x}</li>`).join('');
+      els.formats.innerHTML = `<li>${IML_FORMAT}</li>`;
     };
 
     if (reduced || instant) {

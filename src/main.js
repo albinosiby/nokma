@@ -9,10 +9,9 @@ import { initRipples, initMagnetic, initReveals } from './js/micro.js';
 import { initUniverse } from './js/universe.js';
 import { initFlavours } from './js/flavours.js';
 import { initIngredients } from './js/ingredients.js';
-import { initImpact, initFactory } from './js/impact.js';
-import { initIslands } from './js/islands.js';
+import { initImpact } from './js/impact.js';
 import { initMascot } from './js/mascot.js';
-import { initWhy, initContact, initFooter } from './js/contact.js';
+import { initContact, initFooter } from './js/contact.js';
 
 /** Build every scene once the hero video is ready. */
 function buildScenes() {
@@ -27,9 +26,6 @@ function buildScenes() {
   initFlavours();
   initIngredients();
   initImpact();
-  initFactory();
-  initIslands();
-  initWhy();
   initContact();
   initFooter();
 
