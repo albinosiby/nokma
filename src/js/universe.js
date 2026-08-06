@@ -168,6 +168,7 @@ export function initUniverse() {
 
   function openPanel() {
     panel.hidden = false;
+    document.getElementById('uniSpace')?.classList.add('is-browsing');
     if (!reduced) {
       gsap.fromTo(panel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' });
     }
@@ -177,6 +178,7 @@ export function initUniverse() {
     activeFamily = null;
     activeVariant = null;
     panel.hidden = true;
+    document.getElementById('uniSpace')?.classList.remove('is-browsing');
     renderFamilies();
     ScrollTrigger.refresh();
   }
@@ -199,9 +201,20 @@ export function initUniverse() {
     showVariant();
     if (wasClosed) openPanel();
 
-    // bring the product list into view (Lenis owns scrolling when active)
-    if (lenis) lenis.scrollTo(panel, { offset: -90, duration: 1 });
-    else panel.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    // On mobile, keep the compact category strip in view; otherwise scroll to products.
+    const mobile = window.matchMedia('(max-width: 700px)').matches;
+    const target = mobile ? familyBar : panel;
+    const offset = mobile ? -78 : -90;
+    if (lenis) lenis.scrollTo(target, { offset, duration: 0.85 });
+    else target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+
+    // Keep the selected category chip visible in the horizontal strip.
+    if (mobile) {
+      const selected = familyBar.querySelector(`.ufamily[data-family="${picked.id}"]`);
+      requestAnimationFrame(() => {
+        selected?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+      });
+    }
   });
 
   panelClose.addEventListener('click', closePanel);

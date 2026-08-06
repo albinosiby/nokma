@@ -25,8 +25,11 @@ export const BRAND = {
   care: 'customercare@themeghfarm.com',
   website: 'www.themeghfarm.com',
   social: {
-    instagram: '@nokma_meghfarm',
-    facebook: '@meghfarm',
+    instagram: 'https://instagram.com/nokma_meghfarm',
+    youtube: 'https://www.youtube.com/channel/UCzEyIe6w0Qx9X-857GnG5yw',
+    x: 'https://x.com/nokma_meghfarm',
+    linkedin: 'https://www.linkedin.com/in/nokma-meghfarm-52470541b',
+    facebook: 'https://www.facebook.com/share/1aLArppkUU/?mibextid=wwXIfr',
   },
   fssai: '11725006000073',
 };
@@ -34,6 +37,10 @@ export const BRAND = {
 /* ------------------------------------------------------------------ *
  *  Ice cream flavours — the showcase carousel
  * ------------------------------------------------------------------ */
+const CUP = 'Cup 55 / 70 ML';
+const IML = 'IML Container 100 / 125 ML';
+const TUB = 'Tub & Monocarton 750 / 1000 ML';
+
 export const FLAVOURS = [
   {
     id: 'vanilla',
@@ -41,7 +48,7 @@ export const FLAVOURS = [
     sub: 'Tantalise White Temptation',
     img: 'flavour-vanilla',
     note: 'Snow-soft, slow-churned, the quiet classic every scoop is measured against.',
-    formats: ['IML Container 100 / 125 ML', 'Round & Oval Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'Mono Carton 750 / 1000 ML'],
+    formats: [CUP, IML, TUB],
     theme: { bg: '#F6EEDC', deep: '#5A4526', ink: '#3A2C15', accent: '#C89A4A', glow: '#FFF3D6' },
   },
   {
@@ -50,7 +57,7 @@ export const FLAVOURS = [
     sub: 'Deep Cocoa Indulgence',
     img: 'flavour-chocolate',
     note: 'Dark, rounded cocoa folded through rich Meghalaya cream.',
-    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    formats: [CUP, IML],
     theme: { bg: '#EADCCF', deep: '#4A2C1B', ink: '#33200F', accent: '#8A5230', glow: '#F6E3D2' },
   },
   {
@@ -59,7 +66,7 @@ export const FLAVOURS = [
     sub: 'Blush of the Hills',
     img: 'flavour-strawberry',
     note: 'Bright berry brought forward with real fruit pulp, never essence alone.',
-    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    formats: [CUP, IML],
     theme: { bg: '#F7DDE6', deep: '#7A2745', ink: '#511628', accent: '#D4436F', glow: '#FFE7EF' },
   },
   {
@@ -68,7 +75,7 @@ export const FLAVOURS = [
     sub: 'Sunrise Citrus',
     img: 'flavour-orange',
     note: 'A clean citrus lift — the first light over the Garo Hills, in a scoop.',
-    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    formats: [CUP, IML],
     theme: { bg: '#FCE3CC', deep: '#8A3D0E', ink: '#5E2708', accent: '#E2731C', glow: '#FFEBD6' },
   },
   {
@@ -77,7 +84,7 @@ export const FLAVOURS = [
     sub: 'Jack-A-licious',
     img: 'flavour-jackfruit',
     note: 'Meghalaya’s own jackfruit — honeyed, tropical, unmistakably regional.',
-    formats: ['IML Container 100 / 125 ML', 'Round & Oval Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'Cone 45 / 80 / 110 ML'],
+    formats: [CUP, IML, TUB],
     theme: { bg: '#F8EBBE', deep: '#6E5410', ink: '#4A3806', accent: '#C9A21B', glow: '#FFF6D0' },
   },
   {
@@ -86,7 +93,7 @@ export const FLAVOURS = [
     sub: 'Golden Crunch',
     img: 'flavour-butterscotch',
     note: 'Burnt-sugar warmth with a crunch that keeps finding you.',
-    formats: ['IML Container 100 / 125 ML', 'Round & Oval Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'Cone 45 / 80 / 110 ML'],
+    formats: [CUP, IML, TUB],
     theme: { bg: '#F7E4C3', deep: '#6B4412', ink: '#472C06', accent: '#C4832A', glow: '#FFEFD5' },
   },
   {
@@ -95,7 +102,7 @@ export const FLAVOURS = [
     sub: 'Tantalise Green Crush',
     img: 'flavour-pistachio',
     note: 'Nut-forward and gently savoury — the grown-up scoop of the range.',
-    formats: ['IML Container 100 / 125 ML', 'Round & Oval Tub 750 / 1000 ML', 'Cup 55 / 70 ML'],
+    formats: [CUP, IML, TUB],
     theme: { bg: '#E7EDCE', deep: '#3F4F1C', ink: '#2A360F', accent: '#7B9435', glow: '#F3F8DC' },
   },
   {
@@ -104,7 +111,7 @@ export const FLAVOURS = [
     sub: 'Field-Grown Sweetness',
     img: 'flavour-pineapple',
     note: 'From the same raw pineapples we supply in bulk — straight into cream.',
-    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    formats: [CUP, IML],
     theme: { bg: '#E3EEDF', deep: '#1F4A32', ink: '#12301F', accent: '#3E8055', glow: '#EFF8EC' },
   },
   {
@@ -113,8 +120,17 @@ export const FLAVOURS = [
     sub: 'Orchard Blush',
     img: 'flavour-lychee',
     note: 'Delicate, floral, faintly rose — the most fragile flavour we make.',
-    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    formats: [CUP, IML],
     theme: { bg: '#FADCE3', deep: '#7B2438', ink: '#54141F', accent: '#CF4560', glow: '#FFE9EE' },
+  },
+  {
+    id: 'passion-fruit',
+    name: 'Passion Fruit',
+    sub: 'Tropical Tang',
+    img: 'flavour-passion',
+    note: 'Bright passion fruit folded into cream — sharp, fragrant, and refreshing.',
+    formats: [CUP],
+    theme: { bg: '#F3E8C8', deep: '#6B4E12', ink: '#46340A', accent: '#C9A227', glow: '#FFF6D8' },
   },
   {
     id: 'ginger',
@@ -122,7 +138,7 @@ export const FLAVOURS = [
     sub: 'Hill Spice',
     img: 'flavour-ginger',
     note: 'Made with our own dehydrated ginger — warm, clean, quietly bold.',
-    formats: ['Round Tub 750 / 1000 ML', 'Cup 55 / 70 ML', 'IML Container 125 ML'],
+    formats: [],
     theme: { bg: '#F6E2CE', deep: '#7A3E14', ink: '#52270A', accent: '#C1701E', glow: '#FFEDDA' },
   },
   {
@@ -131,7 +147,7 @@ export const FLAVOURS = [
     sub: 'Sharp & Clear',
     img: 'flavour-lemon',
     note: 'A cold, clean finish — the palate-cleanser of the collection.',
-    formats: ['Cup 55 / 70 ML'],
+    formats: [],
     theme: { bg: '#EEF2D8', deep: '#4B5518', ink: '#333C0B', accent: '#8A9A2C', glow: '#F7FAE6' },
   },
   {
@@ -140,7 +156,7 @@ export const FLAVOURS = [
     sub: 'Local Harvest',
     img: 'flavour-banana',
     note: 'The same local bananas that become our chips — churned soft and sweet.',
-    formats: ['Cup 55 / 70 ML'],
+    formats: [],
     theme: { bg: '#F7EFC8', deep: '#655412', ink: '#443806', accent: '#B79C1E', glow: '#FFFAD8' },
   },
 ];

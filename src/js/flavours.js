@@ -1,7 +1,6 @@
 import { gsap, reduced, isTouch } from './core.js';
 import { FLAVOURS } from './data.js';
 
-const IML_FORMAT = 'IML Container 100 / 125 ML';
 const ICE_CREAM_MOCKUPS = {
   vanilla: 'Ice Cream_Vanilla.png',
   chocolate: 'Ice Cream_Chocolate.png',
@@ -12,7 +11,6 @@ const ICE_CREAM_MOCKUPS = {
   pistachio: 'Ice Cream_Pista.png',
   pineapple: 'Ice Cream_Pineapple.png',
   lychee: 'Ice Cream_Lychee.png',
-  ginger: 'Ice Cream_Ginger.png',
 };
 const SHOWCASE_FLAVOURS = FLAVOURS.filter((flavour) => ICE_CREAM_MOCKUPS[flavour.id]);
 
@@ -153,7 +151,7 @@ export function initFlavours() {
       els.name.textContent = f.name;
       els.sub.textContent = f.sub;
       els.note.textContent = f.note;
-      els.formats.innerHTML = `<li>${IML_FORMAT}</li>`;
+      els.formats.innerHTML = f.formats.map((fmt) => `<li>${fmt}</li>`).join('');
     };
 
     if (reduced || instant) {

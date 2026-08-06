@@ -354,37 +354,204 @@
   .spotlight__body { padding: 1.6rem; }
   .spotlight__name { font-size: 2.2rem; }
   .spotlight__blurb { font-size: 0.9rem; }
-  .universe__space { padding-top: 3rem; }
-  .universe__browse-head { align-items: flex-start; flex-direction: column; gap: 0.35rem; }
-  .universe__families { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 2rem; }
-  .ufamily { min-height: 210px; padding: 0.85rem; font-size: 0.8rem; }
-  .ufamily__label { font-size: 0.95rem; }
-  .ufamily__media { min-height: 104px; }
-  .ufamily img { width: min(140px, 84%); height: 104px; }
-  .ufamily__cta { margin-top: 0.6rem; font-size: 0.56rem; }
-  .universe__field { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ucard { min-height: 252px; }
-  .ucard__media { flex-basis: 145px; height: 145px; }
-  .ucard__media img { height: 125px; max-height: 125px; }
-  .ucard__body { padding: 0.85rem; }
-  .ucard__name { font-size: 0.94rem; }
+  .universe__space { padding-top: 2.5rem; }
+
+  .universe__browse-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.95rem;
+  }
+  .universe__browse-hint { max-width: 22rem; line-height: 1.45; }
+
+  /* Compact horizontal category strip — easier thumb reach & less scroll */
+  .universe__families {
+    display: flex;
+    grid-template-columns: none;
+    gap: 0.65rem;
+    margin: 0 calc(var(--pad-x) * -1) 1.15rem;
+    padding: 0.15rem var(--pad-x) 0.55rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .universe__families::-webkit-scrollbar { display: none; }
+
+  .ufamily {
+    flex: 0 0 auto;
+    width: min(78vw, 248px);
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 0.85rem;
+    scroll-snap-align: start;
+    border-radius: 14px;
+  }
+  .ufamily__media {
+    flex: 0 0 64px;
+    min-height: 64px;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .ufamily img {
+    width: 58px;
+    height: 58px;
+  }
+  .ufamily__copy {
+    flex: 1;
+    min-width: 0;
+    gap: 0.2rem;
+    padding-top: 0;
+    border-top: none;
+  }
+  .ufamily__label {
+    font-size: 0.98rem;
+    line-height: 1.15;
+  }
+  .ufamily__copy small {
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+  }
+  .ufamily__cta { display: none; }
+  .ufamily.is-on::after { height: 3px; }
+  .ufamily:hover img { transform: none; }
+
+  /* Keep categories reachable while scrolling products */
+  .universe__space.is-browsing .universe__families {
+    position: sticky;
+    top: 4.35rem;
+    z-index: 24;
+    margin-bottom: 0.85rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0.65rem;
+    background: linear-gradient(180deg, rgba(8, 37, 21, 0.97) 55%, rgba(8, 37, 21, 0.88) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(251, 246, 236, 0.1);
+  }
+  .universe__space.is-browsing .ufamily {
+    width: auto;
+    max-width: 210px;
+    padding: 0.55rem 0.8rem;
+    gap: 0.6rem;
+  }
+  .universe__space.is-browsing .ufamily__media {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+  .universe__space.is-browsing .ufamily img {
+    width: 40px;
+    height: 40px;
+  }
+  .universe__space.is-browsing .ufamily__label { font-size: 0.88rem; }
+  .universe__space.is-browsing .ufamily__copy small { display: none; }
+
+  .universe__list-head {
+    margin-top: 0;
+    padding-top: 1.15rem;
+    margin-bottom: 0.95rem;
+    gap: 0.65rem;
+  }
+  .universe__list-head h3 { font-size: 1.35rem; }
+  .universe__close {
+    width: 42px;
+    height: 42px;
+  }
+
+  .universe__variants {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin: 0 calc(var(--pad-x) * -1) 1.25rem;
+    padding: 0.1rem var(--pad-x) 0.35rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .universe__variants::-webkit-scrollbar { display: none; }
+  .uvariant {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 0.55rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  /* Product cards as tappable list rows */
+  .universe__field {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+  .ucard {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 0;
+    border-radius: 12px;
+  }
+  .ucard__media {
+    flex: 0 0 118px;
+    width: 118px;
+    height: auto;
+    min-height: 118px;
+    padding: 0.75rem;
+    border-bottom: none;
+    border-right: 1px solid rgba(251, 246, 236, 0.1);
+  }
+  .ucard.is-active .ucard__media { border-right-color: rgba(22, 35, 28, 0.08); }
+  .ucard__media img {
+    height: 96px;
+    max-height: 96px;
+  }
+  .ucard__body {
+    padding: 0.9rem 1rem 0.95rem;
+    justify-content: center;
+  }
+  .ucard__name { font-size: 1rem; }
+  .ucard__sizes {
+    margin-top: 0.45rem;
+    padding-top: 0;
+  }
+  .ucard__action {
+    margin-top: 0.7rem;
+    padding-top: 0.65rem;
+  }
 }
 
 @media (max-width: 420px) {
-  .universe__families { gap: 0.65rem; }
-  .ufamily { min-height: 188px; padding: 0.7rem; }
-  .ufamily__media { min-height: 92px; }
-  .ufamily img { width: min(120px, 88%); height: 92px; }
-  .ufamily__label { font-size: 0.88rem; }
+  .ufamily {
+    width: min(82vw, 230px);
+    gap: 0.65rem;
+    padding: 0.62rem 0.75rem;
+  }
+  .ufamily__media {
+    flex-basis: 56px;
+    width: 56px;
+    height: 56px;
+    min-height: 56px;
+  }
+  .ufamily img { width: 50px; height: 50px; }
+  .ufamily__label { font-size: 0.9rem; }
   .ufamily__copy small { font-size: 0.52rem; }
-  .universe__field { gap: 0.65rem; }
-  .ucard { min-height: 236px; }
-  .ucard__media { flex-basis: 122px; height: 122px; padding: 0.65rem; }
-  .ucard__media img { height: 108px; max-height: 108px; }
-  .ucard__body { padding: 0.72rem; }
+
+  .ucard__media {
+    flex-basis: 104px;
+    width: 104px;
+    min-height: 104px;
+    padding: 0.6rem;
+  }
+  .ucard__media img { height: 84px; max-height: 84px; }
+  .ucard__body { padding: 0.8rem 0.85rem; }
   .ucard__kicker { font-size: 0.51rem; letter-spacing: 0.1em; }
-  .ucard__name { font-size: 0.88rem; }
-  .ucard__action { margin-top: 0.65rem; padding-top: 0.55rem; }
+  .ucard__name { font-size: 0.94rem; }
+  .ucard__action { margin-top: 0.55rem; padding-top: 0.5rem; }
 }
 
 /* ─── product modal ─────────────────────────────────────── */
