@@ -87,7 +87,7 @@
   <nav class="nav__links" aria-label="Primary">
     <a href="#hero" data-cursor="link" class="is-active">Home</a>
     <a href="#universe" data-cursor="link">Products</a>
-    <a href="#impact" data-cursor="link">Blog</a>
+    <a href="#blog" data-cursor="link">Blog</a>
     <a href="#contact" data-cursor="link">Contact</a>
   </nav>
 
@@ -106,7 +106,7 @@
     <a href="#hero">Home</a>
     <a href="#universe">Products</a>
     <a href="#flavours">Flavours</a>
-    <a href="#impact">Blog</a>
+    <a href="#blog">Blog</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="menu__foot">
@@ -145,7 +145,6 @@
         <img id="spotlightImg" alt="" />
       </div>
       <div class="spotlight__body">
-        <p class="spotlight__kicker" id="spotlightKicker"></p>
         <h3 class="spotlight__name" id="spotlightName"></h3>
         <p class="spotlight__sizes" id="spotlightSizes"></p>
         <p class="spotlight__blurb" id="spotlightBlurb"></p>
@@ -186,7 +185,6 @@
       </button>
       <div class="pdp__media"><img id="pdpImg" src="" alt="" /></div>
       <div class="pdp__body">
-        <p class="pdp__kicker" id="pdpKicker"></p>
         <h3 class="pdp__name" id="pdpName"></h3>
         <p class="pdp__sizes" id="pdpSizes"></p>
         <p class="pdp__blurb" id="pdpBlurb"></p>
@@ -243,21 +241,29 @@
     <div class="ingr__pipe" id="ingrPipe"><!-- steps injected --></div>
   </section>
 
-  <!-- ══════════════════ 6 · IMPACT ══════════════════ -->
-  <section class="impact" id="impact">
-    <div class="impact__head">
+  <!-- ══════════════════ 6 · BLOG ══════════════════ -->
+  <section class="blog" id="blog">
+    <div class="blog__head">
       <p class="eyebrow" data-reveal>Blog</p>
-      <h2 class="h2" data-reveal-words>Transforming agriculture<br />through value addition</h2>
+      <h2 class="h2" data-reveal-words>Stories from<br />the Garo Hills</h2>
+      <p class="lede" data-reveal>Notes on value addition, Nokma flavours and the people behind MeghFarm.</p>
     </div>
 
-    <svg class="impact__web" id="impactWeb" aria-hidden="true"><g id="impactLines"></g></svg>
-    <div class="impact__grid" id="impactGrid"><!-- counters injected --></div>
-
-    <div class="impact__pillars">
-      <p class="impact__pillars-t" data-reveal>Impact pillars</p>
-      <ul id="pillarList"></ul>
-    </div>
+    <div class="blog__grid" id="blogGrid"><!-- posts injected --></div>
   </section>
+
+  <!-- blog article modal -->
+  <div class="bpost" id="blogPost" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="blogPostTitle">
+    <div class="bpost__scrim" data-blog-close></div>
+    <article class="bpost__card" id="blogPostCard">
+      <button class="bpost__x" data-blog-close aria-label="Close article" data-cursor="link">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <p class="bpost__meta"><span id="blogPostLabel"></span><span id="blogPostDate"></span></p>
+      <h3 class="bpost__title" id="blogPostTitle"></h3>
+      <div class="bpost__body" id="blogPostBody"></div>
+    </article>
+  </div>
 
   <!-- ══════════════════ 7 · CONTACT ══════════════════ -->
   <section class="contact" id="contact">
@@ -317,7 +323,7 @@
         </div>
         <div>
           <h5>Company</h5>
-          <a href="#impact">Blog</a>
+          <a href="#blog">Blog</a>
         </div>
         <div>
           <h5>Connect</h5>

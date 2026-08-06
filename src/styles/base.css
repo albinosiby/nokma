@@ -101,6 +101,8 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
 .h2 {
   font-size: clamp(2.1rem, 1.2rem + 4.1vw, 5rem);
   font-variation-settings: 'opsz' 100;
+  line-height: 1.15;
+  overflow: visible;
 }
 
 .eyebrow {
@@ -404,8 +406,13 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
 
 /* ─── reveal primitives ─────────────────────────────────── */
 [data-reveal] { opacity: 0; transform: translateY(28px); }
-.rv-word { display: inline-block; }
-.rv-line { display: block; overflow: hidden; }
+.rv-word { display: inline-block; padding-bottom: 0.08em; }
+.rv-line {
+  display: block;
+  overflow: hidden;
+  padding: 0.14em 0.02em 0.22em;
+  margin: -0.14em -0.02em -0.22em;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

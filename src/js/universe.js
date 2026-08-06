@@ -70,7 +70,6 @@ export function initUniverse() {
         <img src="${productImage(p.img)}" alt="${p.name}" loading="lazy" decoding="async" />
       </div>
       <div class="ucard__body">
-        <p class="ucard__kicker">${p.kicker}</p>
         <h3 class="ucard__name">${p.name}</h3>
         <p class="ucard__sizes">${p.sizes}</p>
         <span class="ucard__action" aria-hidden="true">View details <span>→</span></span>
@@ -83,7 +82,6 @@ export function initUniverse() {
   const spotlight = {
     root: document.getElementById('uniSpotlight'),
     img: document.getElementById('spotlightImg'),
-    kicker: document.getElementById('spotlightKicker'),
     name: document.getElementById('spotlightName'),
     sizes: document.getElementById('spotlightSizes'),
     blurb: document.getElementById('spotlightBlurb'),
@@ -99,7 +97,6 @@ export function initUniverse() {
     spotlight.root.dataset.cat = featuredProduct.cat;
     spotlight.img.src = productImage(featuredProduct.img);
     spotlight.img.alt = featuredProduct.name;
-    spotlight.kicker.textContent = featuredProduct.kicker;
     spotlight.name.textContent = featuredProduct.name;
     spotlight.sizes.textContent = featuredProduct.sizes;
     spotlight.blurb.textContent = featuredProduct.blurb;
@@ -236,7 +233,6 @@ export function initUniverse() {
   const card = document.getElementById('pdpCard');
   const els = {
     img: document.getElementById('pdpImg'),
-    kicker: document.getElementById('pdpKicker'),
     name: document.getElementById('pdpName'),
     sizes: document.getElementById('pdpSizes'),
     blurb: document.getElementById('pdpBlurb'),
@@ -253,7 +249,6 @@ export function initUniverse() {
     lastFocus = document.activeElement;
     els.img.src = productImage(p.img);
     els.img.alt = p.name;
-    els.kicker.textContent = p.kicker;
     els.name.textContent = p.name;
     els.sizes.textContent = p.sizes;
     els.blurb.textContent = p.blurb;
@@ -272,7 +267,7 @@ export function initUniverse() {
         { scale: 1, opacity: 1, duration: 0.45, ease: 'power2.out', delay: 0.08 }
       );
       gsap.fromTo(
-        card.querySelectorAll('.pdp__kicker, .pdp__name, .pdp__sizes, .pdp__blurb, .pdp__row, .pdp .btn'),
+        card.querySelectorAll('.pdp__name, .pdp__sizes, .pdp__blurb, .pdp__row, .pdp .btn'),
         { y: 22, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.7, stagger: 0.055, ease: 'power3.out', delay: 0.18 }
       );

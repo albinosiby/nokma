@@ -630,19 +630,55 @@ export const INGREDIENTS = [
 ];
 
 /* ------------------------------------------------------------------ *
- *  Impact counters
+ *  Blog posts
  * ------------------------------------------------------------------ */
-export const IMPACT = [
-  { id: 'flavours', value: 12, suffix: '', label: 'Ice Cream Flavours', note: 'From Vanilla to Jackfruit' },
-  { id: 'lines', value: 5, suffix: '', label: 'Product Categories', note: 'Ice cream, drinks, water, chips and spices' },
-  { id: 'formats', value: 30, suffix: '+', label: 'Pack Formats & Sizes', note: 'Cups, cones, tubs, cartons, bottles, pouches' },
-  { id: 'since', value: 2024, suffix: '', label: 'Building Since', label2: 'Nokma production began in 2024', note: 'MeghFarm Processing Hub', raw: true },
-];
-
-export const IMPACT_PILLARS = [
-  'Local sourcing',
-  'Employment generation',
-  'Women participation',
-  'Sustainable livelihoods',
-  'Regional brand development',
+export const BLOG = [
+  {
+    id: 'value-addition',
+    date: '2026-03-12',
+    label: 'Farm to brand',
+    title: 'Transforming agriculture through value addition',
+    excerpt: 'How MeghFarm turns local harvests into products that carry Meghalaya’s flavour farther.',
+    body: [
+      'Across the Garo Hills, fruit and spice grow in abundance — yet raw produce alone rarely captures its full worth. Value addition is how MeghFarm closes that gap: selecting quality harvests, processing them with care, and packing them as Nokma products people can trust.',
+      'From jackfruit and pineapple to ginger and turmeric, each crop finds a second life as ice cream, drinks, chips or kitchen spices. That shift creates steadier demand for farmers and a clearer identity for produce grown in Meghalaya.',
+      'The work is practical, not abstract. Better processing, cold-chain discipline and honest labelling turn seasonal abundance into year-round opportunity — for growers, for workers at the hub, and for families who want food that tastes of place.',
+    ],
+  },
+  {
+    id: 'nokma-flavours',
+    date: '2026-02-04',
+    label: 'Nokma',
+    title: 'Flavours rooted in Meghalaya',
+    excerpt: 'Jackfruit, lychee, ginger and more — why regional taste sits at the centre of Nokma ice cream.',
+    body: [
+      'Nokma was built to celebrate flavours that already belong here. Jackfruit honeyed from the hills, clean citrus, warm ginger, soft lychee — these are not imported ideas dressed up as local colour.',
+      'Each scoop is meant to feel familiar to people who grew up with these tastes, and surprising to anyone meeting Meghalaya through dessert for the first time. That balance — regional honesty with everyday enjoyment — is the brand’s quiet brief.',
+      'As the range grows across cups, cones, IML packs and family tubs, the promise stays the same: cream that carries the character of the land it comes from.',
+    ],
+  },
+  {
+    id: 'processing-hub',
+    date: '2025-11-18',
+    label: 'Behind the brand',
+    title: 'Inside the MeghFarm Processing Hub',
+    excerpt: 'A look at the West Garo Hills facility where raw material becomes finished Nokma products.',
+    body: [
+      'The MeghFarm Processing Hub in Khamari is where the brand’s daily craft happens — selection, mixing, pasteurisation, ageing, freezing, packing and cold distribution.',
+      'It is also a workplace rooted in the district: people building skill around food processing, quality checks and packaging lines that serve ice cream, beverages, chips and spices under one roof.',
+      'Visitors often ask what makes the hub different. The short answer is proximity — to farms, to community, and to a mandate of turning local produce into products people are proud to share.',
+    ],
+  },
+  {
+    id: 'livelihoods',
+    date: '2025-09-02',
+    label: 'Community',
+    title: 'Local sourcing, lasting livelihoods',
+    excerpt: 'Why buying closer to home strengthens both the product and the people behind it.',
+    body: [
+      'When a processing brand sources nearby, the effect compounds. Farmers gain a buyer who understands the crop. Households gain income pathways tied to real production. The finished product keeps a clearer story of origin.',
+      'MeghFarm’s approach keeps that loop visible: local fruit and spice in, Nokma packs out. Along the way, employment and skill-building at the hub become part of the same value chain — not a separate CSR footnote.',
+      'That is the long game of a regional brand. Not only shelf presence, but a food system in which Meghalaya’s harvests keep more of their value at home.',
+    ],
+  },
 ];

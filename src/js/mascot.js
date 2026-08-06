@@ -4,7 +4,7 @@ const SCENES = [
   { id: 'universe', lift: 92, pose: 'pose-05' },
   { id: 'flavours', lift: 4, pose: 'pose-03' },
   { id: 'ingredients', lift: 8, pose: 'pose-06' },
-  { id: 'impact', lift: 0, pose: 'pose-01' },
+  { id: 'blog', lift: 0, pose: 'pose-01' },
   { id: 'factory', lift: 12, pose: 'pose-04' },
 ];
 

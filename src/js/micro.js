@@ -78,13 +78,16 @@ export function initReveals() {
   gsap.utils.toArray('[data-reveal-words]').forEach((el) => {
     const split = new SplitText(el, { type: 'lines,words', linesClass: 'rv-line', wordsClass: 'rv-word' });
     gsap.from(split.words, {
-      yPercent: 108,
+      yPercent: 100,
       opacity: 0,
       filter: 'blur(6px)',
       duration: 1.15,
       stagger: 0.035,
       ease: 'expo.out',
       scrollTrigger: { trigger: el, start: 'top 84%', once: true },
+      onComplete() {
+        gsap.set(split.words, { clearProps: 'filter' });
+      },
     });
   });
 
