@@ -4,9 +4,9 @@ const HERO_LIGHT = './media/hero-nokma.mp4?v=4';
 const HERO_HQ = './media/hero-nokma-hq.mp4?v=4';
 
 /**
- * Gate the loader on the light clip (~3MB), then upgrade to HQ in the
- * background once the page is interactive. Swap at a loop seam so the
- * quality bump is invisible.
+ * Gate the loader on native playback readiness — not a full-file fetch.
+ * On slow hosts (e.g. cold Render static), blob-downloading 3MB+ hangs forever.
+ * Light clip streams via <video>; HQ upgrades in the background when ready.
  */
 export function preloadHero(onProgress) {
   const video = document.getElementById('heroVideo');
@@ -16,15 +16,68 @@ export function preloadHero(onProgress) {
   }
 
   video.pause();
-  onProgress?.(0.06);
+  video.preload = 'auto';
+  onProgress?.(0.1);
 
-  return fetchAsObjectUrl(HERO_LIGHT, onProgress)
-    .then(async (objectUrl) => {
-      attachSrc(video, objectUrl);
-      await waitForCanPlay(video);
+  // Ensure the light source is the one we stream first.
+  ensureSource(video, HERO_LIGHT);
+
+  return new Promise((resolve) => {
+    let complete = false;
+    // Never block the site on a slow CDN — show poster / partial buffer instead.
+    const timeout = window.setTimeout(done, 4500);
+
+    function bufferedRatio() {
+      if (!video.duration || !Number.isFinite(video.duration) || video.duration <= 0) return 0;
+      if (!video.buffered.length) return 0;
+      try {
+        return Math.min(1, video.buffered.end(video.buffered.length - 1) / video.duration);
+      } catch {
+        return 0;
+      }
+    }
+
+    function report() {
+      const ratio = bufferedRatio();
+      onProgress?.(0.1 + Math.min(0.85, ratio * 0.85 + (video.readyState / 4) * 0.2));
+      // Enough future data to start without an obvious hitch.
+      if (
+        video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA ||
+        ratio >= 0.2 ||
+        (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && ratio > 0)
+      ) {
+        done();
+      }
+    }
+
+    function done() {
+      if (complete) return;
+      complete = true;
+      window.clearTimeout(timeout);
+      video.removeEventListener('canplay', report);
+      video.removeEventListener('canplaythrough', report);
+      video.removeEventListener('loadeddata', report);
+      video.removeEventListener('progress', report);
+      video.removeEventListener('error', done);
       onProgress?.(1);
-    })
-    .catch(() => bufferNatively(video, HERO_LIGHT, onProgress));
+      resolve();
+    }
+
+    if (
+      video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA ||
+      bufferedRatio() >= 0.2
+    ) {
+      done();
+      return;
+    }
+
+    video.addEventListener('canplay', report);
+    video.addEventListener('canplaythrough', report);
+    video.addEventListener('loadeddata', report);
+    video.addEventListener('progress', report);
+    video.addEventListener('error', done, { once: true });
+    video.load();
+  });
 }
 
 export function initHero() {
@@ -42,7 +95,7 @@ export function initHero() {
   try {
     video.currentTime = 0;
   } catch {
-    // Some browsers reject seeks before ready; ignore.
+    // ignore
   }
 
   video.play().then(reveal).catch(() => {
@@ -52,7 +105,6 @@ export function initHero() {
   scheduleHqUpgrade(video);
 }
 
-/** Skip HQ on data-saver / very slow links. */
 function shouldFetchHq() {
   const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if (!conn) return true;
@@ -66,27 +118,66 @@ function scheduleHqUpgrade(video) {
 
   const start = () => {
     upgradeToHq(video).catch(() => {
-      // Light clip keeps playing if HQ fails — no user-facing error.
+      // Light clip keeps playing if HQ never arrives.
     });
   };
 
   if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(start, { timeout: 4000 });
+    window.requestIdleCallback(start, { timeout: 5000 });
   } else {
-    window.setTimeout(start, 1500);
+    window.setTimeout(start, 2000);
   }
 }
 
-async function upgradeToHq(video) {
-  const objectUrl = await fetchAsObjectUrl(HERO_HQ);
-  await swapAtLoopSeam(video, objectUrl);
+/**
+ * Prefetch HQ with a hidden video element (native streaming), then swap
+ * at a loop seam. Avoids full-blob fetch which stalls on slow hosts.
+ */
+function upgradeToHq(video) {
+  return new Promise((resolve, reject) => {
+    const probe = document.createElement('video');
+    probe.muted = true;
+    probe.playsInline = true;
+    probe.preload = 'auto';
+    probe.src = HERO_HQ;
+
+    let settled = false;
+    const failTimer = window.setTimeout(() => {
+      cleanup();
+      reject(new Error('hq timeout'));
+    }, 45000);
+
+    const onReady = () => {
+      if (settled) return;
+      if (probe.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) return;
+      settled = true;
+      window.clearTimeout(failTimer);
+      cleanup();
+      swapAtLoopSeam(video, HERO_HQ).then(resolve).catch(reject);
+    };
+
+    const cleanup = () => {
+      probe.removeEventListener('canplaythrough', onReady);
+      probe.removeEventListener('canplay', onReady);
+      probe.removeEventListener('error', onError);
+      probe.removeAttribute('src');
+      probe.load();
+    };
+
+    const onError = () => {
+      window.clearTimeout(failTimer);
+      cleanup();
+      reject(new Error('hq error'));
+    };
+
+    probe.addEventListener('canplaythrough', onReady);
+    probe.addEventListener('canplay', onReady);
+    probe.addEventListener('error', onError, { once: true });
+    probe.load();
+  });
 }
 
-/**
- * Wait until the loop is about to restart, then hot-swap the source and
- * resume so the quality change lands between cycles.
- */
-function swapAtLoopSeam(video, objectUrl) {
+function swapAtLoopSeam(video, hqSrc) {
   return new Promise((resolve) => {
     let swapped = false;
 
@@ -96,7 +187,9 @@ function swapAtLoopSeam(video, objectUrl) {
       cleanup();
 
       const wasPlaying = !video.paused;
-      attachSrc(video, objectUrl);
+      ensureSource(video, hqSrc);
+      video.load();
+
       await waitForCanPlay(video);
 
       try {
@@ -109,7 +202,7 @@ function swapAtLoopSeam(video, objectUrl) {
         try {
           await video.play();
         } catch {
-          // Autoplay may still be fine after swap; ignore blocks.
+          // ignore
         }
       }
       resolve();
@@ -117,76 +210,37 @@ function swapAtLoopSeam(video, objectUrl) {
 
     const onTimeUpdate = () => {
       if (!video.duration || !Number.isFinite(video.duration)) return;
-      // Last 180ms of the loop — next frame after load will restart cleanly.
-      if (video.currentTime >= video.duration - 0.18) {
-        performSwap();
-      }
+      if (video.currentTime >= video.duration - 0.18) performSwap();
     };
-
-    const onEnded = () => performSwap();
 
     const cleanup = () => {
       video.removeEventListener('timeupdate', onTimeUpdate);
-      video.removeEventListener('ended', onEnded);
+      video.removeEventListener('ended', performSwap);
     };
 
-    // If already near the end, or loop somehow stalled, swap soon.
     if (video.duration && video.currentTime >= video.duration - 0.18) {
       performSwap();
       return;
     }
 
     video.addEventListener('timeupdate', onTimeUpdate);
-    video.addEventListener('ended', onEnded);
-
-    // Safety: if timeupdate never fires near the seam, swap after one full cycle.
+    video.addEventListener('ended', performSwap);
     window.setTimeout(() => performSwap(), Math.max(12000, (video.duration || 10) * 1000 + 2000));
   });
 }
 
-function attachSrc(video, objectUrl) {
-  const source = video.querySelector('source');
-  if (source) source.remove();
-  if (video.src && video.src.startsWith('blob:')) {
-    try {
-      URL.revokeObjectURL(video.src);
-    } catch {
-      // ignore
-    }
+function ensureSource(video, src) {
+  let source = video.querySelector('source');
+  if (!source) {
+    source = document.createElement('source');
+    source.type = 'video/mp4';
+    video.appendChild(source);
   }
-  video.preload = 'auto';
-  video.src = objectUrl;
-  video.load();
-}
-
-async function fetchAsObjectUrl(src, onProgress) {
-  const response = await fetch(src, { cache: 'force-cache' });
-  if (!response.ok) throw new Error(`hero fetch ${response.status}`);
-
-  const total = Number(response.headers.get('content-length')) || 0;
-  let loaded = 0;
-  let blob;
-
-  if (response.body && typeof response.body.getReader === 'function') {
-    const reader = response.body.getReader();
-    const chunks = [];
-    for (;;) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      chunks.push(value);
-      loaded += value.byteLength;
-      if (onProgress) {
-        if (total > 0) onProgress(0.06 + Math.min(0.88, (loaded / total) * 0.88));
-        else onProgress(Math.min(0.9, 0.06 + loaded / (3.5 * 1024 * 1024) * 0.88));
-      }
-    }
-    blob = new Blob(chunks, { type: 'video/mp4' });
-  } else {
-    blob = await response.blob();
-    onProgress?.(0.9);
+  if (source.getAttribute('src') !== src) {
+    source.setAttribute('src', src);
   }
-
-  return URL.createObjectURL(blob);
+  // Clear any prior blob src so the <source> wins.
+  if (video.getAttribute('src')) video.removeAttribute('src');
 }
 
 function waitForCanPlay(video) {
@@ -204,51 +258,6 @@ function waitForCanPlay(video) {
     video.addEventListener('canplay', done, { once: true });
     video.addEventListener('loadeddata', done, { once: true });
     video.addEventListener('error', done, { once: true });
-  });
-}
-
-function bufferNatively(video, src, onProgress) {
-  attachSrc(video, src);
-  onProgress?.(0.1);
-
-  return new Promise((resolve) => {
-    let complete = false;
-    const timeout = window.setTimeout(done, 15000);
-
-    function bufferedRatio() {
-      if (!video.duration || !Number.isFinite(video.duration) || video.duration <= 0) return 0;
-      if (!video.buffered.length) return 0;
-      try {
-        return Math.min(1, video.buffered.end(video.buffered.length - 1) / video.duration);
-      } catch {
-        return 0;
-      }
-    }
-
-    function report() {
-      const ratio = bufferedRatio();
-      onProgress?.(0.1 + ratio * 0.88);
-      if (ratio >= 0.95) done();
-    }
-
-    function done() {
-      if (complete) return;
-      complete = true;
-      window.clearTimeout(timeout);
-      video.removeEventListener('canplaythrough', done);
-      video.removeEventListener('progress', report);
-      video.removeEventListener('error', done);
-      onProgress?.(1);
-      resolve();
-    }
-
-    if (bufferedRatio() >= 0.95 || video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
-      done();
-      return;
-    }
-
-    video.addEventListener('canplaythrough', done);
-    video.addEventListener('progress', report);
-    video.addEventListener('error', done, { once: true });
+    window.setTimeout(done, 3000);
   });
 }
