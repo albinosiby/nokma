@@ -22,12 +22,15 @@
 }
 .hero__vig {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(5, 25, 14, 0.34) 0%, transparent 24%, transparent 76%, rgba(5, 25, 14, 0.2) 100%);
+  background:
+    linear-gradient(180deg, rgba(5, 25, 14, 0.42) 0%, transparent 28%, transparent 72%, rgba(5, 25, 14, 0.36) 100%),
+    rgba(5, 25, 14, 0.28);
+  pointer-events: none;
 }
 .hero__stage::after {
   content: '';
   position: absolute; inset: 0;
-  background: rgba(14, 59, 36, 0.08);
+  background: rgba(8, 37, 21, 0.18);
   pointer-events: none;
 }
 .hero__grain {
@@ -35,6 +38,18 @@
   opacity: 0.06;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+.hero__brand {
+  position: absolute;
+  right: clamp(1rem, 3vw, 2.25rem);
+  bottom: clamp(1rem, 3vw, 2.25rem);
+  z-index: 3;
+  width: clamp(64px, 9vw, 96px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+  user-select: none;
 }
 /* ═══════════════════════════════════════════════════════════
    3 · PRODUCT CATALOGUE
@@ -1269,6 +1284,12 @@
 .contact__form .btn--primary:hover { color: #fff; }
 .contact__hint { grid-column: 1 / -1; font-size: 0.84rem; color: #FFD9A8; min-height: 1.1em; }
 .contact__hint.is-err { color: #FFC1B0; }
+.contact__hint.is-ok { color: #C8E6C0; }
+.contact__form .btn:disabled {
+  opacity: 0.62;
+  cursor: wait;
+  pointer-events: none;
+}
 @media (max-width: 760px) {
   .contact__card { grid-template-columns: 1fr; gap: 1.35rem; }
   .contact__form { grid-template-columns: 1fr; }

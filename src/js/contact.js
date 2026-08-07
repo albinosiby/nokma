@@ -1,7 +1,8 @@
 import { gsap, reduced } from './core.js';
-import { BRAND } from './data.js';
 
-/** Contact scene: card fade-in plus a client-side-validated enquiry form. */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdenkewy';
+
+/** Contact scene: card fade-in plus Formspree-backed enquiry form. */
 export function initContact() {
   const card = document.getElementById('contactCard');
   if (card) {
@@ -22,56 +23,71 @@ export function initContact() {
     }
   }
 
-  /* ── enquiry form ─────────────────────────────────────── */
   const form = document.getElementById('contactForm');
   const hint = document.getElementById('cfHint');
-  if (!form) return;
+  const submit = form?.querySelector('button[type="submit"]');
+  if (!form || !hint) return;
 
-  form.addEventListener('submit', (e) => {
+  const setHint = (text, { error = false, success = false } = {}) => {
+    hint.textContent = text;
+    hint.classList.toggle('is-err', error);
+    hint.classList.toggle('is-ok', success);
+  };
+
+  const fail = (text, field) => {
+    setHint(text, { error: true });
+    field?.focus();
+    if (!reduced) gsap.fromTo(field || form, { x: -7 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, 0.35)' });
+  };
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = form.name.value.trim();
     const email = form.email.value.trim();
-    const msg = form.message.value.trim();
-
-    const fail = (text, field) => {
-      hint.textContent = text;
-      hint.classList.add('is-err');
-      field?.focus();
-      if (!reduced) gsap.fromTo(field || form, { x: -7 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, 0.35)' });
-    };
+    const message = form.message.value.trim();
 
     if (!name) return fail('Please add your name so we know who we’re talking to.', form.name);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail('That email address doesn’t look right.', form.email);
+    if (!message) return fail('Please add a short message with your enquiry.', form.message);
 
-    hint.classList.remove('is-err');
+    submit.disabled = true;
+    setHint('Sending your enquiry…');
 
-    // No backend is wired up yet — hand the enquiry to the visitor's mail client
-    // so nothing is silently dropped.
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      '',
-      msg || '(no message)',
-    ].join('\n');
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: 'Website enquiry — Nokma / MeghFarm',
+        }),
+      });
 
-    const href = `mailto:${BRAND.email}?subject=${encodeURIComponent(
-      'Website enquiry'
-    )}&body=${encodeURIComponent(body)}`;
+      const data = await res.json().catch(() => ({}));
 
-    hint.textContent = 'Opening your mail app with the enquiry ready to send…';
-    window.location.href = href;
+      if (!res.ok) {
+        const firstError = data?.errors?.[0]?.message;
+        throw new Error(firstError || 'Something went wrong while sending. Please try again.');
+      }
 
-    setTimeout(() => {
-      hint.textContent = `If nothing opened, email us directly at ${BRAND.email}.`;
-    }, 2600);
+      form.reset();
+      setHint('Thank you — your enquiry has been sent. We’ll get back to you soon.', { success: true });
+    } catch (err) {
+      setHint(err.message || 'Could not send right now. Please email sales@themeghfarm.com.', { error: true });
+    } finally {
+      submit.disabled = false;
+    }
   });
 
-  // clear the hint as soon as the visitor starts fixing things
   form.addEventListener('input', () => {
-    if (hint.classList.contains('is-err')) {
-      hint.textContent = '';
-      hint.classList.remove('is-err');
+    if (hint.classList.contains('is-err') || hint.classList.contains('is-ok')) {
+      setHint('');
     }
   });
 }

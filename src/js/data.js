@@ -624,8 +624,8 @@ export const INGREDIENTS = [
   { id: 'selection', label: 'Raw Material Selection', img: 'raw-pineapple', note: 'Selecting quality ingredients for every batch.' },
   { id: 'mix', label: 'Mix Preparation', img: 'story-processing', note: 'Preparing the ice cream mix to the required recipe.' },
   { id: 'pasteurization', label: 'Pasteurization & Homogenization', img: 'story-qc', note: 'Heat treatment and texture refinement for a smooth mix.' },
-  { id: 'ageing', label: 'Ageing', img: 'iml-round', note: 'Resting the mix to develop body and a richer texture.' },
-  { id: 'freezing', label: 'Freezing & Packaging', img: 'lineup', note: 'Freezing the mix and packing each product for sale.' },
+  { id: 'ageing', label: 'Ageing', img: 'ageing.png', note: 'Resting the mix to develop body and a richer texture.' },
+  { id: 'freezing', label: 'Freezing & Packaging', img: 'iml-round', note: 'Freezing the mix and packing each product for sale.' },
   { id: 'distribution', label: 'Hardening & Distribution', img: 'story-delivery', note: 'Hardening the finished product before cold-chain distribution.' },
 ];
 

@@ -18,6 +18,8 @@ const POSE_SCALE = {
   'pose-06': 1.03,
 };
 
+const REACT_POSES = ['pose-01', 'pose-02', 'pose-03', 'pose-04', 'pose-05', 'pose-06'];
+
 /** Keep the Nokma character with the visitor and reposition it between sections. */
 export function initMascot() {
   const mascot = document.getElementById('mascot');
@@ -26,13 +28,14 @@ export function initMascot() {
 
   let currentScene = null;
   let currentPose = image.getAttribute('src')?.match(/pose-\d+/)?.[0];
+  let reacting = false;
 
-  SCENES.forEach(({ pose }) => {
+  REACT_POSES.forEach((pose) => {
     const preload = new Image();
     preload.src = `./products/mascot/${pose}.png`;
   });
 
-  const swapPose = (pose) => {
+  const swapPose = (pose, { animate = true } = {}) => {
     const src = `./products/mascot/${pose}.png`;
     const scale = POSE_SCALE[pose] ?? 1;
 
@@ -41,7 +44,7 @@ export function initMascot() {
         scale,
         rotation: 0,
         opacity: 1,
-        duration: reduced ? 0 : 0.2,
+        duration: reduced || !animate ? 0 : 0.2,
         overwrite: true,
       });
       return;
@@ -49,7 +52,7 @@ export function initMascot() {
     currentPose = pose;
     image.setAttribute('src', src);
 
-    if (reduced) {
+    if (reduced || !animate) {
       gsap.set(image, { scale, rotation: 0, opacity: 1 });
       return;
     }
@@ -62,14 +65,86 @@ export function initMascot() {
     );
   };
 
+  const playTapReact = () => {
+    if (reacting || mascot.classList.contains('is-blocked')) return;
+    if (getComputedStyle(mascot).visibility === 'hidden') return;
+
+    reacting = true;
+    const basePose = currentScene?.pose || currentPose || 'pose-01';
+    const baseScale = POSE_SCALE[basePose] ?? 1;
+    const reaction = REACT_POSES.filter((pose) => pose !== basePose)[
+      Math.floor(Math.random() * Math.max(1, REACT_POSES.length - 1))
+    ] || 'pose-02';
+
+    if (reduced) {
+      swapPose(reaction, { animate: false });
+      setTimeout(() => {
+        swapPose(basePose, { animate: false });
+        reacting = false;
+      }, 220);
+      return;
+    }
+
+    gsap.killTweensOf([mascot, image]);
+
+    const jump = gsap.timeline({
+      onComplete: () => {
+        reacting = false;
+        if (currentScene) gsap.set(mascot, positionFor(currentScene));
+      },
+    });
+
+    jump
+      .to(mascot, {
+        y: '-=22',
+        duration: 0.12,
+        ease: 'power2.out',
+      })
+      .to(image, {
+        rotation: 7,
+        scale: baseScale * 1.04,
+        duration: 0.1,
+        ease: 'back.out(1.8)',
+      }, 0)
+      .add(() => swapPose(reaction, { animate: false }), 0.05)
+      .to(image, {
+        rotation: -5,
+        duration: 0.07,
+        ease: 'power1.inOut',
+      })
+      .to(image, {
+        rotation: 4,
+        duration: 0.06,
+        ease: 'power1.inOut',
+      })
+      .to(mascot, {
+        y: currentScene ? -currentScene.lift : 0,
+        duration: 0.2,
+        ease: 'bounce.out',
+      }, 0.12)
+      .to(image, {
+        rotation: 0,
+        scale: POSE_SCALE[reaction] ?? 1,
+        duration: 0.12,
+        ease: 'power2.out',
+      }, 0.18)
+      .add(() => swapPose(basePose), 0.3)
+      .to(image, {
+        scale: baseScale,
+        rotation: 0,
+        duration: 0.12,
+        ease: 'back.out(1.4)',
+      }, 0.32);
+  };
+
   const positionFor = (scene) => {
     return { x: 0, y: -scene.lift };
   };
 
   const showScene = (scene) => {
     currentScene = scene;
-    swapPose(scene.pose);
     mascot.dataset.scene = scene.id;
+    if (!reacting) swapPose(scene.pose);
     const position = positionFor(scene);
 
     if (reduced) {
@@ -80,9 +155,9 @@ export function initMascot() {
     gsap.to(mascot, {
       ...position,
       autoAlpha: 1,
-      duration: 0.65,
+      duration: reacting ? 0.2 : 0.65,
       ease: 'power2.out',
-      overwrite: true,
+      overwrite: 'auto',
     });
   };
 
@@ -164,6 +239,17 @@ export function initMascot() {
   syncInteractiveState();
 
   onResize(() => {
-    if (currentScene) gsap.set(mascot, positionFor(currentScene));
+    if (currentScene && !reacting) gsap.set(mascot, positionFor(currentScene));
+  });
+
+  mascot.addEventListener('click', (e) => {
+    e.preventDefault();
+    playTapReact();
+  });
+
+  mascot.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    playTapReact();
   });
 }

@@ -219,7 +219,11 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
 .scoop-svg { width: 100%; height: 100%; overflow: visible; }
 .scoop-ball { transform-origin: 70px 58px; }
 .scoop-cup { transform-origin: 70px 152px; }
-.scoop-cup-mark { font-family: var(--f-display); font-size: 30px; font-weight: 900; }
+.scoop-cup-mark {
+  transform-origin: 70px 124px;
+  filter: drop-shadow(0 2px 4px rgba(5, 29, 17, 0.28));
+  pointer-events: none;
+}
 .scoop-splash { transform-origin: 70px 88px; }
 .scoop-sprinkles { transform-origin: 70px 52px; }
 .loader__logo { width: 200px; margin-top: 1.6rem; filter: drop-shadow(0 8px 26px rgba(0,0,0,0.35)); }
@@ -246,10 +250,15 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
   z-index: 120;
   width: clamp(138px, 14vw, 220px);
   aspect-ratio: 1;
-  pointer-events: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
   visibility: hidden;
   will-change: transform, opacity;
   filter: drop-shadow(0 14px 18px rgba(8, 37, 21, 0.22));
+  -webkit-tap-highlight-color: transparent;
 }
 .mascot__pose {
   width: 100%;
@@ -259,8 +268,18 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
   object-position: center bottom;
   transform-origin: 50% 100%;
   will-change: opacity, transform;
+  pointer-events: none;
 }
-.mascot.is-blocked { opacity: 0 !important; visibility: hidden !important; }
+.mascot:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+.mascot.is-blocked {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
 
 @media (max-width: 760px) {
   .mascot {

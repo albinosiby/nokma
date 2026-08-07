@@ -6,12 +6,14 @@ export function initIngredients() {
   const pipe = document.getElementById('ingrPipe');
   if (!pipe) return;
 
+  const stepImage = (image) => `./products/${image.includes('.') ? image : `${image}.webp`}`;
+
   INGREDIENTS.forEach((s, i) => {
     const el = document.createElement('div');
     el.className = 'istep';
     el.innerHTML = `
       <div class="istep__pod">
-        ${s.img ? `<img src="./products/${s.img}.webp" alt="${s.label}" loading="lazy" decoding="async" />` : `<span class="istep__number">${String(i + 1).padStart(2, '0')}</span>`}
+        ${s.img ? `<img src="${stepImage(s.img)}" alt="${s.label}" loading="lazy" decoding="async" />` : `<span class="istep__number">${String(i + 1).padStart(2, '0')}</span>`}
       </div>
       <h4>${s.label}</h4>
       <p>${s.note}</p>
