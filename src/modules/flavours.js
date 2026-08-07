@@ -1,16 +1,16 @@
 import { gsap, reduced, isTouch } from './core.js';
-import { FLAVOURS } from './data.js';
+import { FLAVOURS } from '../data/catalogue.js';
 
 const ICE_CREAM_MOCKUPS = {
-  vanilla: 'Ice Cream_Vanilla.png',
-  chocolate: 'Ice Cream_Chocolate.png',
-  strawberry: 'strawberry png.png',
-  orange: 'Ice Cream_Orange.png',
-  jackfruit: 'Ice Cream_Jackfruit.png',
-  butterscotch: 'Ice Cream_ButterScotch.png',
-  pistachio: 'Ice Cream_Pista.png',
-  pineapple: 'Ice Cream_Pineapple.png',
-  lychee: 'Ice Cream_Lychee.png',
+  vanilla: 'ice-cream/mockups/Ice Cream_Vanilla.png',
+  chocolate: 'ice-cream/mockups/Ice Cream_Chocolate.png',
+  strawberry: 'ice-cream/mockups/strawberry png.png',
+  orange: 'ice-cream/mockups/Ice Cream_Orange.png',
+  jackfruit: 'ice-cream/mockups/Ice Cream_Jackfruit.png',
+  butterscotch: 'ice-cream/mockups/Ice Cream_ButterScotch.png',
+  pistachio: 'ice-cream/mockups/Ice Cream_Pista.png',
+  pineapple: 'ice-cream/mockups/Ice Cream_Pineapple.png',
+  lychee: 'ice-cream/mockups/Ice Cream_Lychee.png',
 };
 const SHOWCASE_FLAVOURS = FLAVOURS.filter((flavour) => ICE_CREAM_MOCKUPS[flavour.id]);
 

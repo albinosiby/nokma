@@ -46,7 +46,7 @@ export const FLAVOURS = [
     id: 'vanilla',
     name: 'Vanilla',
     sub: 'Tantalise White Temptation',
-    img: 'flavour-vanilla',
+    img: 'ice-cream/flavours/flavour-vanilla',
     note: 'Snow-soft, slow-churned, the quiet classic every scoop is measured against.',
     formats: [CUP, IML, TUB],
     theme: { bg: '#F6EEDC', deep: '#5A4526', ink: '#3A2C15', accent: '#C89A4A', glow: '#FFF3D6' },
@@ -55,7 +55,7 @@ export const FLAVOURS = [
     id: 'chocolate',
     name: 'Chocolate',
     sub: 'Deep Cocoa Indulgence',
-    img: 'flavour-chocolate',
+    img: 'ice-cream/flavours/flavour-chocolate',
     note: 'Dark, rounded cocoa folded through rich Meghalaya cream.',
     formats: [CUP, IML],
     theme: { bg: '#EADCCF', deep: '#4A2C1B', ink: '#33200F', accent: '#8A5230', glow: '#F6E3D2' },
@@ -64,7 +64,7 @@ export const FLAVOURS = [
     id: 'strawberry',
     name: 'Strawberry',
     sub: 'Blush of the Hills',
-    img: 'flavour-strawberry',
+    img: 'ice-cream/flavours/flavour-strawberry',
     note: 'Bright berry brought forward with real fruit pulp, never essence alone.',
     formats: [CUP, IML],
     theme: { bg: '#F7DDE6', deep: '#7A2745', ink: '#511628', accent: '#D4436F', glow: '#FFE7EF' },
@@ -73,7 +73,7 @@ export const FLAVOURS = [
     id: 'orange',
     name: 'Orange',
     sub: 'Sunrise Citrus',
-    img: 'flavour-orange',
+    img: 'ice-cream/flavours/flavour-orange',
     note: 'A clean citrus lift — the first light over the Garo Hills, in a scoop.',
     formats: [CUP, IML],
     theme: { bg: '#FCE3CC', deep: '#8A3D0E', ink: '#5E2708', accent: '#E2731C', glow: '#FFEBD6' },
@@ -82,7 +82,7 @@ export const FLAVOURS = [
     id: 'jackfruit',
     name: 'Jackfruit',
     sub: 'Jack-A-licious',
-    img: 'flavour-jackfruit',
+    img: 'ice-cream/flavours/flavour-jackfruit',
     note: 'Meghalaya’s own jackfruit — honeyed, tropical, unmistakably regional.',
     formats: [CUP, IML, TUB],
     theme: { bg: '#F8EBBE', deep: '#6E5410', ink: '#4A3806', accent: '#C9A21B', glow: '#FFF6D0' },
@@ -91,7 +91,7 @@ export const FLAVOURS = [
     id: 'butterscotch',
     name: 'Butterscotch',
     sub: 'Golden Crunch',
-    img: 'flavour-butterscotch',
+    img: 'ice-cream/flavours/flavour-butterscotch',
     note: 'Burnt-sugar warmth with a crunch that keeps finding you.',
     formats: [CUP, IML, TUB],
     theme: { bg: '#F7E4C3', deep: '#6B4412', ink: '#472C06', accent: '#C4832A', glow: '#FFEFD5' },
@@ -100,7 +100,7 @@ export const FLAVOURS = [
     id: 'pistachio',
     name: 'Pistachio',
     sub: 'Tantalise Green Crush',
-    img: 'flavour-pistachio',
+    img: 'ice-cream/flavours/flavour-pistachio',
     note: 'Nut-forward and gently savoury — the grown-up scoop of the range.',
     formats: [CUP, IML, TUB],
     theme: { bg: '#E7EDCE', deep: '#3F4F1C', ink: '#2A360F', accent: '#7B9435', glow: '#F3F8DC' },
@@ -109,7 +109,7 @@ export const FLAVOURS = [
     id: 'pineapple',
     name: 'Pineapple',
     sub: 'Field-Grown Sweetness',
-    img: 'flavour-pineapple',
+    img: 'ice-cream/flavours/flavour-pineapple',
     note: 'From the same raw pineapples we supply in bulk — straight into cream.',
     formats: [CUP, IML],
     theme: { bg: '#E3EEDF', deep: '#1F4A32', ink: '#12301F', accent: '#3E8055', glow: '#EFF8EC' },
@@ -118,7 +118,7 @@ export const FLAVOURS = [
     id: 'lychee',
     name: 'Lychee',
     sub: 'Orchard Blush',
-    img: 'flavour-lychee',
+    img: 'ice-cream/flavours/flavour-lychee',
     note: 'Delicate, floral, faintly rose — the most fragile flavour we make.',
     formats: [CUP, IML],
     theme: { bg: '#FADCE3', deep: '#7B2438', ink: '#54141F', accent: '#CF4560', glow: '#FFE9EE' },
@@ -127,7 +127,7 @@ export const FLAVOURS = [
     id: 'passion-fruit',
     name: 'Passion Fruit',
     sub: 'Tropical Tang',
-    img: 'flavour-passion',
+    img: 'ice-cream/flavours/flavour-passion',
     note: 'Bright passion fruit folded into cream — sharp, fragrant, and refreshing.',
     formats: [CUP],
     theme: { bg: '#F3E8C8', deep: '#6B4E12', ink: '#46340A', accent: '#C9A227', glow: '#FFF6D8' },
@@ -136,7 +136,7 @@ export const FLAVOURS = [
     id: 'ginger',
     name: 'Ginger',
     sub: 'Hill Spice',
-    img: 'flavour-ginger',
+    img: 'ice-cream/flavours/flavour-ginger',
     note: 'Made with our own dehydrated ginger — warm, clean, quietly bold.',
     formats: [],
     theme: { bg: '#F6E2CE', deep: '#7A3E14', ink: '#52270A', accent: '#C1701E', glow: '#FFEDDA' },
@@ -145,7 +145,7 @@ export const FLAVOURS = [
     id: 'lemon',
     name: 'Lemon',
     sub: 'Sharp & Clear',
-    img: 'flavour-lemon',
+    img: 'ice-cream/flavours/flavour-lemon',
     note: 'A cold, clean finish — the palate-cleanser of the collection.',
     formats: [],
     theme: { bg: '#EEF2D8', deep: '#4B5518', ink: '#333C0B', accent: '#8A9A2C', glow: '#F7FAE6' },
@@ -154,7 +154,7 @@ export const FLAVOURS = [
     id: 'banana',
     name: 'Banana',
     sub: 'Local Harvest',
-    img: 'flavour-banana',
+    img: 'ice-cream/flavours/flavour-banana',
     note: 'The same local bananas that become our chips — churned soft and sweet.',
     formats: [],
     theme: { bg: '#F7EFC8', deep: '#655412', ink: '#443806', accent: '#B79C1E', glow: '#FFFAD8' },
@@ -167,7 +167,7 @@ export const FLAVOURS = [
 export const UNIVERSE = [
   {
     id: 'family-tub',
-    img: 'family-tubs/jackfruit.png',
+    img: 'ice-cream/tubs/jackfruit.png',
     name: 'Jackfruit Family Tub',
     kicker: 'Family Tub · Jackfruit',
     sizes: '750 ML · 1000 ML',
@@ -177,7 +177,7 @@ export const UNIVERSE = [
   },
   {
     id: 'family-tub-vanilla',
-    img: 'family-tubs/Vanilla.png',
+    img: 'ice-cream/tubs/Vanilla.png',
     name: 'Vanilla Family Tub',
     kicker: 'Family Tub · Vanilla',
     sizes: '750 ML · 1000 ML',
@@ -187,7 +187,7 @@ export const UNIVERSE = [
   },
   {
     id: 'family-tub-pistachio',
-    img: 'family-tubs/pistachio.png',
+    img: 'ice-cream/tubs/pistachio.png',
     name: 'Pistachio Family Tub',
     kicker: 'Family Tub · Pistachio',
     sizes: '750 ML · 1000 ML',
@@ -197,7 +197,7 @@ export const UNIVERSE = [
   },
   {
     id: 'family-tub-butterscotch',
-    img: 'family-tubs/Butterscotch.png',
+    img: 'ice-cream/tubs/Butterscotch.png',
     name: 'Butterscotch Family Tub',
     kicker: 'Family Tub · Butterscotch',
     sizes: '750 ML · 1000 ML',
@@ -207,7 +207,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-vanilla',
-    img: 'Ice Cream_Vanilla.png',
+    img: 'ice-cream/mockups/Ice Cream_Vanilla.png',
     name: 'Vanilla IML Container',
     kicker: 'IML Container · Vanilla',
     sizes: '100 ML · 125 ML',
@@ -217,7 +217,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-chocolate',
-    img: 'Ice Cream_Chocolate.png',
+    img: 'ice-cream/mockups/Ice Cream_Chocolate.png',
     name: 'Chocolate IML Container',
     kicker: 'IML Container · Chocolate',
     sizes: '100 ML · 125 ML',
@@ -227,7 +227,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-strawberry',
-    img: 'strawberry png.png',
+    img: 'ice-cream/mockups/strawberry png.png',
     name: 'Strawberry IML Container',
     kicker: 'IML Container · Strawberry',
     sizes: '100 ML · 125 ML',
@@ -237,7 +237,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-orange',
-    img: 'Ice Cream_Orange.png',
+    img: 'ice-cream/mockups/Ice Cream_Orange.png',
     name: 'Orange IML Container',
     kicker: 'IML Container · Orange',
     sizes: '100 ML · 125 ML',
@@ -247,7 +247,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-jackfruit',
-    img: 'Ice Cream_Jackfruit.png',
+    img: 'ice-cream/mockups/Ice Cream_Jackfruit.png',
     name: 'Jackfruit IML Container',
     kicker: 'IML Container · Jackfruit',
     sizes: '100 ML · 125 ML',
@@ -257,7 +257,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-butterscotch',
-    img: 'Ice Cream_ButterScotch.png',
+    img: 'ice-cream/mockups/Ice Cream_ButterScotch.png',
     name: 'Butterscotch IML Container',
     kicker: 'IML Container · Butterscotch',
     sizes: '100 ML · 125 ML',
@@ -267,7 +267,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-pistachio',
-    img: 'Ice Cream_Pista.png',
+    img: 'ice-cream/mockups/Ice Cream_Pista.png',
     name: 'Pistachio IML Container',
     kicker: 'IML Container · Pistachio',
     sizes: '100 ML · 125 ML',
@@ -277,7 +277,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-pineapple',
-    img: 'Ice Cream_Pineapple.png',
+    img: 'ice-cream/mockups/Ice Cream_Pineapple.png',
     name: 'Pineapple IML Container',
     kicker: 'IML Container · Pineapple',
     sizes: '100 ML · 125 ML',
@@ -287,7 +287,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-lychee',
-    img: 'Ice Cream_Lychee.png',
+    img: 'ice-cream/mockups/Ice Cream_Lychee.png',
     name: 'Lychee IML Container',
     kicker: 'IML Container · Lychee',
     sizes: '100 ML · 125 ML',
@@ -297,7 +297,7 @@ export const UNIVERSE = [
   },
   {
     id: 'iml-ginger',
-    img: 'Ice Cream_Ginger.png',
+    img: 'ice-cream/mockups/Ice Cream_Ginger.png',
     name: 'Ginger IML Container',
     kicker: 'IML Container · Ginger',
     sizes: '100 ML · 125 ML',
@@ -307,7 +307,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-vanilla',
-    img: 'cups-revised/cup (6).png',
+    img: 'ice-cream/cups/cup (6).png',
     name: 'Vanilla Cup',
     kicker: 'Single Serve · Vanilla',
     sizes: '70 ML',
@@ -317,7 +317,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-jackfruit',
-    img: 'cups-revised/cup (4).png',
+    img: 'ice-cream/cups/cup (4).png',
     name: 'Jackfruit Cup',
     kicker: 'Single Serve · Jackfruit',
     sizes: '70 ML',
@@ -327,7 +327,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-ginger',
-    img: 'cups-revised/cup (5).png',
+    img: 'ice-cream/cups/cup (5).png',
     name: 'Ginger Cup',
     kicker: 'Single Serve · Ginger',
     sizes: '70 ML',
@@ -337,7 +337,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-orange',
-    img: 'cups-revised/cup (3).png',
+    img: 'ice-cream/cups/cup (3).png',
     name: 'Orange Cup',
     kicker: 'Single Serve · Orange',
     sizes: '70 ML',
@@ -347,7 +347,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-lychee',
-    img: 'cups-revised/cup (2).png',
+    img: 'ice-cream/cups/cup (2).png',
     name: 'Lychee Cup',
     kicker: 'Single Serve · Lychee',
     sizes: '70 ML',
@@ -357,7 +357,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-lemon',
-    img: 'cups-revised/cup (1).png',
+    img: 'ice-cream/cups/cup (1).png',
     name: 'Lemon Cup',
     kicker: 'Single Serve · Lemon',
     sizes: '70 ML',
@@ -367,7 +367,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-strawberry',
-    img: 'cups-revised/cup.png',
+    img: 'ice-cream/cups/cup.png',
     name: 'Strawberry Cup',
     kicker: 'Single Serve · Strawberry',
     sizes: '70 ML',
@@ -377,7 +377,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-butterscotch',
-    img: 'cups-revised/Untitled design (1).png',
+    img: 'ice-cream/cups/Untitled design (1).png',
     name: 'Butterscotch Cup',
     kicker: 'Single Serve · Butterscotch',
     sizes: '70 ML',
@@ -387,7 +387,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cup-pineapple',
-    img: 'cups-revised/Untitled design.png',
+    img: 'ice-cream/cups/Untitled design.png',
     name: 'Pineapple Cup',
     kicker: 'Single Serve · Pineapple',
     sizes: '70 ML',
@@ -397,7 +397,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-royal-jack',
-    img: 'cones/Royal Jack.png',
+    img: 'ice-cream/cones/Royal Jack.png',
     name: 'Royal Jack Cone',
     kicker: 'Cone · Jackfruit',
     sizes: '45 ML · 80 ML · 110 ML',
@@ -407,7 +407,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-butterscotch-80',
-    img: 'cones/ButterScotch 80 ml.png',
+    img: 'ice-cream/cones/ButterScotch 80 ml.png',
     name: 'Butterscotch Cone',
     kicker: 'Cone · Butterscotch',
     sizes: '80 ML',
@@ -417,7 +417,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-vanilla-110',
-    img: 'cones/Vanilla 110 ml.png',
+    img: 'ice-cream/cones/Vanilla 110 ml.png',
     name: 'Vanilla Cone',
     kicker: 'Cone · Vanilla',
     sizes: '110 ML',
@@ -427,7 +427,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-strawberry-45',
-    img: 'cones/Strawberry 45.png',
+    img: 'ice-cream/cones/Strawberry 45.png',
     name: 'Strawberry Cone',
     kicker: 'Cone · Strawberry',
     sizes: '45 ML',
@@ -437,7 +437,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-chocolate-80',
-    img: 'cones/80 ml choco.png',
+    img: 'ice-cream/cones/80 ml choco.png',
     name: 'Chocolate Cone',
     kicker: 'Cone · Chocolate',
     sizes: '80 ML',
@@ -447,7 +447,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-vanilla-80',
-    img: 'cones/Vanilla 80 ml.png',
+    img: 'ice-cream/cones/Vanilla 80 ml.png',
     name: 'Vanilla Cone',
     kicker: 'Cone · Vanilla',
     sizes: '80 ML',
@@ -457,7 +457,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-strawberry-80',
-    img: 'cones/Strawberry 2.png',
+    img: 'ice-cream/cones/Strawberry 2.png',
     name: 'Strawberry Cone',
     kicker: 'Cone · Strawberry',
     sizes: '80 ML',
@@ -467,7 +467,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-butterscotch-110',
-    img: 'cones/ButterScotch 110 ml.png',
+    img: 'ice-cream/cones/ButterScotch 110 ml.png',
     name: 'Butterscotch Cone',
     kicker: 'Cone · Butterscotch',
     sizes: '110 ML',
@@ -477,7 +477,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-vanilla-45',
-    img: 'cones/Vanilla45 ml.png',
+    img: 'ice-cream/cones/Vanilla45 ml.png',
     name: 'Vanilla Cone',
     kicker: 'Cone · Vanilla',
     sizes: '45 ML',
@@ -487,7 +487,7 @@ export const UNIVERSE = [
   },
   {
     id: 'cone-jackfruit-110',
-    img: 'cones/Jack 110.png',
+    img: 'ice-cream/cones/Jack 110.png',
     name: 'Jackfruit Cone',
     kicker: 'Cone · Jackfruit',
     sizes: '110 ML',
@@ -497,7 +497,7 @@ export const UNIVERSE = [
   },
   {
     id: 'carton-vanilla',
-    img: 'carton-vanilla',
+    img: 'ice-cream/cartons/carton-vanilla',
     name: 'Snow Drift Vanilla',
     kicker: 'Mono Carton',
     sizes: '750 ML · 1000 ML',
@@ -507,7 +507,7 @@ export const UNIVERSE = [
   },
   {
     id: 'carton-butterscotch',
-    img: 'carton-butterscotch',
+    img: 'ice-cream/cartons/carton-butterscotch',
     name: 'Golden Crunch',
     kicker: 'Mono Carton',
     sizes: '750 ML · 1000 ML',
@@ -517,7 +517,7 @@ export const UNIVERSE = [
   },
   {
     id: 'carton-jackfruit',
-    img: 'carton-jackfruit',
+    img: 'ice-cream/cartons/carton-jackfruit',
     name: 'Jack-A-licious',
     kicker: 'Mono Carton',
     sizes: '750 ML · 1000 ML',
@@ -527,7 +527,7 @@ export const UNIVERSE = [
   },
   {
     id: 'drink-passion',
-    img: 'drink-passion',
+    img: 'beverages/drink-passion',
     name: 'Passion Fruit Drink',
     kicker: 'Nokma Beverages',
     sizes: '125 · 250 · 500 ML',
@@ -537,7 +537,7 @@ export const UNIVERSE = [
   },
   {
     id: 'drink-pineapple',
-    img: 'drink-pineapple',
+    img: 'beverages/drink-pineapple',
     name: 'Pineapple Drink',
     kicker: 'Nokma Beverages',
     sizes: '125 · 320 · 500 ML',
@@ -547,7 +547,7 @@ export const UNIVERSE = [
   },
   {
     id: 'drink-lychee',
-    img: 'drink-lychee',
+    img: 'beverages/drink-lychee',
     name: 'Lychee Drink',
     kicker: 'Nokma Beverages',
     sizes: '125 · 250 · 500 ML',
@@ -557,7 +557,7 @@ export const UNIVERSE = [
   },
   {
     id: 'water-bottle',
-    img: 'water-bottle',
+    img: 'beverages/water-bottle',
     name: 'Packaged Drinking Water',
     kicker: 'Blink · Shots · Squad',
     sizes: '250 ML · 500 ML · 1 L',
@@ -567,7 +567,7 @@ export const UNIVERSE = [
   },
   {
     id: 'chips-crispy',
-    img: 'chips-crispy',
+    img: 'chips/chips-crispy',
     name: 'Crispy Banana Chips',
     kicker: 'TE·RIK',
     sizes: '30 · 60 · 85 · 105 G',
@@ -577,7 +577,7 @@ export const UNIVERSE = [
   },
   {
     id: 'chips-plain',
-    img: 'chips-plain',
+    img: 'chips/chips-plain',
     name: 'Plain Banana Chips',
     kicker: 'TE·RIK',
     sizes: '30 · 60 · 85 · 105 G',
@@ -587,7 +587,7 @@ export const UNIVERSE = [
   },
   {
     id: 'spice-turmeric',
-    img: 'spice-turmeric',
+    img: 'spices/spice-turmeric',
     name: 'Turmeric Powder',
     kicker: 'Dehydrated',
     sizes: '100 G · 500 G',
@@ -597,7 +597,7 @@ export const UNIVERSE = [
   },
   {
     id: 'spice-ginger',
-    img: 'spice-ginger',
+    img: 'spices/spice-ginger',
     name: 'Ginger Powder',
     kicker: 'Dehydrated',
     sizes: '100 G · 500 G',
@@ -607,7 +607,7 @@ export const UNIVERSE = [
   },
   {
     id: 'spice-green-chilli',
-    img: 'spice-green-chilli.png',
+    img: 'spices/spice-green-chilli.png',
     name: 'Green Chilli Powder',
     kicker: 'Dehydrated',
     sizes: '500 G',
@@ -621,12 +621,12 @@ export const UNIVERSE = [
  *  Ingredient pipeline
  * ------------------------------------------------------------------ */
 export const INGREDIENTS = [
-  { id: 'selection', label: 'Raw Material Selection', img: 'raw-pineapple', note: 'Selecting quality ingredients for every batch.' },
-  { id: 'mix', label: 'Mix Preparation', img: 'story-processing', note: 'Preparing the ice cream mix to the required recipe.' },
-  { id: 'pasteurization', label: 'Pasteurization & Homogenization', img: 'story-qc', note: 'Heat treatment and texture refinement for a smooth mix.' },
-  { id: 'ageing', label: 'Ageing', img: 'ageing.png', note: 'Resting the mix to develop body and a richer texture.' },
-  { id: 'freezing', label: 'Freezing & Packaging', img: 'iml-round', note: 'Freezing the mix and packing each product for sale.' },
-  { id: 'distribution', label: 'Hardening & Distribution', img: 'story-delivery', note: 'Hardening the finished product before cold-chain distribution.' },
+  { id: 'selection', label: 'Raw Material Selection', img: 'process/raw-pineapple', note: 'Selecting quality ingredients for every batch.' },
+  { id: 'mix', label: 'Mix Preparation', img: 'process/story-processing', note: 'Preparing the ice cream mix to the required recipe.' },
+  { id: 'pasteurization', label: 'Pasteurization & Homogenization', img: 'process/story-qc', note: 'Heat treatment and texture refinement for a smooth mix.' },
+  { id: 'ageing', label: 'Ageing', img: 'process/ageing.png', note: 'Resting the mix to develop body and a richer texture.' },
+  { id: 'freezing', label: 'Freezing & Packaging', img: 'ice-cream/cartons/iml-round', note: 'Freezing the mix and packing each product for sale.' },
+  { id: 'distribution', label: 'Hardening & Distribution', img: 'process/story-delivery', note: 'Hardening the finished product before cold-chain distribution.' },
 ];
 
 /* ------------------------------------------------------------------ *

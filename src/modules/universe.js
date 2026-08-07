@@ -1,12 +1,12 @@
 import { gsap, ScrollTrigger, reduced, lenis } from './core.js';
-import { UNIVERSE } from './data.js';
+import { UNIVERSE } from '../data/catalogue.js';
 
 const FAMILIES = [
   {
     id: 'ice-cream',
     label: 'Nokma Ice Cream',
     note: '5 product formats',
-    img: 'family-tubs/jackfruit.png',
+    img: 'ice-cream/tubs/jackfruit.png',
     variants: [
       { id: 'family-tub', label: 'Family Tub', match: (p) => p.id.startsWith('family-tub') },
       { id: 'iml', label: 'IML', match: (p) => p.id.startsWith('iml-') },
@@ -19,7 +19,7 @@ const FAMILIES = [
     id: 'drinks',
     label: 'Nokma Beverages',
     note: 'Drinks and water',
-    img: 'drink-passion',
+    img: 'beverages/drink-passion',
     variants: [
       { id: 'fruit-drinks', label: 'Fruit Drinks', match: (p) => p.id.startsWith('drink-') },
       { id: 'water', label: 'Packaged Water', match: (p) => p.id === 'water-bottle' },
@@ -29,7 +29,7 @@ const FAMILIES = [
     id: 'chips',
     label: 'Nokma Chips',
     note: '2 crunchy styles',
-    img: 'chips-crispy',
+    img: 'chips/chips-crispy',
     variants: [
       { id: 'crispy', label: 'Crispy', match: (p) => p.id === 'chips-crispy' },
       { id: 'plain', label: 'Plain', match: (p) => p.id === 'chips-plain' },
@@ -39,7 +39,7 @@ const FAMILIES = [
     id: 'spices',
     label: 'Nokma Spices',
     note: '3 kitchen essentials',
-    img: 'spice-turmeric',
+    img: 'spices/spice-turmeric',
     variants: [],
   },
 ];

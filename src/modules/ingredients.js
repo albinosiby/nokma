@@ -1,5 +1,5 @@
 import { gsap, reduced } from './core.js';
-import { INGREDIENTS } from './data.js';
+import { INGREDIENTS } from '../data/catalogue.js';
 
 /** Production pipeline from raw material selection through distribution. */
 export function initIngredients() {

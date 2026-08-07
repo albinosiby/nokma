@@ -1,17 +1,17 @@
 import './styles/base.css';
 import './styles/sections.css';
 
-import { ScrollTrigger, initSmoothScroll } from './js/core.js';
-import { runLoader } from './js/loader.js';
-import { preloadHero, initHero } from './js/hero.js';
-import { initNav } from './js/nav.js';
-import { initRipples, initMagnetic, initReveals } from './js/micro.js';
-import { initUniverse } from './js/universe.js';
-import { initFlavours } from './js/flavours.js';
-import { initIngredients } from './js/ingredients.js';
-import { initBlog } from './js/blog.js';
-import { initMascot } from './js/mascot.js';
-import { initContact, initFooter } from './js/contact.js';
+import { ScrollTrigger, initSmoothScroll } from './modules/core.js';
+import { runLoader } from './modules/loader.js';
+import { preloadHero, initHero } from './modules/hero.js';
+import { initNav } from './modules/nav.js';
+import { initRipples, initMagnetic, initReveals } from './modules/micro.js';
+import { initUniverse } from './modules/universe.js';
+import { initFlavours } from './modules/flavours.js';
+import { initIngredients } from './modules/ingredients.js';
+import { initBlog } from './modules/blog.js';
+import { initMascot } from './modules/mascot.js';
+import { initContact, initFooter } from './modules/contact.js';
 
 /** Build every scene once the hero video is ready. */
 function buildScenes() {

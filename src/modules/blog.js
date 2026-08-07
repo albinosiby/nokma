@@ -1,5 +1,5 @@
 import { gsap, reduced, lenis } from './core.js';
-import { BLOG } from './data.js';
+import { BLOG } from '../data/catalogue.js';
 
 const formatDate = (iso) =>
   new Date(`${iso}T12:00:00`).toLocaleDateString('en-IN', {
