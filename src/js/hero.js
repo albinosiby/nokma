@@ -1,6 +1,9 @@
 import { reduced } from './core.js';
 
-/** Wait until the browser recognizes the video before dismissing the loader. */
+/**
+ * Wait until enough of the hero clip is buffered to play smoothly.
+ * Metadata alone is not enough on first visit — that causes stutter until cache fills.
+ */
 export function preloadHero(onProgress) {
   const video = document.getElementById('heroVideo');
   if (!video) {
@@ -8,28 +11,60 @@ export function preloadHero(onProgress) {
     return Promise.resolve();
   }
 
-  onProgress?.(0.12);
+  // Prevent HTML autoplay racing ahead of the buffer gate.
+  video.pause();
+  video.preload = 'auto';
+  onProgress?.(0.08);
 
   return new Promise((resolve) => {
     let complete = false;
-    const timeout = window.setTimeout(done, 2500);
+    // Slow mobile networks need longer than a metadata-only gate.
+    const timeout = window.setTimeout(done, 12000);
+
+    function bufferedRatio() {
+      if (!video.duration || !Number.isFinite(video.duration) || video.duration <= 0) return 0;
+      if (!video.buffered.length) return 0;
+      try {
+        return Math.min(1, video.buffered.end(video.buffered.length - 1) / video.duration);
+      } catch {
+        return 0;
+      }
+    }
+
+    function report() {
+      const ratio = bufferedRatio();
+      onProgress?.(0.08 + ratio * 0.9);
+      // ~55% of a ~10s loop is enough headroom for smooth first play on most links.
+      if (ratio >= 0.55 || video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+        done();
+      }
+    }
 
     function done() {
       if (complete) return;
       complete = true;
       window.clearTimeout(timeout);
-      video.removeEventListener('loadedmetadata', done);
+      video.removeEventListener('canplaythrough', onReady);
+      video.removeEventListener('progress', report);
+      video.removeEventListener('loadeddata', report);
       video.removeEventListener('error', done);
       onProgress?.(1);
       resolve();
     }
 
-    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+    function onReady() {
+      report();
+      if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) done();
+    }
+
+    if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA || bufferedRatio() >= 0.55) {
       done();
       return;
     }
 
-    video.addEventListener('loadedmetadata', done, { once: true });
+    video.addEventListener('canplaythrough', onReady);
+    video.addEventListener('progress', report);
+    video.addEventListener('loadeddata', report);
     video.addEventListener('error', done, { once: true });
     video.load();
   });
@@ -44,7 +79,18 @@ export function initHero() {
     return;
   }
 
-  video.play().catch(() => {
-    // Muted inline video normally autoplays; the loaded first frame remains a useful fallback.
+  const reveal = () => video.classList.add('is-ready');
+
+  video.addEventListener('playing', reveal, { once: true });
+
+  try {
+    video.currentTime = 0;
+  } catch {
+    // Some browsers reject seeks before ready; ignore.
+  }
+
+  video.play().then(reveal).catch(() => {
+    // Muted inline video normally autoplays; poster / stage fallback remains visible.
+    reveal();
   });
 }
