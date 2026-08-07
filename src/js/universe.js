@@ -63,11 +63,14 @@ export function initUniverse() {
   let cards = [];
 
   function renderCards(products) {
-    field.innerHTML = products.map((p) => `
+    field.innerHTML = products.map((p, index) => `
       <article class="ucard" data-id="${p.id}" data-cat="${p.cat}" tabindex="0"
         role="button" aria-pressed="false" aria-label="View details for ${p.name} — ${p.sizes}">
       <div class="ucard__media">
-        <img src="${productImage(p.img)}" alt="${p.name}" loading="lazy" decoding="async" />
+        <img src="${productImage(p.img)}" alt="${p.name}"
+          loading="${index < 4 ? 'eager' : 'lazy'}"
+          fetchpriority="${index < 2 ? 'high' : 'auto'}"
+          decoding="async" />
       </div>
       <div class="ucard__body">
         <h3 class="ucard__name">${p.name}</h3>
@@ -95,6 +98,8 @@ export function initUniverse() {
     if (!featuredProduct) return;
 
     spotlight.root.dataset.cat = featuredProduct.cat;
+    spotlight.img.decoding = 'async';
+    spotlight.img.fetchPriority = 'high';
     spotlight.img.src = productImage(featuredProduct.img);
     spotlight.img.alt = featuredProduct.name;
     spotlight.name.textContent = featuredProduct.name;
@@ -247,6 +252,7 @@ export function initUniverse() {
     if (!p) return;
 
     lastFocus = document.activeElement;
+    els.img.fetchPriority = 'high';
     els.img.src = productImage(p.img);
     els.img.alt = p.name;
     els.name.textContent = p.name;

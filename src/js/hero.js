@@ -1,6 +1,6 @@
 import { reduced } from './core.js';
 
-/** Wait until the light hero clip can start, then dismiss the loader. */
+/** Begin loading the hero clip without holding the first page render hostage. */
 export function preloadHero(onProgress) {
   const video = document.getElementById('heroVideo');
   if (!video) {
@@ -9,31 +9,30 @@ export function preloadHero(onProgress) {
   }
 
   video.pause();
-  video.preload = 'auto';
+  video.preload = 'metadata';
   onProgress?.(0.12);
 
   return new Promise((resolve) => {
     let complete = false;
-    const timeout = window.setTimeout(done, 4000);
+    const timeout = window.setTimeout(done, 650);
 
     function done() {
       if (complete) return;
       complete = true;
       window.clearTimeout(timeout);
       video.removeEventListener('canplay', done);
-      video.removeEventListener('loadeddata', done);
+      video.removeEventListener('loadedmetadata', done);
       video.removeEventListener('error', done);
       onProgress?.(1);
       resolve();
     }
 
-    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
       done();
       return;
     }
 
-    video.addEventListener('canplay', done, { once: true });
-    video.addEventListener('loadeddata', done, { once: true });
+    video.addEventListener('loadedmetadata', done, { once: true });
     video.addEventListener('error', done, { once: true });
     video.load();
   });
