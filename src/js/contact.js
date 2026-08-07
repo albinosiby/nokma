@@ -1,6 +1,6 @@
 import { gsap, reduced } from './core.js';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdenkewy';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjybkqbn';
 
 /** Contact scene: card fade-in plus Formspree-backed enquiry form. */
 export function initContact() {
