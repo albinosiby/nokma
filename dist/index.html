@@ -20,8 +20,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
 
 <link rel="preload" as="image" href="./frames/desktop/f001.webp" />
-  <script type="module" crossorigin src="./assets/index-GvgLZ29V.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BdF8Wd_A.css">
+<link rel="preload" as="video" href="./media/hero-nokma.mp4?v=3" type="video/mp4" />
+  <script type="module" crossorigin src="./assets/index-BnPJ1C_Y.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DXw1AVFC.css">
 </head>
 
 <body class="is-loading">
@@ -44,7 +45,7 @@
           <path d="M31 88 h78 l-10 57 a8 8 0 0 1 -8 7 h-42 a8 8 0 0 1 -8 -7 z" fill="url(#cup)" />
           <ellipse cx="70" cy="89" rx="39" ry="8" fill="#F57B32" />
           <path d="M45 100 l6 38" stroke="#FFB17A" stroke-width="5" stroke-linecap="round" opacity=".42" />
-          <text class="scoop-cup-mark" x="70" y="132" fill="#FFF8E6" text-anchor="middle">N</text>
+          <image class="scoop-cup-mark" href="./products/mascot/pose-01.png" x="46" y="100" width="48" height="48" preserveAspectRatio="xMidYMid meet" />
         </g>
         <g class="scoop-splash" fill="none" stroke="#FFF8E6" stroke-width="5" stroke-linecap="round">
           <path d="M37 91 C24 87 21 77 16 72" />
@@ -76,9 +77,9 @@
 </div>
 
 <!-- ══════════════════ SCROLL COMPANION ══════════════════ -->
-<div class="mascot" id="mascot" aria-hidden="true">
-  <img class="mascot__pose" id="mascotImage" src="./products/mascot/pose-04.png" alt="" width="672" height="900" decoding="async" />
-</div>
+<button class="mascot" id="mascot" type="button" aria-label="Play with Nokma character" data-cursor="link">
+  <img class="mascot__pose" id="mascotImage" src="./products/mascot/pose-04.png" alt="" width="672" height="900" decoding="async" draggable="false" />
+</button>
 
 <!-- ══════════════════ NAV ══════════════════ -->
 <header class="nav" id="nav">
@@ -89,7 +90,7 @@
   <nav class="nav__links" aria-label="Primary">
     <a href="#hero" data-cursor="link" class="is-active">Home</a>
     <a href="#universe" data-cursor="link">Products</a>
-    <a href="#impact" data-cursor="link">Impact</a>
+    <a href="#blog" data-cursor="link">Blog</a>
     <a href="#contact" data-cursor="link">Contact</a>
   </nav>
 
@@ -108,7 +109,7 @@
     <a href="#hero">Home</a>
     <a href="#universe">Products</a>
     <a href="#flavours">Flavours</a>
-    <a href="#impact">Impact</a>
+    <a href="#blog">Blog</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="menu__foot">
@@ -122,12 +123,11 @@
   <!-- ══════════════════ 1 · HERO ══════════════════ -->
   <section class="hero" id="hero">
     <div class="hero__sticky">
-      <div class="hero__stage" id="heroStage">
-        <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-          <source src="./media/hero-nokma.mp4" type="video/mp4" />
+      <div class="hero__stage" id="heroStage" style="background-image:url('./media/hero-poster.jpg?v=3')">
+        <video class="hero__video" id="heroVideo" muted loop playsinline preload="auto" poster="./media/hero-poster.jpg?v=3" aria-hidden="true">
+          <source src="./media/hero-nokma.mp4?v=3" type="video/mp4" />
         </video>
-        <div class="hero__vig" aria-hidden="true"></div>
-        <div class="hero__grain" aria-hidden="true"></div>
+        <img class="hero__brand" src="./img/logo-meghfarm.webp" alt="MeghFarm" width="96" height="30" />
       </div>
 
     </div>
@@ -147,7 +147,6 @@
         <img id="spotlightImg" alt="" />
       </div>
       <div class="spotlight__body">
-        <p class="spotlight__kicker" id="spotlightKicker"></p>
         <h3 class="spotlight__name" id="spotlightName"></h3>
         <p class="spotlight__sizes" id="spotlightSizes"></p>
         <p class="spotlight__blurb" id="spotlightBlurb"></p>
@@ -160,15 +159,21 @@
     <div class="universe__space" id="uniSpace">
       <div class="universe__browse-head">
         <p>Browse by category</p>
-        <span>Select a category, then choose a product format.</span>
+        <span class="universe__browse-hint">Choose a category, then tap a product.</span>
       </div>
       <div class="universe__families" id="uniFamilies" role="tablist" aria-label="Nokma product families"></div>
-      <div class="universe__list-head">
-        <h3 id="uniGroupTitle">Nokma Ice Cream</h3>
-        <span id="uniCount"></span>
+
+      <div class="universe__panel" id="uniPanel" hidden>
+        <div class="universe__list-head">
+          <h3 id="uniGroupTitle">Nokma Ice Cream</h3>
+          <span id="uniCount"></span>
+          <button class="universe__close" id="uniClose" type="button" aria-label="Close product list" data-cursor="link">
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+        <div class="universe__variants" id="uniVariants" role="tablist" aria-label="Product variants"></div>
+        <div class="universe__field" id="uniField"><!-- product cards injected --></div>
       </div>
-      <div class="universe__variants" id="uniVariants" role="tablist" aria-label="Product variants"></div>
-      <div class="universe__field" id="uniField"><!-- product cards injected --></div>
     </div>
 
   </section>
@@ -182,7 +187,6 @@
       </button>
       <div class="pdp__media"><img id="pdpImg" src="" alt="" /></div>
       <div class="pdp__body">
-        <p class="pdp__kicker" id="pdpKicker"></p>
         <h3 class="pdp__name" id="pdpName"></h3>
         <p class="pdp__sizes" id="pdpSizes"></p>
         <p class="pdp__blurb" id="pdpBlurb"></p>
@@ -239,53 +243,48 @@
     <div class="ingr__pipe" id="ingrPipe"><!-- steps injected --></div>
   </section>
 
-  <!-- ══════════════════ 6 · IMPACT ══════════════════ -->
-  <section class="impact" id="impact">
-    <div class="impact__head">
-      <p class="eyebrow" data-reveal>Our Impact</p>
-      <h2 class="h2" data-reveal-words>Transforming agriculture<br />through value addition</h2>
+  <!-- ══════════════════ 6 · BLOG ══════════════════ -->
+  <section class="blog" id="blog">
+    <div class="blog__head">
+      <p class="eyebrow" data-reveal>Blog</p>
+      <h2 class="h2" data-reveal-words>Stories from<br />the Garo Hills</h2>
+      <p class="lede" data-reveal>Notes on value addition, Nokma flavours and the people behind MeghFarm.</p>
     </div>
 
-    <svg class="impact__web" id="impactWeb" aria-hidden="true"><g id="impactLines"></g></svg>
-    <div class="impact__grid" id="impactGrid"><!-- counters injected --></div>
-
-    <div class="impact__pillars">
-      <p class="impact__pillars-t" data-reveal>Impact pillars</p>
-      <ul id="pillarList"></ul>
-    </div>
+    <div class="blog__grid" id="blogGrid"><!-- posts injected --></div>
   </section>
+
+  <!-- blog article modal -->
+  <div class="bpost" id="blogPost" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="blogPostTitle">
+    <div class="bpost__scrim" data-blog-close></div>
+    <article class="bpost__card" id="blogPostCard">
+      <button class="bpost__x" data-blog-close aria-label="Close article" data-cursor="link">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <p class="bpost__meta"><span id="blogPostLabel"></span><span id="blogPostDate"></span></p>
+      <h3 class="bpost__title" id="blogPostTitle"></h3>
+      <div class="bpost__body" id="blogPostBody"></div>
+    </article>
+  </div>
 
   <!-- ══════════════════ 7 · CONTACT ══════════════════ -->
   <section class="contact" id="contact">
-    <div class="contact__sun" aria-hidden="true"></div>
-    <div class="contact__ridge contact__ridge--far" aria-hidden="true"></div>
-    <div class="contact__ridge contact__ridge--mid" aria-hidden="true"></div>
-    <div class="contact__ridge contact__ridge--near" aria-hidden="true"></div>
-
     <div class="contact__inner">
       <div class="contact__card" id="contactCard">
-        <p class="eyebrow">Contact Us</p>
-        <h2 class="h2">Contact MeghFarm</h2>
-
-        <div class="contact__cols">
-          <div class="contact__col">
-            <h4>MeghFarm Processing Hub</h4>
-            <p class="muted">(A Unit of Muktidata Multipurpose Co-Operative Society Ltd.)</p>
-            <address>
-              Khamari, P.O. Hollaidanga<br />
-              Dist — West Garo Hills<br />
-              Meghalaya — 794109
-            </address>
-            <p class="contact__lines">
-              <a href="tel:+919366323755" data-cursor="link">+91 93663 23755</a>
-              <a href="mailto:sales@themeghfarm.com" data-cursor="link">sales@themeghfarm.com</a>
-              <a href="https://www.themeghfarm.com" target="_blank" rel="noopener" data-cursor="link">www.themeghfarm.com</a>
-            </p>
-          </div>
-
+        <div class="contact__intro">
+          <h2 class="h2">Contact Us</h2>
+          <p class="contact__lede">Reach MeghFarm for orders, partnerships and enquiries.</p>
+          <address>
+            MeghFarm Processing Hub<br />
+            Khamari, West Garo Hills, Meghalaya — 794109
+          </address>
+          <p class="contact__lines">
+            <a href="tel:+919366323755" data-cursor="link">+91 93663 23755</a>
+            <a href="mailto:sales@themeghfarm.com" data-cursor="link">sales@themeghfarm.com</a>
+          </p>
         </div>
 
-        <form class="contact__form" id="contactForm" novalidate>
+        <form class="contact__form" id="contactForm" action="https://formspree.io/f/xjybkqbn" method="POST" novalidate>
           <div class="field">
             <input type="text" id="cfName" name="name" required autocomplete="name" placeholder=" " />
             <label for="cfName">Your name</label>
@@ -295,19 +294,8 @@
             <label for="cfEmail">Email address</label>
           </div>
           <div class="field field--full">
-            <select id="cfTopic" name="topic">
-              <option>Distributor Enquiries</option>
-              <option>Retail Partnerships</option>
-              <option>Institutional Supply</option>
-              <option>Bulk Orders</option>
-              <option>Private Label</option>
-              <option>Something else</option>
-            </select>
-            <label for="cfTopic" class="label--static">I’m interested in</label>
-          </div>
-          <div class="field field--full">
-            <textarea id="cfMsg" name="message" rows="3" placeholder=" "></textarea>
-            <label for="cfMsg">Tell us a little more</label>
+            <textarea id="cfMsg" name="message" rows="2" placeholder=" "></textarea>
+            <label for="cfMsg">Message</label>
           </div>
           <button class="btn btn--primary" type="submit" data-ripple data-cursor="link">
             <span>Send enquiry</span>
@@ -331,14 +319,13 @@
         <div>
           <h5>Products</h5>
           <a href="#flavours">Nokma Ice Creams</a>
-          <a href="#universe">Fruit Drinks</a>
-          <a href="#universe">Packaged Water</a>
-          <a href="#universe">Banana Chips</a>
+          <a href="#universe">Beverages</a>
+          <a href="#universe">Chips</a>
           <a href="#universe">Spice Powders</a>
         </div>
         <div>
           <h5>Company</h5>
-          <a href="#impact">Our Impact</a>
+          <a href="#blog">Blog</a>
         </div>
         <div>
           <h5>Connect</h5>
@@ -353,7 +340,24 @@
                 <circle class="is-filled" cx="17.4" cy="6.7" r="1" />
               </svg>
             </a>
-            <a href="https://facebook.com/meghfarm" target="_blank" rel="noopener noreferrer" aria-label="MeghFarm on Facebook" title="Facebook">
+            <a href="https://www.youtube.com/channel/UCzEyIe6w0Qx9X-857GnG5yw" target="_blank" rel="noopener noreferrer" aria-label="Nokma MeghFarm on YouTube" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2.5" y="5.5" width="19" height="13" rx="3.2" />
+                <path class="is-filled" d="M10.2 9.1v5.8l5.2-2.9-5.2-2.9Z" />
+              </svg>
+            </a>
+            <a href="https://x.com/nokma_meghfarm" target="_blank" rel="noopener noreferrer" aria-label="Nokma MeghFarm on X" title="X">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="is-filled" d="M4.2 4.2h4.1l3.7 5.1 4.4-5.1h3.4l-6.1 7.1 6.5 8.4h-4.1l-4.1-5.4-4.9 5.4H3.7l6.5-7.2L4.2 4.2Zm3.1 1.5 9.7 12.6h1.4L8.7 5.7H7.3Z" />
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/nokma-meghfarm-52470541b" target="_blank" rel="noopener noreferrer" aria-label="Nokma MeghFarm on LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="3.2" />
+                <path class="is-filled" d="M7.2 10.1h2.2v6.9H7.2v-6.9Zm1.1-3.5a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6ZM11.1 10.1h2.1v.9h.1c.3-.5 1-1.1 2.1-1.1 2.2 0 2.6 1.5 2.6 3.4v3.7h-2.2v-3.3c0-.8 0-1.8-1.1-1.8s-1.3.9-1.3 1.8v3.3h-2.3v-6.9Z" />
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/share/1aLArppkUU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Nokma MeghFarm on Facebook" title="Facebook">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path class="is-filled" d="M13.7 22v-8.7h2.9l.5-3.4h-3.4V7.7c0-1 .3-1.7 1.7-1.7h1.9V3a25 25 0 0 0-2.7-.2c-2.7 0-4.6 1.7-4.6 4.7v2.4H7v3.4h3V22h3.7Z" />
               </svg>
