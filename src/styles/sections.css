@@ -20,25 +20,6 @@
   object-position: center center;
   display: block;
 }
-.hero__vig {
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(180deg, rgba(5, 25, 14, 0.42) 0%, transparent 28%, transparent 72%, rgba(5, 25, 14, 0.36) 100%),
-    rgba(5, 25, 14, 0.28);
-  pointer-events: none;
-}
-.hero__stage::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: rgba(8, 37, 21, 0.18);
-  pointer-events: none;
-}
-.hero__grain {
-  position: absolute; inset: 0;
-  opacity: 0.06;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-}
 .hero__brand {
   position: absolute;
   right: clamp(1rem, 3vw, 2.25rem);
