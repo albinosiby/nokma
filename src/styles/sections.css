@@ -41,6 +41,24 @@
   pointer-events: none;
   user-select: none;
 }
+
+@media (max-width: 700px) {
+  .hero { min-height: 45svh; }
+  .hero__sticky { height: 45svh; min-height: 280px; }
+  .hero__stage {
+    background-size: cover;
+    background-position: center;
+  }
+  .hero__video {
+    object-fit: cover;
+    object-position: center;
+  }
+  .hero__brand {
+    right: 0.9rem;
+    bottom: 0.9rem;
+    width: 56px;
+  }
+}
 /* ═══════════════════════════════════════════════════════════
    3 · PRODUCT CATALOGUE
    ═══════════════════════════════════════════════════════════ */

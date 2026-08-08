@@ -367,9 +367,16 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
 .nav__burger[aria-expanded='true'] .nav__burger-lines span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 @media (max-width: 900px) {
+  .nav {
+    gap: 0.85rem;
+    padding: 0.75rem 1rem;
+    background: rgba(8, 37, 21, 0.82);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  }
   .nav__links { display: none; }
   .nav__burger { display: grid; }
-  .nav__logo { width: 96px; }
+  .nav__logo { width: 82px; }
 }
 
 /* mobile menu */
