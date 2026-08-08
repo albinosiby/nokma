@@ -392,12 +392,12 @@ svg path, svg circle, svg line { vector-effect: non-scaling-stroke; }
   visibility: visible;
   pointer-events: auto;
 }
-.menu__list { display: flex; flex-direction: column; gap: clamp(0.35rem, 1.4vh, 0.75rem); }
+.menu__list { display: flex; flex-direction: column; gap: clamp(0.25rem, 1vh, 0.5rem); }
 .menu__list a {
   position: relative;
   width: fit-content;
   font-family: var(--f-display);
-  font-size: clamp(1.75rem, min(8vw, 5.4vh), 2.9rem);
+  font-size: clamp(1.45rem, min(5.5vw, 4.3vh), 2rem);
   font-weight: 600;
   line-height: 1.08;
   transition: color 0.3s, transform 0.3s var(--ease-out);
