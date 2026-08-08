@@ -22,8 +22,6 @@ export function initFlavours() {
   const ring = document.getElementById('flavRing');
   const dots = document.getElementById('flavDots');
   const section = document.getElementById('flavours');
-  const previous = document.getElementById('flavPrev');
-  const next = document.getElementById('flavNext');
   if (!ring) return;
 
   const els = {
@@ -42,9 +40,6 @@ export function initFlavours() {
     s.setAttribute('aria-label', `Show ${f.name} ice cream`);
     s.setAttribute('data-cursor', 'link');
     s.innerHTML = `<img src="./products/${ICE_CREAM_MOCKUPS[f.id]}" alt="Nokma ${f.name} ice cream" loading="${i < 3 ? 'eager' : 'lazy'}" decoding="async" />`;
-    s.addEventListener('click', () => {
-      if (i !== active) select(i);
-    });
     s.addEventListener('keydown', (event) => {
       if (!['Enter', ' '].includes(event.key) || i === active) return;
       event.preventDefault();
@@ -173,9 +168,6 @@ export function initFlavours() {
     if (d) select(Number(d.dataset.i));
   });
 
-  previous?.addEventListener('click', () => select(active - 1));
-  next?.addEventListener('click', () => select(active + 1));
-
   section.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') { e.preventDefault(); select(active - 1); }
     if (e.key === 'ArrowRight') { e.preventDefault(); select(active + 1); }
@@ -196,6 +188,16 @@ export function initFlavours() {
   const onUp = () => { down = false; };
 
   ring.addEventListener('pointerdown', (e) => onDown(e.clientX));
+  ring.addEventListener('pointerup', (e) => {
+    if (moved) return;
+    const bounds = ring.getBoundingClientRect();
+    const position = (e.clientX - bounds.left) / bounds.width;
+
+    // The center pack overlaps the side slide hitboxes in 3D. Use stable
+    // left/right tap regions so the pack the visitor sees always wins.
+    if (position < 0.4) select(active - 1);
+    else if (position > 0.6) select(active + 1);
+  });
   window.addEventListener('pointermove', (e) => onMove(e.clientX), { passive: true });
   window.addEventListener('pointerup', onUp);
 

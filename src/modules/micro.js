@@ -74,6 +74,24 @@ export function initReveals() {
     });
   });
 
+  // Collection title: reveal the two lines as a small, deliberate sequence.
+  const collectionTitle = document.querySelector('[data-collection-title]');
+  if (collectionTitle && !reduced) {
+    const lines = collectionTitle.querySelectorAll('.universe__title-line > span');
+    gsap.from(lines, {
+      yPercent: 115,
+      opacity: 0,
+      filter: 'blur(8px)',
+      duration: 1.15,
+      stagger: 0.16,
+      ease: 'expo.out',
+      scrollTrigger: { trigger: collectionTitle, start: 'top 82%', once: true },
+      onComplete() {
+        gsap.set(lines, { clearProps: 'filter' });
+      },
+    });
+  }
+
   // word-by-word headline reveal with a blur lift
   gsap.utils.toArray('[data-reveal-words]').forEach((el) => {
     const split = new SplitText(el, { type: 'lines,words', linesClass: 'rv-line', wordsClass: 'rv-word' });
