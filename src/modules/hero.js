@@ -1,4 +1,5 @@
 import { reduced } from './core.js';
+import { cacheMediaAsset } from './media-cache.js';
 
 /** Load the full hero clip and report its real buffered progress to the loader. */
 export function preloadHero(onProgress) {
@@ -15,7 +16,7 @@ export function preloadHero(onProgress) {
   return new Promise((resolve) => {
     let complete = false;
 
-    function done() {
+    async function done() {
       if (complete) return;
       complete = true;
       video.removeEventListener('progress', updateProgress);
@@ -24,6 +25,7 @@ export function preloadHero(onProgress) {
       video.removeEventListener('suspend', updateProgress);
       video.removeEventListener('error', done);
       onProgress?.(1);
+      await cacheMediaAsset(video.currentSrc);
       resolve();
     }
 

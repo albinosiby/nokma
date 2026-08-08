@@ -11,6 +11,7 @@ import { initFlavours } from './modules/flavours.js';
 import { initIngredients } from './modules/ingredients.js';
 import { initMascot } from './modules/mascot.js';
 import { initContact, initFooter } from './modules/contact.js';
+import { warmAssets } from './modules/warmup.js';
 
 /** Build every scene once the hero video is ready. */
 function buildScenes() {
@@ -50,6 +51,8 @@ async function boot() {
   loader.setProgress(0.97);
 
   await loader.finish();
+
+  warmAssets();
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
 }
