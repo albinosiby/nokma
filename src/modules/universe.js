@@ -29,7 +29,7 @@ const FAMILIES = [
     id: 'chips',
     label: 'Nokma Chips',
     note: '2 crunchy styles',
-    img: 'chips/chips-crispy',
+    imgs: ['chips/chips-crispy', 'chips/chips-plain'],
     variants: [
       { id: 'crispy', label: 'Crispy', match: (p) => p.id === 'chips-crispy' },
       { id: 'plain', label: 'Plain', match: (p) => p.id === 'chips-plain' },
@@ -89,10 +89,6 @@ export function initUniverse() {
     name: document.getElementById('spotlightName'),
     sizes: document.getElementById('spotlightSizes'),
     details: document.getElementById('spotlightDetails'),
-    blurb: document.getElementById('spotlightBlurb'),
-    flavours: document.getElementById('spotlightFlavours'),
-    index: document.getElementById('spotlightIndex'),
-    frameLabel: document.getElementById('spotlightFrameLabel'),
     previous: document.getElementById('spotlightPrev'),
     next: document.getElementById('spotlightNext'),
   };
@@ -113,7 +109,6 @@ export function initUniverse() {
       card.classList.toggle('is-active', active);
       card.setAttribute('aria-hidden', String(!active));
     });
-    spotlight.frameLabel.textContent = `${String(monthlyFrameIndex + 1).padStart(2, '0')} / ${String(monthlyCards.length).padStart(2, '0')}`;
   }
 
   function renderSpotlight(animate = false) {
@@ -129,9 +124,6 @@ export function initUniverse() {
       spotlight.name.textContent = featuredProduct.name;
       spotlight.sizes.textContent = featuredProduct.sizes;
       spotlight.details.textContent = featuredProduct.blurb;
-      spotlight.blurb.textContent = featuredProduct.blurb;
-      spotlight.flavours.textContent = featuredProduct.flavours;
-      spotlight.index.textContent = `${String(monthlyIndex + 1).padStart(2, '0')} / ${String(monthlyPicks.length).padStart(2, '0')}`;
     };
 
     const frames = spotlight.root.querySelectorAll('.monthly-card__inner');
@@ -205,7 +197,9 @@ export function initUniverse() {
     familyBar.innerHTML = FAMILIES.map((family) => `
       <button class="ufamily${activeFamily && family.id === activeFamily.id ? ' is-on' : ''}" type="button" role="tab"
         aria-selected="${Boolean(activeFamily && family.id === activeFamily.id)}" data-family="${family.id}" data-cursor="link">
-        <span class="ufamily__media"><img src="${productImage(family.img)}" alt="" loading="lazy" decoding="async" /></span>
+        <span class="ufamily__media${family.imgs ? ' ufamily__media--duo' : ''}">
+          ${(family.imgs ?? [family.img]).map((image) => `<img src="${productImage(image)}" alt="" loading="lazy" decoding="async" />`).join('')}
+        </span>
         <span class="ufamily__copy">
           <span class="ufamily__label">${family.label}</span>
           <small>${family.note}</small>

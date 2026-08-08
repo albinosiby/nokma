@@ -27,8 +27,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
 
 <link rel="preload" as="image" href="./media/hero-poster.png?v=10" fetchpriority="high" />
-  <script type="module" crossorigin src="./assets/index-ChdNPnDO.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-pfUh4CMI.css">
+  <script type="module" crossorigin src="./assets/index-CJsTFmXb.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BIbW9pya.css">
 </head>
 
 <body class="is-loading">
@@ -115,7 +115,6 @@
       <article class="monthly-card monthly-card--product">
         <div class="monthly-card__inner">
           <p class="monthly__eyebrow">Monthly product</p>
-          <span class="monthly__index" id="spotlightIndex">01 / 03</span>
           <img id="spotlightImg" alt="" />
           <h3 class="monthly__product-name" id="spotlightProductName"></h3>
           <div class="monthly__steps" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -124,7 +123,6 @@
       <article class="monthly-card monthly-card--details">
         <div class="monthly-card__inner">
           <p class="monthly__eyebrow">The ice cream</p>
-          <p class="monthly__card-number" aria-hidden="true">01</p>
           <h3 class="monthly__name" id="spotlightName"></h3>
           <p class="monthly__sizes" id="spotlightSizes"></p>
           <p class="monthly__detail" id="spotlightDetails"></p>
@@ -133,19 +131,19 @@
       </article>
       <article class="monthly-card monthly-card--notes">
         <div class="monthly-card__inner">
-          <p class="monthly__eyebrow">Nokma notes</p>
-          <p class="monthly__card-number" aria-hidden="true">02</p>
-          <p class="monthly__blurb" id="spotlightBlurb"></p>
-          <div class="monthly__note-row">
-            <span>Flavour profile</span>
-            <p id="spotlightFlavours"></p>
-          </div>
+          <p class="monthly__eyebrow">Jackfruit ice cream</p>
+          <h3 class="monthly__nutrition-title">Nutrition information</h3>
+          <p class="monthly__blurb">A creamy Jackfruit Family Tub, made for sharing and served frozen.</p>
+          <dl class="monthly__nutrition-list">
+            <div><dt>Energy, protein, carbohydrate and fat</dt><dd>See the product pack</dd></div>
+            <div><dt>Serving format</dt><dd>750 ML / 1000 ML</dd></div>
+            <div><dt>Storage</dt><dd>Keep frozen at -18 C or below</dd></div>
+          </dl>
           <div class="monthly__steps" aria-hidden="true"><span></span><span></span><span></span></div>
         </div>
       </article>
       <div class="monthly__controls" role="group" aria-label="Featured product cards">
         <button id="spotlightPrev" type="button" aria-label="Show previous featured card" title="Previous card">&#8592;</button>
-        <span id="spotlightFrameLabel" aria-live="polite">01 / 03</span>
         <button id="spotlightNext" type="button" aria-label="Show next featured card" title="Next card">&#8594;</button>
       </div>
     </div>
@@ -202,7 +200,9 @@
     </div>
 
     <div class="flav__stage">
+      <button class="flav__arrow flav__arrow--prev" id="flavPrev" type="button" aria-label="Show previous ice cream flavour" title="Previous flavour">&#8592;</button>
       <div class="flav__ring" id="flavRing"><!-- flavour slides injected --></div>
+      <button class="flav__arrow flav__arrow--next" id="flavNext" type="button" aria-label="Show next ice cream flavour" title="Next flavour">&#8594;</button>
 
     </div>
 

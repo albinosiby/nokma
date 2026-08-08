@@ -22,6 +22,8 @@ export function initFlavours() {
   const ring = document.getElementById('flavRing');
   const dots = document.getElementById('flavDots');
   const section = document.getElementById('flavours');
+  const previous = document.getElementById('flavPrev');
+  const next = document.getElementById('flavNext');
   if (!ring) return;
 
   const els = {
@@ -171,6 +173,9 @@ export function initFlavours() {
     if (d) select(Number(d.dataset.i));
   });
 
+  previous?.addEventListener('click', () => select(active - 1));
+  next?.addEventListener('click', () => select(active + 1));
+
   section.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') { e.preventDefault(); select(active - 1); }
     if (e.key === 'ArrowRight') { e.preventDefault(); select(active + 1); }
@@ -199,14 +204,20 @@ export function initFlavours() {
   ring.addEventListener('touchend', onUp);
 
   let wheelLocked = false;
+  let wheelRelease = null;
   ring.addEventListener('wheel', (e) => {
     const direction = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
-    if (!direction || wheelLocked) return;
+    if (!direction) return;
 
     e.preventDefault();
-    wheelLocked = true;
-    select(active + (direction > 0 ? 1 : -1));
-    window.setTimeout(() => { wheelLocked = false; }, 650);
+    window.clearTimeout(wheelRelease);
+    if (!wheelLocked) {
+      wheelLocked = true;
+      select(active + (direction > 0 ? 1 : -1));
+    }
+    // Trackpads emit a burst of wheel events for one gesture. Unlock only
+    // after that gesture goes quiet so it cannot skip a flavour.
+    wheelRelease = window.setTimeout(() => { wheelLocked = false; }, 240);
   }, { passive: false });
 
   /* ── parallax tilt of the whole ring ──────────────────── */
