@@ -1,8 +1,10 @@
 import { reduced } from './core.js';
-import { cacheMediaAsset } from './media-cache.js';
+import { cachedMediaUrl, cacheMediaAsset } from './media-cache.js';
+
+const FULL_HERO_SOURCE = './media/hero-nokma-full.mp4?v=1';
 
 /** Load the full hero clip and report its real buffered progress to the loader. */
-export function preloadHero(onProgress) {
+export async function preloadHero(onProgress) {
   const video = document.getElementById('heroVideo');
   if (!video || reduced) {
     onProgress?.(1);
@@ -11,6 +13,17 @@ export function preloadHero(onProgress) {
 
   video.pause();
   video.preload = 'auto';
+  video.dataset.mediaSource = video.querySelector('source')?.src || video.currentSrc;
+
+  const cachedFullVideo = await cachedMediaUrl(FULL_HERO_SOURCE);
+  if (cachedFullVideo) {
+    video.src = cachedFullVideo;
+    video.dataset.mediaSource = FULL_HERO_SOURCE;
+  } else {
+    // Start the full-quality download now, but never hold up first paint for it.
+    void cacheMediaAsset(FULL_HERO_SOURCE);
+  }
+
   onProgress?.(0);
 
   return new Promise((resolve) => {
@@ -25,7 +38,7 @@ export function preloadHero(onProgress) {
       video.removeEventListener('suspend', updateProgress);
       video.removeEventListener('error', done);
       onProgress?.(1);
-      await cacheMediaAsset(video.currentSrc);
+      await cacheMediaAsset(video.dataset.mediaSource);
       resolve();
     }
 

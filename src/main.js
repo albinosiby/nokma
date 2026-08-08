@@ -11,6 +11,7 @@ import { initFlavours } from './modules/flavours.js';
 import { initIngredients } from './modules/ingredients.js';
 import { initMascot } from './modules/mascot.js';
 import { initContact, initFooter } from './modules/contact.js';
+import { initBlog } from './modules/blog.js';
 import { warmAssets } from './modules/warmup.js';
 
 /** Build every scene once the hero video is ready. */
@@ -25,6 +26,7 @@ function buildScenes() {
   initUniverse();
   initFlavours();
   initIngredients();
+  initBlog();
   initContact();
   initFooter();
 

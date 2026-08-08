@@ -1,5 +1,4 @@
 import { FLAVOURS, UNIVERSE } from '../data/catalogue.js';
-import { cacheMediaAsset } from './media-cache.js';
 
 const productImage = (image) => `./products/${image.includes('.') ? image : `${image}.webp`}`;
 
@@ -43,10 +42,5 @@ export function warmAssets() {
     }
   }
 
-  idle(() => {
-    loadNext();
-    window.setTimeout(() => {
-      void cacheMediaAsset('./media/hero-nokma-full.mp4?v=1');
-    }, 1000);
-  });
+  idle(loadNext);
 }
