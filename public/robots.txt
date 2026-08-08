@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nokma.onrender.com/sitemap.xml
