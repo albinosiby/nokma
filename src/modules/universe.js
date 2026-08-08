@@ -85,26 +85,103 @@ export function initUniverse() {
   const spotlight = {
     root: document.getElementById('uniSpotlight'),
     img: document.getElementById('spotlightImg'),
+    productName: document.getElementById('spotlightProductName'),
     name: document.getElementById('spotlightName'),
     sizes: document.getElementById('spotlightSizes'),
+    details: document.getElementById('spotlightDetails'),
     blurb: document.getElementById('spotlightBlurb'),
-    button: document.getElementById('spotlightButton'),
+    flavours: document.getElementById('spotlightFlavours'),
+    index: document.getElementById('spotlightIndex'),
+    frameLabel: document.getElementById('spotlightFrameLabel'),
+    previous: document.getElementById('spotlightPrev'),
+    next: document.getElementById('spotlightNext'),
   };
-  const featuredId = 'family-tub';
-  const featuredProduct = UNIVERSE.find((product) => product.id === featuredId);
-  let activeId = featuredId;
+  const monthlyPickIds = ['family-tub'];
+  const monthlyPicks = monthlyPickIds.map((id) => UNIVERSE.find((product) => product.id === id)).filter(Boolean);
+  let monthlyIndex = 0;
+  let monthlyFrameIndex = 0;
+  let featuredProduct = monthlyPicks[monthlyIndex] || UNIVERSE[0];
+  let activeId = featuredProduct?.id;
 
-  function renderSpotlight() {
+  const monthlyCards = [...spotlight.root.querySelectorAll('.monthly-card')];
+
+  function setMonthlyFrame(index) {
+    if (!monthlyCards.length) return;
+    monthlyFrameIndex = index % monthlyCards.length;
+    monthlyCards.forEach((card, cardIndex) => {
+      const active = cardIndex === monthlyFrameIndex;
+      card.classList.toggle('is-active', active);
+      card.setAttribute('aria-hidden', String(!active));
+    });
+    spotlight.frameLabel.textContent = `${String(monthlyFrameIndex + 1).padStart(2, '0')} / ${String(monthlyCards.length).padStart(2, '0')}`;
+  }
+
+  function renderSpotlight(animate = false) {
     if (!featuredProduct) return;
 
-    spotlight.root.dataset.cat = featuredProduct.cat;
-    spotlight.img.decoding = 'async';
-    spotlight.img.fetchPriority = 'high';
-    spotlight.img.src = productImage(featuredProduct.img);
-    spotlight.img.alt = featuredProduct.name;
-    spotlight.name.textContent = featuredProduct.name;
-    spotlight.sizes.textContent = featuredProduct.sizes;
-    spotlight.blurb.textContent = featuredProduct.blurb;
+    const update = () => {
+      spotlight.root.dataset.cat = featuredProduct.cat;
+      spotlight.img.decoding = 'async';
+      spotlight.img.fetchPriority = 'high';
+      spotlight.img.src = productImage(featuredProduct.img);
+      spotlight.img.alt = featuredProduct.name;
+      spotlight.productName.textContent = featuredProduct.name;
+      spotlight.name.textContent = featuredProduct.name;
+      spotlight.sizes.textContent = featuredProduct.sizes;
+      spotlight.details.textContent = featuredProduct.blurb;
+      spotlight.blurb.textContent = featuredProduct.blurb;
+      spotlight.flavours.textContent = featuredProduct.flavours;
+      spotlight.index.textContent = `${String(monthlyIndex + 1).padStart(2, '0')} / ${String(monthlyPicks.length).padStart(2, '0')}`;
+    };
+
+    const frames = spotlight.root.querySelectorAll('.monthly-card__inner');
+    if (!animate || reduced) { update(); return; }
+
+    gsap.to(frames, {
+      opacity: 0,
+      y: -18,
+      scale: 0.985,
+      duration: 0.24,
+      stagger: 0.055,
+      ease: 'power2.in',
+      onComplete: () => {
+        update();
+        gsap.fromTo(frames, { opacity: 0, y: 22, scale: 0.985 }, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.58,
+          stagger: 0.08,
+          ease: 'power3.out',
+        });
+      },
+    });
+  }
+
+  function rotateMonthlyPick() {
+    if (monthlyPicks.length < 2) return;
+    monthlyIndex = (monthlyIndex + 1) % monthlyPicks.length;
+    featuredProduct = monthlyPicks[monthlyIndex];
+    renderSpotlight(false);
+  }
+
+  function changeMonthlyFrame(direction) {
+    const nextFrame = monthlyFrameIndex + direction;
+    if (nextFrame >= monthlyCards.length) {
+      rotateMonthlyPick();
+      setMonthlyFrame(0);
+      return;
+    }
+    if (nextFrame < 0) {
+      if (monthlyPicks.length > 1) {
+        monthlyIndex = (monthlyIndex - 1 + monthlyPicks.length) % monthlyPicks.length;
+        featuredProduct = monthlyPicks[monthlyIndex];
+        renderSpotlight(false);
+      }
+      setMonthlyFrame(monthlyCards.length - 1);
+      return;
+    }
+    setMonthlyFrame(nextFrame);
   }
 
   function highlight(id) {
@@ -185,15 +262,12 @@ export function initUniverse() {
     ScrollTrigger.refresh();
   }
 
-  familyBar.addEventListener('click', (e) => {
-    const button = e.target.closest('.ufamily');
-    if (!button) return;
-
-    const picked = FAMILIES.find((family) => family.id === button.dataset.family);
+  function selectFamily(familyId, { allowToggle = false, scroll = true } = {}) {
+    const picked = FAMILIES.find((family) => family.id === familyId);
     if (!picked) return;
 
     // tapping the open category again collapses the list
-    if (activeFamily && picked.id === activeFamily.id) { closePanel(); return; }
+    if (allowToggle && activeFamily && picked.id === activeFamily.id) { closePanel(); return; }
 
     const wasClosed = panel.hidden;
     activeFamily = picked;
@@ -202,6 +276,7 @@ export function initUniverse() {
     renderVariants();
     showVariant();
     if (wasClosed) openPanel();
+    if (!scroll) return;
 
     // On mobile, keep the compact category strip in view; otherwise scroll to products.
     const mobile = window.matchMedia('(max-width: 700px)').matches;
@@ -217,6 +292,16 @@ export function initUniverse() {
         selected?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
       });
     }
+  }
+
+  familyBar.addEventListener('click', (e) => {
+    const button = e.target.closest('.ufamily');
+    if (!button) return;
+    selectFamily(button.dataset.family, { allowToggle: true });
+  });
+
+  window.addEventListener('nokma:open-family', (event) => {
+    selectFamily(event.detail?.family);
   });
 
   panelClose.addEventListener('click', closePanel);
@@ -232,6 +317,32 @@ export function initUniverse() {
 
   renderFamilies();
   renderSpotlight();
+  setMonthlyFrame(0);
+
+  let monthlyTimer = null;
+  const startMonthlyTimer = () => {
+    if (reduced || monthlyCards.length < 2) return;
+    window.clearInterval(monthlyTimer);
+    monthlyTimer = window.setInterval(() => changeMonthlyFrame(1), 4200);
+  };
+  const stopMonthlyTimer = () => window.clearInterval(monthlyTimer);
+
+  if (!reduced && monthlyCards.length > 1) {
+    startMonthlyTimer();
+    spotlight.root.addEventListener('pointerenter', stopMonthlyTimer);
+    spotlight.root.addEventListener('pointerleave', () => {
+      startMonthlyTimer();
+    });
+  }
+
+  spotlight.previous.addEventListener('click', () => {
+    changeMonthlyFrame(-1);
+    startMonthlyTimer();
+  });
+  spotlight.next.addEventListener('click', () => {
+    changeMonthlyFrame(1);
+    startMonthlyTimer();
+  });
 
   /* ── detail modal ─────────────────────────────────────── */
   const pdp = document.getElementById('pdp');
@@ -289,8 +400,6 @@ export function initUniverse() {
     document.body.style.overflow = '';
     lastFocus?.focus?.();
   }
-
-  spotlight.button.addEventListener('click', () => open(featuredId));
 
   field.addEventListener('click', (e) => {
     const productCard = e.target.closest('.ucard');

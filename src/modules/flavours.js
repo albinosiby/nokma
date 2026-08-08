@@ -29,7 +29,6 @@ export function initFlavours() {
     sub: document.getElementById('flavSub'),
     note: document.getElementById('flavNote'),
     formats: document.getElementById('flavFormats'),
-    melt: document.getElementById('meltPath'),
   };
 
   /* ── build slides + dots ──────────────────────────────── */
@@ -37,7 +36,18 @@ export function initFlavours() {
     const s = document.createElement('div');
     s.className = 'fslide';
     s.dataset.i = i;
+    s.setAttribute('role', 'button');
+    s.setAttribute('aria-label', `Show ${f.name} ice cream`);
+    s.setAttribute('data-cursor', 'link');
     s.innerHTML = `<img src="./products/${ICE_CREAM_MOCKUPS[f.id]}" alt="Nokma ${f.name} ice cream" loading="${i < 3 ? 'eager' : 'lazy'}" decoding="async" />`;
+    s.addEventListener('click', () => {
+      if (i !== active) select(i);
+    });
+    s.addEventListener('keydown', (event) => {
+      if (!['Enter', ' '].includes(event.key) || i === active) return;
+      event.preventDefault();
+      select(i);
+    });
     ring.appendChild(s);
 
     const d = document.createElement('button');
@@ -56,41 +66,6 @@ export function initFlavours() {
 
   let active = 0;
   let spin = null;
-
-  /* ── melting drip path ────────────────────────────────── */
-  function meltPath(t) {
-    // t 0..1 — how far the drips have run
-    const W = 600;
-    const base = 34;
-    const drops = [
-      { x: 96, d: 30 }, { x: 198, d: 56 }, { x: 300, d: 74 },
-      { x: 402, d: 48 }, { x: 504, d: 26 },
-    ];
-    let d = `M0 ${base} `;
-    drops.forEach((p, i) => {
-      const prev = i === 0 ? 0 : drops[i - 1].x;
-      const mid = (prev + p.x) / 2;
-      // fingers of cream rise out of the pool towards the tub
-      const peak = base - p.d * t;
-      d += `Q ${mid} ${base + 7} ${p.x - 24} ${base} `;
-      d += `C ${p.x - 14} ${peak} ${p.x + 14} ${peak} ${p.x + 24} ${base} `;
-    });
-    d += `Q ${(drops[drops.length - 1].x + W) / 2} ${base + 7} ${W} ${base} L ${W} 120 L 0 120 Z`;
-    return d;
-  }
-
-  els.melt.setAttribute('d', meltPath(0.15));
-
-  if (!reduced) {
-    gsap.to({ t: 0.12 }, {
-      t: 1,
-      duration: 3.4,
-      ease: 'sine.inOut',
-      yoyo: true,
-      repeat: -1,
-      onUpdate() { els.melt.setAttribute('d', meltPath(this.targets()[0].t)); },
-    });
-  }
 
   /* ── layout the ring around the active slide ──────────── */
   function place(instant = false) {
@@ -118,6 +93,7 @@ export function initFlavours() {
 
       gsap.to(s, target);
       s.style.pointerEvents = visible ? 'auto' : 'none';
+      s.tabIndex = visible ? 0 : -1;
       s.classList.toggle('is-active', abs === 0);
       s.querySelector('img').style.filter =
         abs === 0
@@ -189,18 +165,10 @@ export function initFlavours() {
     }
   }
 
-  /* ── controls ─────────────────────────────────────────── */
-  document.getElementById('flavPrev').addEventListener('click', () => select(active - 1));
-  document.getElementById('flavNext').addEventListener('click', () => select(active + 1));
-
+  /* ── direct pack selection ────────────────────────────── */
   dots.addEventListener('click', (e) => {
     const d = e.target.closest('.fdot');
     if (d) select(Number(d.dataset.i));
-  });
-
-  ring.addEventListener('click', (e) => {
-    const s = e.target.closest('.fslide');
-    if (s && !s.classList.contains('is-active')) select(Number(s.dataset.i));
   });
 
   section.addEventListener('keydown', (e) => {
@@ -229,6 +197,17 @@ export function initFlavours() {
   ring.addEventListener('touchstart', (e) => onDown(e.touches[0].clientX), { passive: true });
   ring.addEventListener('touchmove', (e) => onMove(e.touches[0].clientX), { passive: true });
   ring.addEventListener('touchend', onUp);
+
+  let wheelLocked = false;
+  ring.addEventListener('wheel', (e) => {
+    const direction = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
+    if (!direction || wheelLocked) return;
+
+    e.preventDefault();
+    wheelLocked = true;
+    select(active + (direction > 0 ? 1 : -1));
+    window.setTimeout(() => { wheelLocked = false; }, 650);
+  }, { passive: false });
 
   /* ── parallax tilt of the whole ring ──────────────────── */
   if (!isTouch && !reduced) {

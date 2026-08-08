@@ -52,7 +52,7 @@
 <!-- ══════════════════ NAV ══════════════════ -->
 <header class="nav" id="nav">
   <a class="nav__brand" href="#hero" data-cursor="link" aria-label="Nokma by MeghFarm — home">
-    <img src="./brand/logo-nokma-primary.png" alt="Nokma" class="nav__logo" width="856" height="580" />
+    <img src="./brand/logo-nokma-header.png" alt="Nokma" class="nav__logo" width="2550" height="1585" />
   </a>
 
   <nav class="nav__links" aria-label="Primary">
@@ -105,22 +105,46 @@
   <section class="universe" id="universe">
     <div class="universe__head">
       <p class="eyebrow" data-reveal>The Collection</p>
-      <h2 class="h2" data-reveal-words>A complete range,<br />made in Meghalaya</h2>
+      <h2 class="h2" data-reveal-words>No Drama,<br />Just Nokma</h2>
       <p class="lede" data-reveal>A wide variety of Nokma ice cream, beverages, chips and spices. Explore a product family to view its variants.</p>
     </div>
 
-    <div class="universe__spotlight" id="uniSpotlight" aria-live="polite">
-      <div class="spotlight__media">
-        <span class="spotlight__badge">Featured product</span>
-        <img id="spotlightImg" alt="" />
-      </div>
-      <div class="spotlight__body">
-        <h3 class="spotlight__name" id="spotlightName"></h3>
-        <p class="spotlight__sizes" id="spotlightSizes"></p>
-        <p class="spotlight__blurb" id="spotlightBlurb"></p>
-        <button class="spotlight__button" id="spotlightButton" type="button" data-cursor="product" data-cursor-label="Open">
-          <span>View product details</span><span aria-hidden="true">→</span>
-        </button>
+    <div class="universe__monthly" id="uniSpotlight" aria-live="polite">
+      <article class="monthly-card monthly-card--product">
+        <div class="monthly-card__inner">
+          <p class="monthly__eyebrow">Monthly product</p>
+          <span class="monthly__index" id="spotlightIndex">01 / 03</span>
+          <img id="spotlightImg" alt="" />
+          <h3 class="monthly__product-name" id="spotlightProductName"></h3>
+          <div class="monthly__steps" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+      </article>
+      <article class="monthly-card monthly-card--details">
+        <div class="monthly-card__inner">
+          <p class="monthly__eyebrow">The ice cream</p>
+          <p class="monthly__card-number" aria-hidden="true">01</p>
+          <h3 class="monthly__name" id="spotlightName"></h3>
+          <p class="monthly__sizes" id="spotlightSizes"></p>
+          <p class="monthly__detail" id="spotlightDetails"></p>
+          <div class="monthly__steps" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+      </article>
+      <article class="monthly-card monthly-card--notes">
+        <div class="monthly-card__inner">
+          <p class="monthly__eyebrow">Nokma notes</p>
+          <p class="monthly__card-number" aria-hidden="true">02</p>
+          <p class="monthly__blurb" id="spotlightBlurb"></p>
+          <div class="monthly__note-row">
+            <span>Flavour profile</span>
+            <p id="spotlightFlavours"></p>
+          </div>
+          <div class="monthly__steps" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+      </article>
+      <div class="monthly__controls" role="group" aria-label="Featured product cards">
+        <button id="spotlightPrev" type="button" aria-label="Show previous featured card" title="Previous card">&#8592;</button>
+        <span id="spotlightFrameLabel" aria-live="polite">01 / 03</span>
+        <button id="spotlightNext" type="button" aria-label="Show next featured card" title="Next card">&#8594;</button>
       </div>
     </div>
 
@@ -176,19 +200,8 @@
     </div>
 
     <div class="flav__stage">
-      <button class="flav__nav flav__nav--prev" id="flavPrev" aria-label="Previous flavour" data-cursor="link">
-        <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
-      </button>
-
       <div class="flav__ring" id="flavRing"><!-- flavour slides injected --></div>
 
-      <button class="flav__nav flav__nav--next" id="flavNext" aria-label="Next flavour" data-cursor="link">
-        <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
-
-      <svg class="flav__melt" id="flavMelt" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
-        <path id="meltPath" d="" />
-      </svg>
     </div>
 
     <div class="flav__meta">
@@ -245,7 +258,7 @@
             Khamari, West Garo Hills, Meghalaya — 794109
           </address>
           <p class="contact__lines">
-            <a href="tel:+919366323755" data-cursor="link">+91 93663 23755</a>
+            <a href="https://wa.me/919366323755" target="_blank" rel="noopener noreferrer" data-cursor="link">+91 93663 23755</a>
             <a href="mailto:customercare@themeghfarm.com" data-cursor="link">customercare@themeghfarm.com</a>
           </p>
         </div>
@@ -285,15 +298,15 @@
         <div>
           <h5>Products</h5>
           <a href="#flavours">Nokma Ice Creams</a>
-          <a href="#universe">Beverages</a>
-          <a href="#universe">Chips</a>
-          <a href="#universe">Spice Powders</a>
+          <a href="#universe" data-open-family="drinks">Beverages</a>
+          <a href="#universe" data-open-family="chips">Chips</a>
+          <a href="#universe" data-open-family="spices">Spice Powders</a>
         </div>
         <div>
           <h5>Connect</h5>
           <a href="mailto:sales@themeghfarm.com">sales@themeghfarm.com</a>
           <a href="mailto:customercare@themeghfarm.com">customercare@themeghfarm.com</a>
-          <a href="tel:+919366323755">+91 93663 23755</a>
+          <a href="https://wa.me/919366323755" target="_blank" rel="noopener noreferrer">+91 93663 23755</a>
           <div class="foot__socials" aria-label="Social media">
             <a href="https://instagram.com/nokma_meghfarm" target="_blank" rel="noopener noreferrer" aria-label="Nokma MeghFarm on Instagram" title="Instagram">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -332,7 +345,7 @@
     <div class="foot__support">
       <img src="./brand/logo-muktidata.webp" alt="Muktidata Multipurpose Co-operative Society Ltd." height="64" />
       <img src="./brand/logo-meghfarm.webp" alt="MeghFarm" height="64" />
-      <img src="./brand/logo-collectives.webp" alt="The Collectives" height="64" />
+      <img class="foot__collectives" src="./brand/logo-collectives.webp" alt="The Collectives" height="64" />
       <p>
         MeghFarm’s growth journey is supported through the enabling ecosystem created by the
         Government of Meghalaya, with support and collaboration through the Meghalaya Basin

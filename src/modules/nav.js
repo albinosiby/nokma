@@ -85,12 +85,21 @@ export function initNav() {
     // pinned sections must land at their very top; everything else clears the nav
     const pinned = ['hero', 'factory'].includes(target.id);
     const opts = { offset: pinned ? 0 : -72 };
+    const openFamily = () => {
+      const family = a.dataset.openFamily;
+      if (!family) return;
+      window.dispatchEvent(new CustomEvent('nokma:open-family', { detail: { family } }));
+    };
 
     if (menu.classList.contains('is-open')) {
       closeMenu();
-      setTimeout(() => scrollTo(target, opts), 380);
+      setTimeout(() => {
+        scrollTo(target, opts);
+        openFamily();
+      }, 380);
     } else {
       scrollTo(target, opts);
+      openFamily();
     }
   });
 

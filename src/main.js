@@ -3,7 +3,7 @@ import './styles/sections.css';
 
 import { ScrollTrigger, initSmoothScroll } from './modules/core.js';
 import { runLoader } from './modules/loader.js';
-import { preloadHero, initHero } from './modules/hero.js';
+import { preloadHero, initHero, cacheFullHeroWhenReady } from './modules/hero.js';
 import { initNav } from './modules/nav.js';
 import { initRipples, initMagnetic, initReveals } from './modules/micro.js';
 import { initUniverse } from './modules/universe.js';
@@ -20,7 +20,7 @@ function buildScenes() {
 
   initNav();
   initRipples();
-  initMagnetic('.icon-btn, .flav__nav', 0.3);
+  initMagnetic('.icon-btn', 0.3);
 
   initHero();
   initUniverse();
@@ -55,6 +55,7 @@ async function boot() {
   await loader.finish();
 
   warmAssets();
+  cacheFullHeroWhenReady();
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
 }

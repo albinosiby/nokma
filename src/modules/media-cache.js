@@ -15,18 +15,3 @@ export async function cacheMediaAsset(source) {
     // Cache storage is optional; normal browser caching still applies.
   }
 }
-
-/** Return a local object URL only when the complete media file is already cached. */
-export async function cachedMediaUrl(source) {
-  if (!source || !('caches' in window)) return null;
-
-  try {
-    const request = new Request(new URL(source, window.location.href).href);
-    const response = await (await caches.open(MEDIA_CACHE)).match(request);
-    if (!response) return null;
-
-    return URL.createObjectURL(await response.blob());
-  } catch {
-    return null;
-  }
-}
