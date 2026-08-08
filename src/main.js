@@ -40,10 +40,10 @@ async function boot() {
   // Fonts first: SplitText must measure final glyphs, not fallbacks.
   const fonts = document.fonts?.ready ?? Promise.resolve();
 
-  // The hero video drives 85% of progress; font readiness takes the rest.
+  // Keep the loading screen active until the whole hero video is buffered.
   await Promise.all([
-    preloadHero((p) => loader.setProgress(p * 0.85)),
-    fonts.then(() => loader.setProgress(0.88)),
+    preloadHero((p) => loader.setProgress(p * 0.97)),
+    fonts,
   ]);
 
   buildScenes();

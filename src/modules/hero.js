@@ -1,40 +1,51 @@
 import { reduced } from './core.js';
 
-/** Begin loading the hero clip without holding the first page render hostage. */
+/** Load the full hero clip and report its real buffered progress to the loader. */
 export function preloadHero(onProgress) {
   const video = document.getElementById('heroVideo');
-  if (!video) {
+  if (!video || reduced) {
     onProgress?.(1);
     return Promise.resolve();
   }
 
   video.pause();
-  video.preload = 'metadata';
-  onProgress?.(0.12);
+  video.preload = 'auto';
+  onProgress?.(0);
 
   return new Promise((resolve) => {
     let complete = false;
-    const timeout = window.setTimeout(done, 650);
 
     function done() {
       if (complete) return;
       complete = true;
-      window.clearTimeout(timeout);
-      video.removeEventListener('canplay', done);
-      video.removeEventListener('loadedmetadata', done);
+      video.removeEventListener('progress', updateProgress);
+      video.removeEventListener('loadedmetadata', updateProgress);
+      video.removeEventListener('canplaythrough', updateProgress);
+      video.removeEventListener('suspend', updateProgress);
       video.removeEventListener('error', done);
       onProgress?.(1);
       resolve();
     }
 
-    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      done();
-      return;
+    function updateProgress() {
+      const duration = video.duration;
+      const ranges = video.buffered;
+      const end = ranges.length ? ranges.end(ranges.length - 1) : 0;
+      const progress = Number.isFinite(duration) && duration > 0
+        ? Math.min(end / duration, 1)
+        : 0;
+
+      onProgress?.(progress);
+      if (progress >= 0.999) done();
     }
 
-    video.addEventListener('loadedmetadata', done, { once: true });
+    video.addEventListener('progress', updateProgress);
+    video.addEventListener('loadedmetadata', updateProgress);
+    video.addEventListener('canplaythrough', updateProgress);
+    video.addEventListener('suspend', updateProgress);
     video.addEventListener('error', done, { once: true });
     video.load();
+    updateProgress();
   });
 }
 
