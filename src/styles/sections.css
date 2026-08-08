@@ -42,9 +42,14 @@
   user-select: none;
 }
 
+@media (min-width: 701px) and (max-width: 1000px) {
+  .hero { min-height: 60svh; }
+  .hero__sticky { height: 60svh; }
+}
+
 @media (max-width: 700px) {
-  .hero { min-height: 45svh; }
-  .hero__sticky { height: 45svh; min-height: 280px; }
+  .hero { min-height: 52svh; }
+  .hero__sticky { height: 52svh; }
   .hero__stage {
     background-size: cover;
     background-position: center;
