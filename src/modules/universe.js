@@ -86,6 +86,8 @@ export function initUniverse() {
     root: document.getElementById('uniSpotlight'),
     img: document.getElementById('spotlightImg'),
     productName: document.getElementById('spotlightProductName'),
+    kicker: document.getElementById('spotlightKicker'),
+    productSizes: document.getElementById('spotlightProductSizes'),
     name: document.getElementById('spotlightName'),
     sizes: document.getElementById('spotlightSizes'),
     details: document.getElementById('spotlightDetails'),
@@ -121,6 +123,8 @@ export function initUniverse() {
       spotlight.img.src = productImage(featuredProduct.img);
       spotlight.img.alt = featuredProduct.name;
       spotlight.productName.textContent = featuredProduct.name;
+      spotlight.kicker.textContent = featuredProduct.kicker;
+      spotlight.productSizes.textContent = featuredProduct.sizes;
       spotlight.name.textContent = featuredProduct.name;
       spotlight.sizes.textContent = featuredProduct.sizes;
       spotlight.details.textContent = featuredProduct.blurb;
@@ -148,6 +152,13 @@ export function initUniverse() {
         });
       },
     });
+  }
+
+  function resetMonthlySpotlight() {
+    monthlyIndex = 0;
+    featuredProduct = monthlyPicks[0] || UNIVERSE[0];
+    renderSpotlight();
+    setMonthlyFrame(0);
   }
 
   function rotateMonthlyPick() {
@@ -310,16 +321,20 @@ export function initUniverse() {
   });
 
   renderFamilies();
-  renderSpotlight();
-  setMonthlyFrame(0);
+  resetMonthlySpotlight();
 
+  const monthlyFrameDurations = [7600, 3200, 3200];
   let monthlyTimer = null;
   const startMonthlyTimer = () => {
     if (reduced || monthlyCards.length < 2) return;
-    window.clearInterval(monthlyTimer);
-    monthlyTimer = window.setInterval(() => changeMonthlyFrame(1), 4200);
+    window.clearTimeout(monthlyTimer);
+    const duration = monthlyFrameDurations[monthlyFrameIndex] || monthlyFrameDurations[0];
+    monthlyTimer = window.setTimeout(() => {
+      changeMonthlyFrame(1);
+      startMonthlyTimer();
+    }, duration);
   };
-  const stopMonthlyTimer = () => window.clearInterval(monthlyTimer);
+  const stopMonthlyTimer = () => window.clearTimeout(monthlyTimer);
 
   if (!reduced && monthlyCards.length > 1) {
     startMonthlyTimer();
@@ -328,6 +343,13 @@ export function initUniverse() {
       startMonthlyTimer();
     });
   }
+
+  window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return;
+    stopMonthlyTimer();
+    resetMonthlySpotlight();
+    startMonthlyTimer();
+  });
 
   spotlight.previous.addEventListener('click', () => {
     changeMonthlyFrame(-1);

@@ -202,9 +202,30 @@
 }
 .monthly-card--product .monthly__eyebrow {
   position: absolute;
+  z-index: 2;
   top: 1.25rem;
   left: clamp(1.5rem, 5vw, 5rem);
   color: var(--orange);
+}
+.monthly__product-kicker,
+.monthly__product-sizes {
+  position: absolute;
+  z-index: 2;
+  left: clamp(1.5rem, 5vw, 5rem);
+  margin: 0;
+  color: #3B261C;
+  font-family: var(--f-body);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+.monthly__product-kicker { top: 2.6rem; }
+.monthly__product-sizes {
+  top: 3.82rem;
+  color: rgba(59, 38, 28, 0.64);
+  font-size: 0.68rem;
 }
 .monthly__product-name {
   position: absolute;
