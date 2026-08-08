@@ -21,7 +21,7 @@ export const BRAND = {
     lines: ['Khamari, P.O. Hollaidanga', 'Dist — West Garo Hills', 'Meghalaya — 794109'],
   },
   phone: '+91 93663 23755',
-  email: 'sales@themeghfarm.com',
+  email: 'customercare@themeghfarm.com',
   care: 'customercare@themeghfarm.com',
   website: 'www.themeghfarm.com',
   social: {

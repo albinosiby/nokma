@@ -79,7 +79,7 @@ export function initContact() {
       form.reset();
       setHint('Thank you — your enquiry has been sent. We’ll get back to you soon.', { success: true });
     } catch (err) {
-      setHint(err.message || 'Could not send right now. Please email sales@themeghfarm.com.', { error: true });
+      setHint(err.message || 'Could not send right now. Please email customercare@themeghfarm.com.', { error: true });
     } finally {
       submit.disabled = false;
     }

@@ -9,7 +9,6 @@ import { initRipples, initMagnetic, initReveals } from './modules/micro.js';
 import { initUniverse } from './modules/universe.js';
 import { initFlavours } from './modules/flavours.js';
 import { initIngredients } from './modules/ingredients.js';
-import { initBlog } from './modules/blog.js';
 import { initMascot } from './modules/mascot.js';
 import { initContact, initFooter } from './modules/contact.js';
 
@@ -25,7 +24,6 @@ function buildScenes() {
   initUniverse();
   initFlavours();
   initIngredients();
-  initBlog();
   initContact();
   initFooter();
 
