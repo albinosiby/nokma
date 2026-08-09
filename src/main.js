@@ -1,7 +1,7 @@
 import './styles/base.css';
 import './styles/sections.css';
 
-import { ScrollTrigger, initSmoothScroll } from './modules/core.js';
+import { ScrollTrigger, initSmoothScroll, isMobile } from './modules/core.js';
 import { runLoader } from './modules/loader.js';
 import { preloadHero, initHero, cacheFullHeroWhenReady } from './modules/hero.js';
 import { initNav } from './modules/nav.js';
@@ -40,13 +40,15 @@ function buildScenes() {
 async function boot() {
   const loader = runLoader();
 
-  // Fonts first: SplitText must measure final glyphs, not fallbacks.
+  // Keep the first render responsive if a phone has a slow font connection.
   const fonts = document.fonts?.ready ?? Promise.resolve();
+  const criticalFonts = isMobile
+    ? Promise.race([fonts, new Promise((resolve) => window.setTimeout(resolve, 1000))])
+    : fonts;
 
-  // Keep the loading screen active until the whole hero video is buffered.
   await Promise.all([
     preloadHero((p) => loader.setProgress(p * 0.97)),
-    fonts,
+    criticalFonts,
   ]);
 
   buildScenes();
@@ -57,6 +59,7 @@ async function boot() {
   warmAssets();
   cacheFullHeroWhenReady();
 
+  fonts.then(() => ScrollTrigger.refresh()).catch(() => {});
   window.addEventListener('load', () => ScrollTrigger.refresh());
 }
 

@@ -1,7 +1,8 @@
-import { reduced } from './core.js';
+import { isMobile, reduced } from './core.js';
 import { cacheMediaAsset } from './media-cache.js';
 
 const FULL_HERO_SOURCE = './media/hero-nokma-full.mp4?v=1';
+const STANDARD_HERO_SOURCE = './media/hero-nokma.mp4?v=10';
 const STARTUP_BUFFER_THRESHOLD = 0.5;
 
 /** Buffer enough of the hero clip for playback before opening the page. */
@@ -13,6 +14,16 @@ export async function preloadHero(onProgress) {
   }
 
   video.pause();
+
+  // Phones open against the poster immediately; playback continues loading after
+  // the interface is available instead of holding the visitor on the loader.
+  if (isMobile) {
+    video.preload = 'metadata';
+    video.load();
+    onProgress?.(1);
+    return Promise.resolve();
+  }
+
   video.preload = 'auto';
 
   onProgress?.(0);
@@ -54,10 +65,12 @@ export async function preloadHero(onProgress) {
   });
 }
 
-/** Cache the full-quality source only after the startup video is completely buffered. */
+/** Cache the next-highest-quality source only after the startup video is completely buffered. */
 export function cacheFullHeroWhenReady() {
   const video = document.getElementById('heroVideo');
   if (!video) return;
+
+  const backgroundSource = isMobile ? STANDARD_HERO_SOURCE : FULL_HERO_SOURCE;
 
   let started = false;
   const begin = () => {
@@ -70,7 +83,7 @@ export function cacheFullHeroWhenReady() {
     started = true;
     video.removeEventListener('progress', begin);
     video.removeEventListener('canplaythrough', begin);
-    void cacheMediaAsset(FULL_HERO_SOURCE);
+    void cacheMediaAsset(backgroundSource);
   };
 
   video.addEventListener('progress', begin);
