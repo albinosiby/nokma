@@ -86,7 +86,7 @@
   position: relative;
   background: #F4ECDF;
   color: #2E221C;
-  padding: var(--sec-y) 0;
+  padding: 0 0 var(--sec-y);
   overflow: hidden;
 }
 .universe__head { padding: 0 var(--pad-x); max-width: 1500px; margin: 0 auto; position: relative; z-index: 2; overflow: visible; }
@@ -163,14 +163,16 @@
 }
 .monthly-card--product .monthly-card__inner::before {
   position: absolute;
-  top: 3.1rem;
-  left: clamp(1.5rem, 5vw, 5rem);
-  color: rgba(59, 38, 28, 0.06);
-  content: 'NOKMA';
-  font-family: var(--f-display);
-  font-size: clamp(3.7rem, 10vw, 7.5rem);
-  line-height: 0.82;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: min(78%, 760px);
+  aspect-ratio: 2200 / 720;
+  background: url('/brand/logo-nokma-header-green.png') center / contain no-repeat;
+  content: '';
+  opacity: 0.08;
   pointer-events: none;
+  transform: translate(-50%, -56%);
 }
 .monthly-card--product img {
   position: relative;
@@ -337,10 +339,10 @@
 }
 .monthly-card--notes { background: transparent; color: #2E221C; }
 .monthly-card--notes .monthly-card__inner {
-  justify-content: flex-end;
+  justify-content: center;
   max-width: 760px;
   margin: 0 auto;
-  padding: 1.5rem 1.5rem 3rem;
+  padding: 1.5rem 1.5rem 4rem;
   border-top: 0;
 }
 .monthly-card--notes .monthly__eyebrow { color: #A64E20; }
@@ -643,11 +645,11 @@
   .monthly-card { min-height: 0; }
   .monthly-card__inner { min-height: 360px; }
   .monthly-card--product .monthly-card__inner { min-height: 330px; padding: 1.25rem; }
-  .monthly-card--product .monthly-card__inner::before { top: 4.1rem; left: 1.55rem; font-size: 4.35rem; }
+  .monthly-card--product .monthly-card__inner::before { width: min(82%, 330px); transform: translate(-50%, -54%); }
   .monthly-card--product img { width: min(76%, 290px); height: 205px; max-height: 205px; margin-bottom: 1.8rem; }
   .monthly__product-name { left: 1.25rem; bottom: 1.2rem; }
-  .monthly-card--details .monthly-card__inner,
-  .monthly-card--notes .monthly-card__inner { min-height: 360px; padding: 1.25rem; }
+  .monthly-card--details .monthly-card__inner { min-height: 360px; padding: 1.25rem; }
+  .monthly-card--notes .monthly-card__inner { min-height: 360px; padding: 1.25rem 1.25rem 3rem; }
   .monthly__name { font-size: 2.65rem; }
   .monthly__steps { right: 1.55rem; bottom: 1.4rem; }
   .monthly__controls { left: var(--pad-x); }

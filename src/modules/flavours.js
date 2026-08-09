@@ -190,13 +190,26 @@ export function initFlavours() {
   ring.addEventListener('pointerdown', (e) => onDown(e.clientX));
   ring.addEventListener('pointerup', (e) => {
     if (moved) return;
-    const bounds = ring.getBoundingClientRect();
-    const position = (e.clientX - bounds.left) / bounds.width;
 
-    // The center pack overlaps the side slide hitboxes in 3D. Use stable
-    // left/right tap regions so the pack the visitor sees always wins.
-    if (position < 0.4) select(active - 1);
-    else if (position > 0.6) select(active + 1);
+    // Slide boxes overlap in 3D, so choose the visible pack nearest the tap
+    // rather than relying on the DOM element at that point.
+    const picked = slides
+      .map((slide) => {
+        const image = slide.querySelector('img');
+        const bounds = image.getBoundingClientRect();
+        const containsPoint = e.clientX >= bounds.left && e.clientX <= bounds.right
+          && e.clientY >= bounds.top && e.clientY <= bounds.bottom;
+        const distance = Math.hypot(
+          e.clientX - (bounds.left + bounds.width / 2),
+          e.clientY - (bounds.top + bounds.height / 2)
+        );
+
+        return { slide, containsPoint, distance };
+      })
+      .filter(({ slide, containsPoint }) => containsPoint && slide.style.pointerEvents !== 'none')
+      .sort((a, b) => a.distance - b.distance)[0];
+
+    if (picked) select(Number(picked.slide.dataset.i));
   });
   window.addEventListener('pointermove', (e) => onMove(e.clientX), { passive: true });
   window.addEventListener('pointerup', onUp);

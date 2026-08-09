@@ -323,7 +323,7 @@ export function initUniverse() {
   renderFamilies();
   resetMonthlySpotlight();
 
-  const monthlyFrameDurations = [7600, 3200, 3200];
+  const monthlyFrameDurations = [3000, 3000, 3000];
   let monthlyTimer = null;
   const startMonthlyTimer = () => {
     if (reduced || monthlyCards.length < 2) return;

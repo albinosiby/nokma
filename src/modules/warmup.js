@@ -18,7 +18,7 @@ export function warmAssets() {
     ...FLAVOURS.map((flavour) => productImage(flavour.img)),
     ...Array.from({ length: 6 }, (_, index) => `./products/mascot/pose-0${index + 1}.png`),
     './brand/logo-nokma.webp',
-    './brand/logo-meghfarm.webp',
+    './brand/logo-meghfarm-official.png',
     './brand/logo-meghfarm-full.webp',
     ...[...document.images].map((image) => image.currentSrc || image.src),
   ]);
