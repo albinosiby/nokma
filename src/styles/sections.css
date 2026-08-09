@@ -317,11 +317,14 @@
 }
 .monthly-card--details { background: transparent; color: #2E221C; }
 .monthly-card--details .monthly-card__inner {
-  justify-content: flex-end;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 1.5rem 1.5rem 3rem;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 1.55rem 0 2.5rem clamp(1.75rem, 4vw, 4rem);
   border-top: 0;
+  text-align: left;
 }
 .monthly-card--details .monthly-card__inner::before {
   position: absolute;
@@ -335,18 +338,22 @@
   pointer-events: none;
   transform: translate(-50%, -56%);
 }
+.monthly-card--details .monthly__eyebrow {
+  max-width: min(36rem, 48%);
+  margin: 0;
+}
 .monthly__name {
   position: relative;
-  max-width: 11ch;
-  margin: 0.7rem 0 0;
+  max-width: min(14ch, 48%);
+  margin: 0.28rem 0 0;
   color: #3B261C;
   font-family: var(--f-body);
   font-size: clamp(2.45rem, 4.8vw, 4.5rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 0.96;
 }
 .monthly__sizes {
-  margin: 1rem 0 0;
+  margin: 0.45rem 0 0;
   color: #87553E;
   font-family: var(--f-body);
   font-size: 0.76rem;
@@ -355,20 +362,20 @@
   text-transform: uppercase;
 }
 .monthly__detail {
-  max-width: 39rem;
-  margin: 1.45rem 0 0;
+  max-width: min(34rem, 48%);
+  margin: 0.7rem 0 0;
   color: rgba(46, 34, 28, 0.72);
   font-family: var(--f-body);
   font-size: clamp(0.94rem, 1.2vw, 1.08rem);
-  line-height: 1.65;
+  line-height: 1.55;
 }
 .monthly__detail-product {
   position: absolute;
   z-index: 1;
-  right: clamp(1.5rem, 5vw, 5rem);
-  top: 50%;
-  width: min(28vw, 360px);
-  height: min(25vw, 350px);
+  right: clamp(1.5rem, 6vw, 5.5rem);
+  top: 52%;
+  width: min(42vw, 520px);
+  height: min(38vw, 480px);
   object-fit: contain;
   filter: drop-shadow(0 26px 24px rgba(66, 39, 26, 0.22));
   pointer-events: none;
@@ -799,7 +806,10 @@
   .monthly-card--product .monthly-card__inner::before { width: min(82%, 330px); transform: translate(-50%, -54%); }
   .monthly-card--product img { width: min(76%, 290px); height: 205px; max-height: 205px; margin-bottom: 1.8rem; }
   .monthly__product-name { left: 1.25rem; bottom: 1.2rem; }
-  .monthly-card--details .monthly-card__inner { min-height: 360px; padding: 1.25rem; }
+  .monthly-card--details .monthly-card__inner { min-height: 360px; padding: 1.5rem 0 2.5rem 0.35rem; }
+  .monthly-card--details .monthly__eyebrow,
+  .monthly__name,
+  .monthly__detail { max-width: 100%; }
   .monthly__detail-product { display: none; }
   .monthly-card--notes .monthly-card__inner { min-height: 360px; padding: 1.25rem 1.25rem 3rem; }
   .monthly__name { font-size: 2.65rem; }

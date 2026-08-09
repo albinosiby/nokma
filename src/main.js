@@ -13,7 +13,6 @@ import { initMascot } from './modules/mascot.js';
 import { initContact, initFooter } from './modules/contact.js';
 import { initBlog } from './modules/blog.js';
 import { warmAssets } from './modules/warmup.js';
-import { runLaunchCountdown } from './modules/launch-countdown.js';
 
 /** Build every scene once the hero video is ready. */
 function buildScenes() {
@@ -65,7 +64,6 @@ async function boot() {
 }
 
 async function start() {
-  await runLaunchCountdown();
   boot();
 }
 
