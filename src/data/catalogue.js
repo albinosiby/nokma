@@ -171,7 +171,7 @@ export const UNIVERSE = [
     name: 'Jackfruit Family Tub',
     kicker: 'Family Tub · Jackfruit',
     sizes: '750 ML · 1000 ML',
-    blurb: 'Generous servings of happiness, made for parties, celebrations and joyful moments.',
+    blurb: 'Generous servings of happiness, made for parties, celebrations and joyful moments. Made to share with family and friends.',
     flavours: 'Jackfruit',
     cat: 'ice-cream',
   },

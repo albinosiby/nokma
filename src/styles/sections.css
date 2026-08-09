@@ -97,6 +97,30 @@
 .universe__head .lede { color: rgba(59, 38, 28, 0.7); }
 .universe__head .eyebrow { color: #A64E20; }
 
+@media (min-width: 1001px) {
+  .universe__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+    column-gap: clamp(2rem, 6vw, 7rem);
+    align-items: center;
+  }
+
+  .universe__head .h2 {
+    width: fit-content;
+    max-width: 10ch;
+    margin: 0 auto;
+    font-size: clamp(3.5rem, 2.2rem + 4.6vw, 5.7rem);
+    transform: translateX(clamp(1rem, 3vw, 3.5rem));
+  }
+
+  .universe__head .lede {
+    width: min(100%, 31ch);
+    margin: 0 0 0 auto;
+    font-size: clamp(1.12rem, 0.98rem + 0.55vw, 1.45rem);
+    line-height: 1.58;
+  }
+}
+
 .universe__monthly {
   position: relative;
   z-index: 2;
@@ -442,7 +466,7 @@
 }
 
 .universe__monthly::before {
-  top: -2rem;
+  top: 1.25rem;
   left: var(--pad-x);
   padding: 0.18rem 1rem 0.25rem 0;
   background: transparent;

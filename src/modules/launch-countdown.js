@@ -1,13 +1,13 @@
-const TEST_DURATION_MS = 10 * 60 * 1000;
-const STORAGE_KEY = 'nokma-launch-test-ends-at';
-const COMPLETE_KEY = 'nokma-launch-test-complete';
-const COUNTDOWN_ENABLED = false;
+const TEST_DURATION_MS = 2 * 60 * 1000;
+const STORAGE_KEY = 'nokma-launch-ends-at-v3';
+const COMPLETE_KEY = 'nokma-launch-complete-v3';
+const COUNTDOWN_ENABLED = true;
 
 function pad(value) {
   return String(value).padStart(2, '0');
 }
 
-/** Temporarily gate the site behind a 10-minute launch countdown for review. */
+/** Temporarily gate the site behind a two-minute launch countdown for review. */
 export function runLaunchCountdown() {
   const screen = document.getElementById('launchCountdown');
   if (!screen) return Promise.resolve();
