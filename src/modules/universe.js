@@ -91,6 +91,7 @@ export function initUniverse() {
     name: document.getElementById('spotlightName'),
     sizes: document.getElementById('spotlightSizes'),
     details: document.getElementById('spotlightDetails'),
+    detailImage: document.getElementById('spotlightDetailImg'),
     previous: document.getElementById('spotlightPrev'),
     next: document.getElementById('spotlightNext'),
   };
@@ -128,6 +129,9 @@ export function initUniverse() {
       spotlight.name.textContent = featuredProduct.name;
       spotlight.sizes.textContent = featuredProduct.sizes;
       spotlight.details.textContent = featuredProduct.blurb;
+      spotlight.detailImage.decoding = 'async';
+      spotlight.detailImage.src = productImage(featuredProduct.img);
+      spotlight.detailImage.alt = featuredProduct.name;
     };
 
     const frames = spotlight.root.querySelectorAll('.monthly-card__inner');

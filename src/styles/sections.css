@@ -86,10 +86,10 @@
   position: relative;
   background: #F4ECDF;
   color: #2E221C;
-  padding: 0 0 var(--sec-y);
+  padding: 0;
   overflow: hidden;
 }
-.universe__head { padding: 0 var(--pad-x); max-width: 1500px; margin: 0 auto; position: relative; z-index: 2; overflow: visible; }
+.universe__head { padding: clamp(2rem, 4vw, 3.5rem) var(--pad-x) 0; max-width: 1500px; margin: 0 auto; position: relative; z-index: 2; overflow: visible; }
 .universe__head .h2 { color: #3B261C; padding-bottom: 0.08em; }
 .universe__title-line { display: block; overflow: hidden; padding-bottom: 0.08em; }
 .universe__title-line > span { display: block; }
@@ -115,7 +115,7 @@
   top: -0.55rem;
   left: 0;
   padding-right: 0.9rem;
-  background: #F4ECDF;
+  background: #F8EBBE;
   color: #A64E20;
   content: 'Monthly product';
   font-family: var(--f-body);
@@ -260,7 +260,7 @@
 .monthly__controls {
   position: absolute;
   left: clamp(1.5rem, 5vw, 5rem);
-  bottom: 0;
+  bottom: 1.25rem;
   display: inline-flex;
   align-items: center;
   gap: 0;
@@ -301,14 +301,15 @@
 }
 .monthly-card--details .monthly-card__inner::before {
   position: absolute;
-  top: 2.8rem;
-  left: 1.5rem;
-  color: rgba(59, 38, 28, 0.07);
-  content: 'NOKMA';
-  font-family: var(--f-display);
-  font-size: clamp(3.7rem, 10vw, 7.5rem);
-  line-height: 0.82;
+  top: 50%;
+  left: 50%;
+  width: min(78%, 760px);
+  aspect-ratio: 2200 / 720;
+  background: url('/brand/logo-nokma-header-green.png') center / contain no-repeat;
+  content: '';
+  opacity: 0.08;
   pointer-events: none;
+  transform: translate(-50%, -56%);
 }
 .monthly__name {
   position: relative;
@@ -337,6 +338,25 @@
   font-size: clamp(0.94rem, 1.2vw, 1.08rem);
   line-height: 1.65;
 }
+.monthly__detail-product {
+  position: absolute;
+  z-index: 1;
+  right: clamp(1.5rem, 5vw, 5rem);
+  top: 50%;
+  width: min(28vw, 360px);
+  height: min(25vw, 350px);
+  object-fit: contain;
+  filter: drop-shadow(0 26px 24px rgba(66, 39, 26, 0.22));
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+.monthly-card--details .monthly__eyebrow,
+.monthly-card--details .monthly__name,
+.monthly-card--details .monthly__sizes,
+.monthly-card--details .monthly__detail {
+  position: relative;
+  z-index: 2;
+}
 .monthly-card--notes { background: transparent; color: #2E221C; }
 .monthly-card--notes .monthly-card__inner {
   justify-content: center;
@@ -344,6 +364,18 @@
   margin: 0 auto;
   padding: 1.5rem 1.5rem 4rem;
   border-top: 0;
+}
+.monthly-card--notes .monthly-card__inner::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(78%, 760px);
+  aspect-ratio: 2200 / 720;
+  background: url('/brand/logo-nokma-header-green.png') center / contain no-repeat;
+  content: '';
+  opacity: 0.08;
+  pointer-events: none;
+  transform: translate(-50%, -56%);
 }
 .monthly-card--notes .monthly__eyebrow { color: #A64E20; }
 .monthly-card--notes .monthly__steps span { background: rgba(59, 38, 28, 0.18); }
@@ -396,11 +428,106 @@
   text-transform: uppercase;
 }
 
+/* Monthly product: keep the same calm ice-cream surface as the catalogue. */
+.universe__monthly {
+  width: 100%;
+  max-width: none;
+  margin: 4rem 0 0;
+  padding: 2.8rem var(--pad-x) 3.25rem;
+  border-top: 1px solid rgba(59, 38, 28, 0.22);
+  border-bottom: 0;
+  background: #F8EBBE;
+  color: #2E221C;
+  box-shadow: none;
+}
+
+.universe__monthly::before {
+  top: -2rem;
+  left: var(--pad-x);
+  padding: 0.18rem 1rem 0.25rem 0;
+  background: transparent;
+  color: #2E221C;
+  font-family: var(--f-display);
+  font-size: clamp(1.3rem, 1rem + 0.8vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+}
+
+.universe__monthly .monthly-card--product,
+.universe__monthly .monthly-card--details,
+.universe__monthly .monthly-card--notes {
+  color: #2E221C;
+}
+
+.universe__monthly .monthly-card--product .monthly-card__inner::before {
+  filter: none;
+  opacity: 0.08;
+}
+
+.universe__monthly .monthly-card--product img {
+  filter: drop-shadow(0 26px 24px rgba(71, 42, 21, 0.2));
+}
+
+.universe__monthly .monthly__product-kicker,
+.universe__monthly .monthly__product-name,
+.universe__monthly .monthly__name,
+.universe__monthly .monthly__nutrition-title {
+  color: #2E221C;
+}
+
+.universe__monthly .monthly__product-sizes,
+.universe__monthly .monthly__detail,
+.universe__monthly .monthly__blurb,
+.universe__monthly .monthly__nutrition-list dt {
+  color: rgba(59, 38, 28, 0.7);
+}
+
+.universe__monthly .monthly__sizes,
+.universe__monthly .monthly__nutrition-list dd {
+  color: #A64E20;
+}
+
+.universe__monthly .monthly-card--details .monthly-card__inner::before {
+  color: rgba(59, 38, 28, 0.08);
+}
+
+.universe__monthly .monthly-card--notes .monthly__eyebrow {
+  color: #A64E20;
+}
+
+.universe__monthly .monthly__steps span,
+.universe__monthly .monthly-card--notes .monthly__steps span {
+  background: rgba(59, 38, 28, 0.18);
+}
+
+.universe__monthly .monthly__controls {
+  border-color: rgba(59, 38, 28, 0.26);
+  background: rgba(248, 235, 190, 0.96);
+}
+
+.universe__monthly .monthly__controls button {
+  color: #2E221C;
+}
+
+.universe__monthly .monthly__controls button + button {
+  border-left-color: rgba(59, 38, 28, 0.22);
+}
+
+.universe__monthly .monthly__nutrition-list {
+  border-top-color: rgba(59, 38, 28, 0.18);
+}
+
+.universe__monthly .monthly__nutrition-list div {
+  border-bottom-color: rgba(59, 38, 28, 0.14);
+}
+
 .universe__space {
   width: 100%;
   max-width: none;
-  margin: 4.75rem 0 0;
-  padding: 4.75rem max(var(--pad-x), calc((100vw - 1500px) / 2)) clamp(4rem, 7vw, 6rem);
+  margin: 0;
+  padding: 4.75rem max(var(--pad-x), calc((100vw - 1500px) / 2)) clamp(1.5rem, 3vw, 2.5rem);
   background: #0A2F1E;
   position: relative; z-index: 2;
 }
@@ -422,7 +549,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
 }
 .ufamily {
   position: relative;
@@ -649,6 +776,7 @@
   .monthly-card--product img { width: min(76%, 290px); height: 205px; max-height: 205px; margin-bottom: 1.8rem; }
   .monthly__product-name { left: 1.25rem; bottom: 1.2rem; }
   .monthly-card--details .monthly-card__inner { min-height: 360px; padding: 1.25rem; }
+  .monthly__detail-product { display: none; }
   .monthly-card--notes .monthly-card__inner { min-height: 360px; padding: 1.25rem 1.25rem 3rem; }
   .monthly__name { font-size: 2.65rem; }
   .monthly__steps { right: 1.55rem; bottom: 1.4rem; }
@@ -669,7 +797,7 @@
     display: flex;
     grid-template-columns: none;
     gap: 0.85rem;
-    margin: 0 calc(var(--pad-x) * -1) 1.35rem;
+    margin: 0 calc(var(--pad-x) * -1) 0;
     padding: 0.2rem var(--pad-x) 0.7rem;
     overflow-x: auto;
     overflow-y: hidden;
@@ -989,7 +1117,7 @@
 .flav {
   position: relative;
   min-height: min(850px, 94svh);
-  padding: clamp(4rem, 7vw, 5.8rem) 0 3.75rem;
+  padding: clamp(2rem, 3vw, 3rem) 0 3.75rem;
   overflow: hidden;
   display: flex; flex-direction: column; align-items: center;
   isolation: isolate;
@@ -1104,7 +1232,7 @@
 @media (max-width: 700px) {
   .flav {
     min-height: auto;
-    padding: clamp(4rem, 11vh, 5rem) 0 3.5rem;
+    padding: 2rem 0 3.5rem;
   }
   .flav__head .h2 { font-size: clamp(2.15rem, 8.5vw, 3rem); }
   .flav__stage {
