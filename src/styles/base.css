@@ -317,13 +317,36 @@ body.is-launching { overflow: hidden; }
 .launch-screen.is-complete { opacity: 0; visibility: hidden; }
 
 @media (max-width: 700px) {
-  .launch-screen__content { align-self: start; padding-top: 17vh; }
-  .launch-screen h1 { font-size: clamp(2.7rem, 12vw, 4rem); }
-  .launch-screen__timer { gap: 0.3rem; }
-  .launch-screen__timer div { min-width: 4.7rem; }
-  .launch-screen__timer strong { font-size: clamp(2.9rem, 13.5vw, 4.2rem); }
-  .launch-screen__timer i { font-size: 2.2rem; }
-  .launch-screen__mascot { right: 0.25rem; bottom: -1.8rem; width: 132px; }
+  .launch-screen__top { padding: 1rem var(--pad-x); }
+  .launch-screen__top img { width: 108px; }
+  .launch-screen__top .launch-screen__meghfarm { width: 58px; }
+  .launch-screen__content {
+    align-self: center;
+    width: min(100% - (2 * var(--pad-x)), 390px);
+    padding: 1rem 0 7.25rem;
+  }
+  .launch-screen__eyebrow { font-size: 0.62rem; letter-spacing: 0.14em; }
+  .launch-screen h1 {
+    max-width: 14ch;
+    margin-top: 0.75rem;
+    font-size: clamp(2.15rem, 9.6vw, 3rem);
+    line-height: 0.98;
+  }
+  .launch-screen__timer { gap: 0.2rem; margin-top: 1.35rem; }
+  .launch-screen__timer div { min-width: 0; flex: 1; gap: 0.25rem; }
+  .launch-screen__timer strong { font-size: clamp(2.45rem, 12.5vw, 3.7rem); }
+  .launch-screen__timer span { font-size: 0.54rem; letter-spacing: 0.1em; }
+  .launch-screen__timer i { margin-top: -0.75rem; font-size: 1.85rem; }
+  .launch-screen__note { margin-top: 1.15rem; font-size: 0.82rem; line-height: 1.4; }
+  .launch-screen__mascot { right: 0.4rem; bottom: 0.4rem; width: 96px; }
+}
+
+@media (max-width: 700px) and (max-height: 700px) {
+  .launch-screen__content { padding-top: 0.5rem; padding-bottom: 5.5rem; }
+  .launch-screen h1 { font-size: clamp(1.9rem, 9vw, 2.55rem); }
+  .launch-screen__timer { margin-top: 0.95rem; }
+  .launch-screen__note { margin-top: 0.85rem; }
+  .launch-screen__mascot { width: 80px; }
 }
 
 .loader__inner { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: 2rem; }
