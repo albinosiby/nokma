@@ -3,7 +3,7 @@ import './styles/sections.css';
 
 import { ScrollTrigger, initSmoothScroll, isMobile } from './modules/core.js';
 import { runLoader } from './modules/loader.js';
-import { preloadHero, initHero, cacheFullHeroWhenReady } from './modules/hero.js';
+import { preloadHero, initHero, cacheFullHeroWhenReady, warmFullHeroForLaunch } from './modules/hero.js';
 import { initNav } from './modules/nav.js';
 import { initRipples, initMagnetic, initReveals } from './modules/micro.js';
 import { initUniverse } from './modules/universe.js';
@@ -13,6 +13,7 @@ import { initMascot } from './modules/mascot.js';
 import { initContact, initFooter } from './modules/contact.js';
 import { initBlog } from './modules/blog.js';
 import { warmAssets } from './modules/warmup.js';
+import { runLaunchCountdown } from './modules/launch-countdown.js';
 
 /** Build every scene once the hero video is ready. */
 function buildScenes() {
@@ -64,6 +65,10 @@ async function boot() {
 }
 
 async function start() {
+  const launchCountdown = runLaunchCountdown();
+  warmFullHeroForLaunch();
+  warmAssets();
+  await launchCountdown;
   boot();
 }
 

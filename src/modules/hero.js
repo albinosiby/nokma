@@ -5,6 +5,11 @@ const FULL_HERO_SOURCE = './media/hero-nokma-full.mp4?v=1';
 const STANDARD_HERO_SOURCE = './media/hero-nokma.mp4?v=10';
 const STARTUP_BUFFER_THRESHOLD = 0.5;
 
+/** Begin caching the full-quality hero while the launch screen is visible. */
+export function warmFullHeroForLaunch() {
+  void cacheMediaAsset(FULL_HERO_SOURCE);
+}
+
 /** Buffer enough of the hero clip for playback before opening the page. */
 export async function preloadHero(onProgress) {
   const video = document.getElementById('heroVideo');

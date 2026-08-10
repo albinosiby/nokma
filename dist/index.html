@@ -88,11 +88,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
 
 <link rel="preload" as="image" href="./media/hero-poster.jpg?v=1" fetchpriority="high" />
-  <script type="module" crossorigin src="./assets/index-xI9GwNGs.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DBdLVWzm.css">
+  <script type="module" crossorigin src="./assets/index-CMQK_71v.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-vfN5UAoF.css">
 </head>
 
 <body class="is-loading">
+
+<!-- ══════════════════ GLOBAL LAUNCH COUNTDOWN ══════════════════ -->
+<section class="launch-screen" id="launchCountdown" aria-labelledby="launchTitle" hidden>
+  <div class="launch-screen__visual" aria-hidden="true"></div>
+  <div class="launch-screen__top">
+    <img src="./brand/logo-nokma.webp" alt="Nokma" width="132" height="41" />
+    <img class="launch-screen__meghfarm" src="./brand/logo-meghfarm-official.png" alt="MeghFarm - Fresh From Meghalaya" width="504" height="530" />
+  </div>
+  <main class="launch-screen__content">
+    <p class="launch-screen__eyebrow" id="launchStatus">Launching at 2:30 PM</p>
+    <h1 id="launchTitle">A fresh Nokma<br />experience is almost here.</h1>
+    <div class="launch-screen__timer" role="timer" aria-label="Time remaining until launch">
+      <div><strong id="launchHours">00</strong><span>Hours</span></div>
+      <i aria-hidden="true">:</i>
+      <div><strong id="launchMinutes">00</strong><span>Minutes</span></div>
+      <i aria-hidden="true">:</i>
+      <div><strong id="launchSeconds">00</strong><span>Seconds</span></div>
+    </div>
+    <p class="launch-screen__note">Rooted in Meghalaya. Crafted for the world.</p>
+  </main>
+  <img class="launch-screen__mascot" src="./products/mascot/pose-01.png" alt="" width="672" height="900" aria-hidden="true" />
+</section>
 
 <!-- ══════════════════ LOADING SCREEN ══════════════════ -->
 <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading Nokma">
