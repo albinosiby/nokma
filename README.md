@@ -68,3 +68,30 @@ npm run preview
 - Deploy `dist/` (or the Vite build output your host expects).
 - `_source/` is kept for archive/re-export work; it is not required for the live site.
 - Share previews use `public/brand/og-nokma.png` via absolute `og:image` URLs.
+
+## Cloudflare Pages (static)
+
+This project is configured as a **static** Cloudflare Pages site.
+
+### Connect via Git (dashboard)
+
+1. Cloudflare Dashboard → **Workers & Pages** → **Create** → **Pages** → connect the GitHub repo.
+2. Build settings:
+   - **Framework preset:** Vite (or None)
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+   - **Node version:** `20` (matches `.nvmrc`)
+3. Save and deploy. Point your custom domain (e.g. `nokma.in`) to the Pages project.
+
+### Deploy from CLI
+
+```bash
+npm install
+npm run deploy
+```
+
+Config files:
+
+- `wrangler.toml` — Pages project name + `dist` output
+- `public/_headers` — cache + security headers (copied into `dist`)
+- `public/_redirects` — SPA fallback to `index.html`
