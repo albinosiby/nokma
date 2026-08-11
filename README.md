@@ -83,6 +83,9 @@ This project deploys as a **static Worker** (assets from `dist/`).
 | **Non-production builds** | `npx wrangler versions upload` |
 | **Root directory** | `/` (leave as `/` or blank) |
 | **API token** | Create new token (auto is fine) |
+| **Node version** (Advanced) | `22` |
+
+Wrangler 4 requires **Node.js 22+**. Set this in Cloudflare Advanced settings as `NODE_VERSION=22` if the build still picks Node 20.
 
 Do **not** use `wrangler pages deploy` on that screen — this is Workers static assets.
 
@@ -97,4 +100,4 @@ Config:
 
 - `wrangler.toml` — Worker name + `[assets] directory = "./dist"`
 - `public/_headers` — cache + security headers
-- `.nvmrc` — Node 20
+- `.nvmrc` / `.node-version` — Node 22 (required by Wrangler 4)
