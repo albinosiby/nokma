@@ -1,0 +1,3 @@
+# Ignore junk in the uploaded static bundle
+.DS_Store
+**/.DS_Store

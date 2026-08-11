@@ -69,19 +69,22 @@ npm run preview
 - `_source/` is kept for archive/re-export work; it is not required for the live site.
 - Share previews use `public/brand/og-nokma.png` via absolute `og:image` URLs.
 
-## Cloudflare Pages (static)
+## Cloudflare Workers (static)
 
-This project is configured as a **static** Cloudflare Pages site.
+This project deploys as a **static Worker** (assets from `dist/`).
 
-### Connect via Git (dashboard)
+### Fill these fields on the Cloudflare setup page
 
-1. Cloudflare Dashboard → **Workers & Pages** → **Create** → **Pages** → connect the GitHub repo.
-2. Build settings:
-   - **Framework preset:** Vite (or None)
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Node version:** `20` (matches `.nvmrc`)
-3. Save and deploy. Point your custom domain (e.g. `nokma.in`) to the Pages project.
+| Field | Value |
+|---|---|
+| **Name** | `nokma` |
+| **Build command** | `npm install && npm run build` |
+| **Deploy command** | `npx wrangler deploy` |
+| **Non-production builds** | `npx wrangler versions upload` |
+| **Root directory** | `/` (leave as `/` or blank) |
+| **API token** | Create new token (auto is fine) |
+
+Do **not** use `wrangler pages deploy` on that screen — this is Workers static assets.
 
 ### Deploy from CLI
 
@@ -90,8 +93,8 @@ npm install
 npm run deploy
 ```
 
-Config files:
+Config:
 
-- `wrangler.toml` — Pages project name + `dist` output
-- `public/_headers` — cache + security headers (copied into `dist`)
-- `public/_redirects` — SPA fallback to `index.html`
+- `wrangler.toml` — Worker name + `[assets] directory = "./dist"`
+- `public/_headers` — cache + security headers
+- `.nvmrc` — Node 20
