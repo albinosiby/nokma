@@ -1,13 +1,17 @@
 import { isMobile, reduced } from './core.js';
 import { cacheMediaAsset } from './media-cache.js';
 
-const FULL_HERO_SOURCE = './media/hero-nokma-full.mp4?v=1';
 const STANDARD_HERO_SOURCE = './media/hero-nokma.mp4?v=10';
 const STARTUP_BUFFER_THRESHOLD = 0.5;
 
-/** Begin caching the full-quality hero while the launch screen is visible. */
+/**
+ * On mobile the page starts with the lighter clip; warm the desktop-quality
+ * file in the background while the launch screen is still up.
+ * (Workers has a 25 MiB asset limit — no separate HQ file.)
+ */
 export function warmFullHeroForLaunch() {
-  void cacheMediaAsset(FULL_HERO_SOURCE);
+  if (!isMobile) return;
+  void cacheMediaAsset(STANDARD_HERO_SOURCE);
 }
 
 /** Buffer enough of the hero clip for playback before opening the page. */
@@ -70,12 +74,12 @@ export async function preloadHero(onProgress) {
   });
 }
 
-/** Cache the next-highest-quality source only after the startup video is completely buffered. */
+/** After the startup clip is fully buffered, cache the next quality for mobile. */
 export function cacheFullHeroWhenReady() {
+  if (!isMobile) return;
+
   const video = document.getElementById('heroVideo');
   if (!video) return;
-
-  const backgroundSource = isMobile ? STANDARD_HERO_SOURCE : FULL_HERO_SOURCE;
 
   let started = false;
   const begin = () => {
@@ -88,7 +92,7 @@ export function cacheFullHeroWhenReady() {
     started = true;
     video.removeEventListener('progress', begin);
     video.removeEventListener('canplaythrough', begin);
-    void cacheMediaAsset(backgroundSource);
+    void cacheMediaAsset(STANDARD_HERO_SOURCE);
   };
 
   video.addEventListener('progress', begin);
