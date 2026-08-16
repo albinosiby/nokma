@@ -266,7 +266,7 @@ body.is-launching { overflow: hidden; }
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
-.launch-screen h1 {
+.launch-screen__heading {
   max-width: 12ch;
   margin: 1rem auto 0;
   color: #FFF7EA;
@@ -326,7 +326,7 @@ body.is-launching { overflow: hidden; }
     padding: 1rem 0 7.25rem;
   }
   .launch-screen__eyebrow { font-size: 0.62rem; letter-spacing: 0.14em; }
-  .launch-screen h1 {
+  .launch-screen__heading {
     max-width: 14ch;
     margin-top: 0.75rem;
     font-size: clamp(2.15rem, 9.6vw, 3rem);
@@ -343,7 +343,7 @@ body.is-launching { overflow: hidden; }
 
 @media (max-width: 700px) and (max-height: 700px) {
   .launch-screen__content { padding-top: 0.5rem; padding-bottom: 5.5rem; }
-  .launch-screen h1 { font-size: clamp(1.9rem, 9vw, 2.55rem); }
+  .launch-screen__heading { font-size: clamp(1.9rem, 9vw, 2.55rem); }
   .launch-screen__timer { margin-top: 0.95rem; }
   .launch-screen__note { margin-top: 0.85rem; }
   .launch-screen__mascot { width: 80px; }
