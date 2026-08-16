@@ -249,43 +249,24 @@
       <p class="lede" data-reveal>A wide variety of Nokma ice cream, beverages, chips and spices. Explore a product family to view its variants.</p>
     </div>
 
-    <div class="universe__monthly" id="uniSpotlight" aria-live="polite">
-      <article class="monthly-card monthly-card--product">
-        <div class="monthly-card__inner">
-          <p class="monthly__eyebrow">Featured ice cream</p>
-          <p class="monthly__product-kicker" id="spotlightKicker"></p>
-          <p class="monthly__product-sizes" id="spotlightProductSizes"></p>
-          <img id="spotlightImg" alt="" />
-          <h3 class="monthly__product-name" id="spotlightProductName"></h3>
-          <div class="monthly__steps" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="monthly" id="monthly">
+      <div class="monthly__layout">
+        <div class="monthly__stage">
+          <div class="monthly__viewport" id="monthlyViewport">
+            <span class="monthly__halo" aria-hidden="true"></span>
+            <span class="monthly__floor" aria-hidden="true"></span>
+            <div class="monthly__tilt" id="monthlyTilt"><!-- tub injected --></div>
+          </div>
         </div>
-      </article>
-      <article class="monthly-card monthly-card--details">
-        <div class="monthly-card__inner">
-          <p class="monthly__eyebrow">The ice cream</p>
-          <h3 class="monthly__name" id="spotlightName"></h3>
-          <p class="monthly__sizes" id="spotlightSizes"></p>
-          <p class="monthly__detail" id="spotlightDetails"></p>
-          <img class="monthly__detail-product" id="spotlightDetailImg" alt="" />
-          <div class="monthly__steps" aria-hidden="true"><span></span><span></span><span></span></div>
+
+        <div class="monthly__panel">
+          <p class="monthly__eyebrow">Monthly product</p>
+          <h2 class="monthly__heading" id="monthlyName"></h2>
+          <p class="monthly__sizes" id="monthlySizes"></p>
+          <p class="monthly__lede" id="monthlyBlurb"></p>
+          <dl class="monthly__specs" id="monthlySpecs"></dl>
+          <a class="btn btn--ghost monthly__cta" href="#contact" data-ripple data-cursor="link"><span>Enquire about this tub</span></a>
         </div>
-      </article>
-      <article class="monthly-card monthly-card--notes">
-        <div class="monthly-card__inner">
-          <p class="monthly__eyebrow">Jackfruit ice cream</p>
-          <h3 class="monthly__nutrition-title">Nutrition information</h3>
-          <p class="monthly__blurb">A creamy Jackfruit Family Tub, made for sharing and served frozen.</p>
-          <dl class="monthly__nutrition-list">
-            <div><dt>Energy, protein, carbohydrate and fat</dt><dd>See the product pack</dd></div>
-            <div><dt>Serving format</dt><dd>750 ML / 1000 ML</dd></div>
-            <div><dt>Storage</dt><dd>Keep frozen at -18 C or below</dd></div>
-          </dl>
-          <div class="monthly__steps" aria-hidden="true"><span></span><span></span><span></span></div>
-        </div>
-      </article>
-      <div class="monthly__controls" role="group" aria-label="Featured product cards">
-        <button id="spotlightPrev" type="button" aria-label="Show previous featured card" title="Previous card">&#8592;</button>
-        <button id="spotlightNext" type="button" aria-label="Show next featured card" title="Next card">&#8594;</button>
       </div>
     </div>
 

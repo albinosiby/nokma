@@ -7,6 +7,7 @@ import { preloadHero, initHero, cacheFullHeroWhenReady, warmFullHeroForLaunch } 
 import { initNav } from './modules/nav.js';
 import { initRipples, initMagnetic, initReveals } from './modules/micro.js';
 import { initUniverse } from './modules/universe.js';
+import { initMonthly } from './modules/monthly.js';
 import { initFlavours } from './modules/flavours.js';
 import { initIngredients } from './modules/ingredients.js';
 import { initMascot } from './modules/mascot.js';
@@ -25,6 +26,7 @@ function buildScenes() {
 
   initHero();
   initUniverse();
+  initMonthly();
   initFlavours();
   initIngredients();
   initBlog();

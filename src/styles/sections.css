@@ -121,102 +121,189 @@
   }
 }
 
-.universe__monthly {
+/* ═══════════════════════════════════════════════════════════
+   MONTHLY PRODUCT · 3D turntable
+   ═══════════════════════════════════════════════════════════ */
+.monthly {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  width: calc(100% - (2 * var(--pad-x)));
-  max-width: 1200px;
-  margin: 4rem auto 0;
-  padding-top: 2.8rem;
-  padding-bottom: 3.25rem;
+  overflow: hidden;
+  width: 100%;
+  margin: 4rem 0 0;
+  padding: clamp(2.4rem, 4vw, 3.6rem) var(--pad-x) clamp(2.8rem, 5vw, 4.5rem);
   border-top: 1px solid rgba(59, 38, 28, 0.22);
+  background:
+    radial-gradient(90% 70% at 26% 10%, rgba(255, 253, 242, 0.9), rgba(255, 253, 242, 0) 62%),
+    radial-gradient(70% 60% at 84% 90%, rgba(232, 98, 27, 0.13), rgba(232, 98, 27, 0) 70%),
+    #F8EBBE;
+  color: #2E221C;
 }
-.universe__monthly::before {
-  position: absolute;
-  z-index: 3;
-  top: -0.55rem;
-  left: 0;
-  padding-right: 0.9rem;
-  background: #F8EBBE;
-  color: #A64E20;
-  content: 'Monthly product';
-  font-family: var(--f-body);
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  line-height: 1.1;
-  text-transform: uppercase;
+.monthly__heading {
+  margin: 0.45rem 0 0;
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 1.35rem + 2.4vw, 3.3rem);
+  font-weight: 600;
+  line-height: 1.02;
 }
-.monthly-card {
-  position: relative;
-  grid-area: 1 / 1;
-  min-width: 0;
-  min-height: 470px;
-  overflow: visible;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(18px) scale(0.985);
-  transition: opacity 0.42s ease, transform 0.58s var(--ease-out), visibility 0s linear 0.58s;
-  visibility: hidden;
+.monthly__lede {
+  max-width: 36rem;
+  margin: 0.85rem 0 0;
+  color: rgba(59, 38, 28, 0.72);
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
+  line-height: 1.6;
 }
-.monthly-card.is-active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0) scale(1);
-  transition-delay: 0s;
-  visibility: visible;
-}
-.monthly-card__inner {
-  position: relative;
-  display: flex;
-  min-height: 470px;
-  height: 100%;
-  flex-direction: column;
-}
-.monthly-card--product { background: transparent; color: #2E221C; }
-.monthly-card--product .monthly-card__inner {
-  display: flex;
-  justify-content: flex-end;
-  padding: 1.25rem clamp(1.5rem, 5vw, 5rem) 2.4rem;
-  border-top: 0;
-}
-.monthly-card--product .monthly-card__inner::before {
-  position: absolute;
-  z-index: 0;
-  top: 50%;
-  left: 50%;
-  width: min(78%, 760px);
-  aspect-ratio: 2200 / 720;
-  background: url('/brand/logo-nokma-header-green.png') center / contain no-repeat;
-  content: '';
-  opacity: 0.08;
-  pointer-events: none;
-  transform: translate(-50%, -56%);
-}
-.monthly-card--product img {
+.monthly__layout {
   position: relative;
   z-index: 1;
-  width: min(82%, 680px);
-  height: 370px;
-  max-height: 370px;
-  margin: 0 auto 2.4rem;
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 1001px) {
+  .monthly__layout { grid-template-columns: minmax(0, 1.05fr) minmax(22rem, 0.95fr); }
+}
+
+/* ─── 3D stage ──────────────────────────────────────────── */
+.monthly__stage { position: relative; }
+.monthly__viewport {
+  --tub-w: clamp(260px, 44vw, 660px);
+  position: relative;
+  height: clamp(300px, 34vw, 470px);
+  perspective: 1300px;
+  perspective-origin: 50% 44%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.monthly__halo {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 44%;
+  width: min(78%, 520px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.85), rgba(255, 246, 214, 0.34) 46%, rgba(248, 235, 190, 0) 72%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+.monthly__floor {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 78%;
+  width: min(86%, 600px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(120, 74, 38, 0.24), rgba(120, 74, 38, 0.08) 42%, rgba(248, 235, 190, 0) 68%);
+  filter: blur(3px);
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotateX(74deg);
+}
+.monthly__tilt {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.monthly__word {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 46%;
+  width: min(96%, 780px);
+  height: auto;
+  margin: 0;
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
+  transform: translate(-50%, -54%);
+}
+.mtub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--tub-w);
+  aspect-ratio: 1000 / 665;
+  margin-top: calc(var(--tub-w) * -0.3325);
+  margin-left: calc(var(--tub-w) / -2);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  z-index: 2;
+}
+.mtub__img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 30px 28px rgba(66, 39, 26, 0.2));
+  object-position: bottom center;
+  filter: drop-shadow(0 34px 34px rgba(66, 39, 26, 0.3));
 }
-@media (min-width: 701px) {
-  .monthly-card--product img {
-    width: min(88%, 760px);
-    height: 400px;
-    max-height: 400px;
-    transform: translateY(-10px) scale(1.14);
-    transform-origin: center center;
-  }
+.mtub__mirror {
+  position: absolute;
+  left: 0;
+  top: 86%;
+  width: 100%;
+  height: 100%;
+  background: center bottom / contain no-repeat;
+  opacity: 0.22;
+  /* Masked to a shallow floor reflection, then flipped under the tub. */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.9) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.9) 100%);
+  pointer-events: none;
+  transform: scaleY(-1);
 }
+.mtub__shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -4%;
+  width: 78%;
+  height: 11%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(74, 43, 22, 0.4), rgba(74, 43, 22, 0));
+  filter: blur(5px);
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+/* ─── copy panel ────────────────────────────────────────── */
+.monthly__panel {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+.monthly__sizes {
+  margin: 0.6rem 0 0;
+  color: #A64E20;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.monthly__specs {
+  margin: 1.1rem 0 0;
+  padding: 0;
+  border-top: 1px solid rgba(59, 38, 28, 0.18);
+}
+.monthly__specs div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(59, 38, 28, 0.12);
+}
+.monthly__specs dt {
+  color: rgba(59, 38, 28, 0.62);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.monthly__specs dd {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: right;
+}
+.monthly__cta { margin-top: 1.5rem; }
 .monthly__eyebrow {
   margin: 0;
   color: var(--orange);
@@ -226,334 +313,6 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
-.monthly-card--product .monthly__eyebrow {
-  position: absolute;
-  z-index: 2;
-  top: 1.25rem;
-  left: clamp(1.5rem, 5vw, 5rem);
-  color: var(--orange);
-}
-.monthly__product-kicker,
-.monthly__product-sizes {
-  position: absolute;
-  z-index: 2;
-  left: clamp(1.5rem, 5vw, 5rem);
-  margin: 0;
-  color: #3B261C;
-  font-family: var(--f-body);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  line-height: 1.25;
-  text-transform: uppercase;
-}
-.monthly__product-kicker { top: 2.6rem; }
-.monthly__product-sizes {
-  top: 3.82rem;
-  color: rgba(59, 38, 28, 0.64);
-  font-size: 0.68rem;
-}
-.monthly__product-name {
-  position: absolute;
-  z-index: 2;
-  left: clamp(1.5rem, 5vw, 5rem);
-  bottom: 1.8rem;
-  max-width: calc(100% - 8rem);
-  margin: 0;
-  color: #3B261C;
-  font-family: var(--f-display);
-  font-size: clamp(1.25rem, 2vw, 1.8rem);
-  line-height: 1;
-}
-.monthly__steps {
-  position: absolute;
-  right: 1.35rem;
-  bottom: 1.65rem;
-  display: flex;
-  gap: 0.38rem;
-}
-.monthly__steps span {
-  display: block;
-  width: 1.45rem;
-  height: 2px;
-  background: rgba(59, 38, 28, 0.2);
-}
-.monthly-card--product .monthly__steps span:first-child,
-.monthly-card--details .monthly__steps span:nth-child(2),
-.monthly-card--notes .monthly__steps span:last-child { background: var(--orange); }
-.monthly__controls {
-  position: absolute;
-  left: clamp(1.5rem, 5vw, 5rem);
-  bottom: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  overflow: hidden;
-  border: 1px solid rgba(59, 38, 28, 0.3);
-  border-radius: 999px;
-  background: rgba(244, 236, 223, 0.9);
-}
-.monthly__controls button {
-  display: grid;
-  width: 2.8rem;
-  height: 2.6rem;
-  place-items: center;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: #3B261C;
-  cursor: pointer;
-  font-size: 1.08rem;
-  line-height: 1;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-.monthly__controls button + button { border-left: 1px solid rgba(59, 38, 28, 0.22); }
-.monthly__controls button:hover,
-.monthly__controls button:focus-visible {
-  border-color: var(--orange);
-  background: var(--orange);
-  color: #FFFFFF;
-  outline: none;
-}
-.monthly-card--details { background: transparent; color: #2E221C; }
-.monthly-card--details .monthly-card__inner {
-  justify-content: center;
-  align-items: flex-start;
-  max-width: none;
-  width: 100%;
-  margin: 0;
-  padding: 1.55rem 0 2.5rem clamp(1.75rem, 4vw, 4rem);
-  border-top: 0;
-  text-align: left;
-}
-.monthly-card--details .monthly-card__inner::before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(78%, 760px);
-  aspect-ratio: 2200 / 720;
-  background: url('/brand/logo-nokma-header-green.png') center / contain no-repeat;
-  content: '';
-  opacity: 0.08;
-  pointer-events: none;
-  transform: translate(-50%, -56%);
-}
-.monthly-card--details .monthly__eyebrow {
-  max-width: min(36rem, 48%);
-  margin: 0;
-}
-.monthly__name {
-  position: relative;
-  max-width: min(14ch, 48%);
-  margin: 0.28rem 0 0;
-  color: #3B261C;
-  font-family: var(--f-body);
-  font-size: clamp(2.45rem, 4.8vw, 4.5rem);
-  font-weight: 700;
-  line-height: 0.96;
-}
-.monthly__sizes {
-  margin: 0.45rem 0 0;
-  color: #87553E;
-  font-family: var(--f-body);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-.monthly__detail {
-  max-width: min(34rem, 48%);
-  margin: 0.7rem 0 0;
-  color: rgba(46, 34, 28, 0.72);
-  font-family: var(--f-body);
-  font-size: clamp(0.94rem, 1.2vw, 1.08rem);
-  line-height: 1.55;
-}
-.monthly__detail-product {
-  position: absolute;
-  z-index: 1;
-  right: clamp(1.5rem, 6vw, 5.5rem);
-  top: 52%;
-  width: min(42vw, 520px);
-  height: min(38vw, 480px);
-  object-fit: contain;
-  filter: drop-shadow(0 26px 24px rgba(66, 39, 26, 0.22));
-  pointer-events: none;
-  transform: translateY(-50%);
-}
-.monthly-card--details .monthly__eyebrow,
-.monthly-card--details .monthly__name,
-.monthly-card--details .monthly__sizes,
-.monthly-card--details .monthly__detail {
-  position: relative;
-  z-index: 2;
-}
-.monthly-card--notes { background: transparent; color: #2E221C; }
-.monthly-card--notes .monthly-card__inner {
-  justify-content: center;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 1.5rem 1.5rem 4rem;
-  border-top: 0;
-}
-.monthly-card--notes .monthly-card__inner::before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(78%, 760px);
-  aspect-ratio: 2200 / 720;
-  background: url('/brand/logo-nokma-header-green.png') center / contain no-repeat;
-  content: '';
-  opacity: 0.08;
-  pointer-events: none;
-  transform: translate(-50%, -56%);
-}
-.monthly-card--notes .monthly__eyebrow { color: #A64E20; }
-.monthly-card--notes .monthly__steps span { background: rgba(59, 38, 28, 0.18); }
-.monthly-card--notes .monthly__steps span:last-child { background: var(--orange); }
-.monthly__nutrition-title {
-  max-width: 9ch;
-  margin: 0.7rem 0 0;
-  color: #3B261C;
-  font-family: var(--f-display);
-  font-size: clamp(2rem, 3.2vw, 3.45rem);
-  font-weight: 600;
-  line-height: 0.98;
-}
-.monthly__blurb {
-  margin: 1rem 0 0;
-  color: rgba(46, 34, 28, 0.78);
-  font-family: var(--f-body);
-  font-size: 0.98rem;
-  line-height: 1.7;
-}
-.monthly__nutrition-list {
-  display: grid;
-  gap: 0;
-  margin: 1.8rem 0 0;
-  padding: 0;
-  border-top: 1px solid rgba(59, 38, 28, 0.18);
-}
-.monthly__nutrition-list div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(59, 38, 28, 0.12);
-}
-.monthly__nutrition-list dt {
-  color: rgba(46, 34, 28, 0.72);
-  font-family: var(--f-body);
-  font-size: 0.72rem;
-  line-height: 1.35;
-}
-.monthly__nutrition-list dd {
-  margin: 0;
-  color: #A64E20;
-  font-family: var(--f-body);
-  font-size: 0.68rem;
-  font-weight: 600;
-  line-height: 1.3;
-  text-align: right;
-  text-transform: uppercase;
-}
-
-/* Monthly product: keep the same calm ice-cream surface as the catalogue. */
-.universe__monthly {
-  width: 100%;
-  max-width: none;
-  margin: 4rem 0 0;
-  padding: 2.8rem var(--pad-x) 3.25rem;
-  border-top: 1px solid rgba(59, 38, 28, 0.22);
-  border-bottom: 0;
-  background: #F8EBBE;
-  color: #2E221C;
-  box-shadow: none;
-}
-
-.universe__monthly::before {
-  top: 1.25rem;
-  left: var(--pad-x);
-  padding: 0.18rem 1rem 0.25rem 0;
-  background: transparent;
-  color: #2E221C;
-  font-family: var(--f-display);
-  font-size: clamp(1.3rem, 1rem + 0.8vw, 1.85rem);
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1;
-  text-transform: none;
-}
-
-.universe__monthly .monthly-card--product,
-.universe__monthly .monthly-card--details,
-.universe__monthly .monthly-card--notes {
-  color: #2E221C;
-}
-
-.universe__monthly .monthly-card--product .monthly-card__inner::before {
-  filter: none;
-  opacity: 0.08;
-}
-
-.universe__monthly .monthly-card--product img {
-  filter: drop-shadow(0 26px 24px rgba(71, 42, 21, 0.2));
-}
-
-.universe__monthly .monthly__product-kicker,
-.universe__monthly .monthly__product-name,
-.universe__monthly .monthly__name,
-.universe__monthly .monthly__nutrition-title {
-  color: #2E221C;
-}
-
-.universe__monthly .monthly__product-sizes,
-.universe__monthly .monthly__detail,
-.universe__monthly .monthly__blurb,
-.universe__monthly .monthly__nutrition-list dt {
-  color: rgba(59, 38, 28, 0.7);
-}
-
-.universe__monthly .monthly__sizes,
-.universe__monthly .monthly__nutrition-list dd {
-  color: #A64E20;
-}
-
-.universe__monthly .monthly-card--details .monthly-card__inner::before {
-  color: rgba(59, 38, 28, 0.08);
-}
-
-.universe__monthly .monthly-card--notes .monthly__eyebrow {
-  color: #A64E20;
-}
-
-.universe__monthly .monthly__steps span,
-.universe__monthly .monthly-card--notes .monthly__steps span {
-  background: rgba(59, 38, 28, 0.18);
-}
-
-.universe__monthly .monthly__controls {
-  border-color: rgba(59, 38, 28, 0.26);
-  background: rgba(248, 235, 190, 0.96);
-}
-
-.universe__monthly .monthly__controls button {
-  color: #2E221C;
-}
-
-.universe__monthly .monthly__controls button + button {
-  border-left-color: rgba(59, 38, 28, 0.22);
-}
-
-.universe__monthly .monthly__nutrition-list {
-  border-top-color: rgba(59, 38, 28, 0.18);
-}
-
-.universe__monthly .monthly__nutrition-list div {
-  border-bottom-color: rgba(59, 38, 28, 0.14);
-}
-
 .universe__space {
   width: 100%;
   max-width: none;
@@ -796,26 +555,14 @@
 }
 
 @media (max-width: 700px) {
-  .universe__monthly {
-    margin-top: 1.5rem;
-    padding-bottom: 3.1rem;
+  .monthly { margin-top: 1.5rem; }
+  .monthly__word { width: min(94%, 420px); }
+  .monthly__viewport {
+    --tub-w: clamp(240px, 86vw, 420px);
+    height: 230px;
   }
-  .monthly-card { min-height: 0; }
-  .monthly-card__inner { min-height: 360px; }
-  .monthly-card--product .monthly-card__inner { min-height: 330px; padding: 1.25rem; }
-  .monthly-card--product .monthly-card__inner::before { width: min(82%, 330px); transform: translate(-50%, -54%); }
-  .monthly-card--product img { width: min(76%, 290px); height: 205px; max-height: 205px; margin-bottom: 1.8rem; }
-  .monthly__product-name { left: 1.25rem; bottom: 1.2rem; }
-  .monthly-card--details .monthly-card__inner { min-height: 360px; padding: 1.5rem 0 2.5rem 0.35rem; }
-  .monthly-card--details .monthly__eyebrow,
-  .monthly__name,
-  .monthly__detail { max-width: 100%; }
-  .monthly__detail-product { display: none; }
-  .monthly-card--notes .monthly-card__inner { min-height: 360px; padding: 1.25rem 1.25rem 3rem; }
-  .monthly__name { font-size: 2.65rem; }
-  .monthly__steps { right: 1.55rem; bottom: 1.4rem; }
-  .monthly__controls { left: var(--pad-x); }
-  .monthly__blurb { font-size: 0.92rem; line-height: 1.6; }
+  .monthly__specs dt { font-size: 0.66rem; }
+  .monthly__specs dd { font-size: 0.76rem; }
   .universe__space { padding-top: 2.5rem; }
 
   .universe__browse-head {
