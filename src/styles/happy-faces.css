@@ -1,0 +1,49 @@
+.happy {
+  --happy-control-size: 44px;
+  --happy-gap: 1rem;
+  padding: var(--sec-y) var(--pad-x);
+  background: var(--mist);
+}
+.happy__inner { max-width: 1000px; margin: 0 auto; }
+.happy__head { display: flex; align-items: center; justify-content: space-between; gap: var(--happy-gap); margin-bottom: 2rem; }
+.happy__head .h2 { font-size: 3rem; letter-spacing: 0; }
+.happy__track {
+  position: relative;
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  border-radius: var(--r-sm);
+  cursor: grab;
+}
+.happy__track::-webkit-scrollbar { display: none; }
+.happy__track.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.happy__slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; background: var(--cream); }
+.happy__slide img { width: 100%; aspect-ratio: 16 / 9; height: auto; max-height: 520px; object-fit: contain; padding: 2rem; }
+.happy__nav { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--happy-gap); margin-top: 1.25rem; }
+.happy [hidden] { display: none; }
+.happy__control {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--happy-control-size);
+  height: var(--happy-control-size);
+  border: 1px solid var(--green-300);
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--green-800);
+}
+.happy__control:hover { background: var(--green-800); color: var(--cream); }
+.happy__control svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.happy__dots { display: flex; flex-wrap: wrap; justify-content: center; max-width: 60%; }
+.happy__dot { display: grid; place-items: center; width: var(--happy-control-size); height: var(--happy-control-size); }
+.happy__dot::after { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--green-300); transition: background 0.2s, transform 0.2s; }
+.happy__dot[aria-current='true']::after { background: var(--green-800); transform: scale(1.4); }
+.happy__count { font-size: 0.9rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) {
+  .happy__head .h2 { font-size: 2.1rem; }
+  .happy__slide img { aspect-ratio: 4 / 3; padding: 1rem; }
+  .happy__nav { gap: 0.5rem; }
+}

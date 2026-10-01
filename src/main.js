@@ -1,5 +1,6 @@
 import './styles/base.css';
 import './styles/sections.css';
+import './styles/happy-faces.css';
 
 import { ScrollTrigger, initSmoothScroll, isMobile } from './modules/core.js';
 import { runLoader } from './modules/loader.js';
@@ -13,6 +14,7 @@ import { initIngredients } from './modules/ingredients.js';
 import { initMascot } from './modules/mascot.js';
 import { initContact, initFooter } from './modules/contact.js';
 import { initBlog } from './modules/blog.js';
+import { initHappyFaces } from './modules/happy-faces.js';
 import { warmAssets } from './modules/warmup.js';
 import { runLaunchCountdown } from './modules/launch-countdown.js';
 
@@ -30,6 +32,7 @@ function buildScenes() {
   initFlavours();
   initIngredients();
   initBlog();
+  initHappyFaces();
   initContact();
   initFooter();
 

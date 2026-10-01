@@ -368,6 +368,30 @@
     </article>
   </div>
 
+  <section class="happy" id="happy-faces" aria-labelledby="happyHeading" aria-roledescription="carousel">
+    <div class="happy__inner">
+      <div class="happy__head">
+        <h2 class="h2" id="happyHeading">Happy Faces</h2>
+        <button class="happy__control" type="button" data-happy-play aria-label="Pause automatic slides" title="Pause automatic slides">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14" /></svg>
+        </button>
+      </div>
+      <div class="happy__track" id="happyTrack" tabindex="0" aria-label="Happy Faces images" data-lenis-prevent>
+        <!-- Images discovered from src/assets/happy-faces at build time. -->
+      </div>
+      <div class="happy__nav">
+        <button class="happy__control" type="button" data-happy-prev aria-label="Previous image" title="Previous image" aria-controls="happyTrack">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>
+        </button>
+        <div class="happy__dots" aria-label="Choose an image"></div>
+        <button class="happy__control" type="button" data-happy-next aria-label="Next image" title="Next image" aria-controls="happyTrack">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg>
+        </button>
+        <span class="happy__count" aria-live="off"></span>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════════════ 7 · CONTACT ══════════════════ -->
   <section class="contact" id="contact">
     <div class="contact__inner">
