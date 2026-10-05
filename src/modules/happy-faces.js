@@ -31,11 +31,9 @@ export function initHappyFaces() {
   const slides = [...track.children];
   const dots = section.querySelector('.happy__dots');
   const count = section.querySelector('.happy__count');
-  const play = section.querySelector('[data-happy-play]');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (!slides.length) { section.hidden = true; return; }
   let active = 0;
-  let paused = motion.matches;
   let visible = false;
   let hovered = false;
   let focused = false;
@@ -45,7 +43,7 @@ export function initHappyFaces() {
 
   const schedule = () => {
     clearTimeout(timer);
-    if (slides.length > 1 && !paused && visible && !hovered && !focused && !pointer && !document.hidden) {
+    if (slides.length > 1 && !motion.matches && visible && !hovered && !focused && !pointer && !document.hidden) {
       timer = setTimeout(() => goTo(active + 1), AUTO_DELAY);
     }
   };
@@ -73,15 +71,7 @@ export function initHappyFaces() {
     return button;
   });
   update(0);
-  const updatePlay = () => {
-    const label = paused ? 'Start automatic slides' : 'Pause automatic slides';
-    play.setAttribute('aria-label', label);
-    play.title = label;
-    play.querySelector('path').setAttribute('d', paused ? 'm9 5 10 7-10 7Z' : 'M9 5v14M15 5v14');
-  };
-  updatePlay();
-  play.addEventListener('click', () => { paused = !paused; updatePlay(); schedule(); });
-  motion.addEventListener('change', () => { paused = motion.matches; updatePlay(); schedule(); });
+  motion.addEventListener('change', schedule);
   section.querySelector('[data-happy-prev]').addEventListener('click', () => goTo(active - 1));
   section.querySelector('[data-happy-next]').addEventListener('click', () => goTo(active + 1));
   track.addEventListener('keydown', (event) => {
@@ -132,5 +122,5 @@ export function initHappyFaces() {
   document.addEventListener('visibilitychange', schedule);
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; schedule(); }, { threshold: 0.25 }).observe(section);
   new ResizeObserver(() => goTo(active, true)).observe(track);
-  if (slides.length === 1) section.querySelector('.happy__nav').hidden = play.hidden = true;
+  if (slides.length === 1) section.querySelector('.happy__nav').hidden = true;
 }
