@@ -1,12 +1,10 @@
 import { isMobile, reduced } from './core.js';
 import { cacheMediaAsset } from './media-cache.js';
 
-const STANDARD_HERO_SOURCE = './media/hero-nokma.mp4?v=10';
+const STANDARD_HERO_SOURCE = './media/hero-nokma.mp4?v=13';
 
 /**
- * On mobile the page starts with the lighter clip; warm the desktop-quality
- * file in the background while the launch screen is still up.
- * (Workers has a 25 MiB asset limit — no separate HQ file.)
+ * Warm the shared hero video for mobile visits.
  */
 export function warmFullHeroForLaunch() {
   if (!isMobile) return;
@@ -24,7 +22,7 @@ export async function preloadHero(onProgress) {
   onProgress?.(1);
 }
 
-/** After the startup clip is fully buffered, cache the next quality for mobile. */
+/** Cache the shared hero video after mobile playback has fully buffered. */
 export function cacheFullHeroWhenReady() {
   if (!isMobile) return;
 
