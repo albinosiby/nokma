@@ -2,9 +2,9 @@ import './styles/base.css';
 import './styles/sections.css';
 import './styles/happy-faces.css';
 
-import { ScrollTrigger, initSmoothScroll, isMobile } from './modules/core.js';
+import { ScrollTrigger, initSmoothScroll } from './modules/core.js';
 import { runLoader } from './modules/loader.js';
-import { preloadHero, initHero, cacheFullHeroWhenReady, warmFullHeroForLaunch } from './modules/hero.js';
+import { preloadHero, initHero, cacheFullHeroWhenReady } from './modules/hero.js';
 import { initNav } from './modules/nav.js';
 import { initRipples, initMagnetic, initReveals } from './modules/micro.js';
 import { initUniverse } from './modules/universe.js';
@@ -18,7 +18,7 @@ import { initHappyFaces } from './modules/happy-faces.js';
 import { warmAssets } from './modules/warmup.js';
 import { runLaunchCountdown } from './modules/launch-countdown.js';
 
-/** Build every scene once the hero video is ready. */
+/** Build the page while hero media continues loading. */
 function buildScenes() {
   initSmoothScroll();
 
@@ -46,21 +46,25 @@ function buildScenes() {
 async function boot() {
   const loader = runLoader();
 
-  // Keep the first render responsive if a phone has a slow font connection.
+  // Fonts must not keep either desktop or mobile visitors on the loader.
   const fonts = document.fonts?.ready ?? Promise.resolve();
-  const criticalFonts = isMobile
-    ? Promise.race([fonts, new Promise((resolve) => window.setTimeout(resolve, 1000))])
-    : fonts;
+  const criticalFonts = Promise.race([
+    fonts.catch(() => {}),
+    new Promise((resolve) => window.setTimeout(resolve, 1000)),
+  ]);
 
   await Promise.all([
     preloadHero((p) => loader.setProgress(p * 0.97)),
     criticalFonts,
   ]);
 
-  buildScenes();
-  loader.setProgress(0.97);
-
-  await loader.finish();
+  try {
+    buildScenes();
+    loader.setProgress(0.97);
+  } finally {
+    // Release the page even if an optional scene fails to initialize.
+    await loader.finish();
+  }
 
   warmAssets();
   cacheFullHeroWhenReady();
@@ -71,10 +75,8 @@ async function boot() {
 
 async function start() {
   const launchCountdown = runLaunchCountdown();
-  warmFullHeroForLaunch();
-  warmAssets();
   await launchCountdown;
-  boot();
+  await boot();
 }
 
 if (document.readyState === 'loading') {

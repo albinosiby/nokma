@@ -2,7 +2,6 @@ import { isMobile, reduced } from './core.js';
 import { cacheMediaAsset } from './media-cache.js';
 
 const STANDARD_HERO_SOURCE = './media/hero-nokma.mp4?v=10';
-const STARTUP_BUFFER_THRESHOLD = 0.5;
 
 /**
  * On mobile the page starts with the lighter clip; warm the desktop-quality
@@ -14,64 +13,15 @@ export function warmFullHeroForLaunch() {
   void cacheMediaAsset(STANDARD_HERO_SOURCE);
 }
 
-/** Buffer enough of the hero clip for playback before opening the page. */
+/** Start loading hero media without blocking the page on network or decoding. */
 export async function preloadHero(onProgress) {
   const video = document.getElementById('heroVideo');
-  if (!video || reduced) {
-    onProgress?.(1);
-    return Promise.resolve();
-  }
-
-  video.pause();
-
-  // Phones open against the poster immediately; playback continues loading after
-  // the interface is available instead of holding the visitor on the loader.
-  if (isMobile) {
+  if (video && !reduced) {
+    video.pause();
     video.preload = 'metadata';
     video.load();
-    onProgress?.(1);
-    return Promise.resolve();
   }
-
-  video.preload = 'auto';
-
-  onProgress?.(0);
-
-  return new Promise((resolve) => {
-    let complete = false;
-
-    async function done() {
-      if (complete) return;
-      complete = true;
-      video.removeEventListener('progress', updateProgress);
-      video.removeEventListener('loadedmetadata', updateProgress);
-      video.removeEventListener('canplaythrough', updateProgress);
-      video.removeEventListener('suspend', updateProgress);
-      video.removeEventListener('error', done);
-      onProgress?.(1);
-      resolve();
-    }
-
-    function updateProgress() {
-      const duration = video.duration;
-      const ranges = video.buffered;
-      const end = ranges.length ? ranges.end(ranges.length - 1) : 0;
-      const progress = Number.isFinite(duration) && duration > 0
-        ? Math.min(end / duration, 1)
-        : 0;
-
-      onProgress?.(progress);
-      if (progress >= STARTUP_BUFFER_THRESHOLD) done();
-    }
-
-    video.addEventListener('progress', updateProgress);
-    video.addEventListener('loadedmetadata', updateProgress);
-    video.addEventListener('canplaythrough', updateProgress);
-    video.addEventListener('suspend', updateProgress);
-    video.addEventListener('error', done, { once: true });
-    video.load();
-    updateProgress();
-  });
+  onProgress?.(1);
 }
 
 /** After the startup clip is fully buffered, cache the next quality for mobile. */
