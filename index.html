@@ -369,23 +369,54 @@
   <section class="happy" id="happy-faces" aria-labelledby="happyHeading" aria-roledescription="carousel">
     <div class="happy__inner">
       <div class="happy__head">
-        <h2 class="h2" id="happyHeading">Happy Faces</h2>
+        <div class="happy__head-left">
+          <p class="happy__eyebrow">Photo Gallery</p>
+          <h2 class="h2 happy__title" id="happyHeading">Happy Faces</h2>
+          <p class="happy__lede">Capturing smiles, celebrations, and genuine moments shared across Meghalaya.</p>
+        </div>
+
+        <div class="happy__head-right">
+          <span class="happy__counter" id="happyCounter">1 / 3</span>
+          <div class="happy__nav-buttons">
+            <button class="happy__btn" type="button" data-happy-prev aria-label="Previous photo" title="Previous photo" aria-controls="happyTrack">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button class="happy__btn" type="button" data-happy-next aria-label="Next photo" title="Next photo" aria-controls="happyTrack">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="happy__track" id="happyTrack" tabindex="0" aria-label="Happy Faces images" data-lenis-prevent>
-        <!-- Images discovered from src/assets/happy-faces at build time. -->
+
+      <div class="happy__stage">
+        <div class="happy__track" id="happyTrack" tabindex="0" aria-label="Happy Faces gallery" data-lenis-prevent>
+          <!-- Images discovered from src/assets/happy-faces at build time. -->
+        </div>
       </div>
-      <div class="happy__nav">
-        <button class="happy__control" type="button" data-happy-prev aria-label="Previous image" title="Previous image" aria-controls="happyTrack">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>
-        </button>
-        <div class="happy__dots" aria-label="Choose an image"></div>
-        <button class="happy__control" type="button" data-happy-next aria-label="Next image" title="Next image" aria-controls="happyTrack">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg>
-        </button>
-        <span class="happy__count" aria-live="off"></span>
+
+      <div class="happy__footer">
+        <div class="happy__dots" aria-label="Choose a photo"></div>
       </div>
     </div>
   </section>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="happy-modal" id="happyModal" role="dialog" aria-modal="true" aria-label="Photo preview" aria-hidden="true">
+    <div class="happy-modal__scrim" data-modal-close></div>
+    <button class="happy-modal__close" type="button" data-modal-close aria-label="Close photo preview">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg>
+    </button>
+    <button class="happy-modal__nav happy-modal__nav--prev" type="button" data-modal-prev aria-label="Previous photo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 19l-7-7 7-7" /></svg>
+    </button>
+    <div class="happy-modal__stage">
+      <img class="happy-modal__img" id="happyModalImg" src="" alt="Photo preview" />
+      <span class="happy-modal__count" id="happyModalCount"></span>
+    </div>
+    <button class="happy-modal__nav happy-modal__nav--next" type="button" data-modal-next aria-label="Next photo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+    </button>
+  </div>
 
   <!-- ══════════════════ 7 · CONTACT ══════════════════ -->
   <section class="contact" id="contact">
